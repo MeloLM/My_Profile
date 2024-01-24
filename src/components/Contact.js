@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container , Row , Col } from 'react-bootstrap';
-import contactImg from '../assets/img/contact-img.svg';
+import contactImg from '../assets/img/bonfire.svg';
 
 export default function Contact() {
     const formInitialDetails = {
@@ -47,7 +47,7 @@ export default function Contact() {
                         <img src={contactImg} alt="Contact us" />
                     </Col>
                     <Col md={6}>
-                        <h2>Get the Wave</h2>
+                        <h2>Get the White Stone</h2>
                         <form onSubmit={handleSubmit}>
                             <Row>
                                 <Col sm={6} className="px-1">

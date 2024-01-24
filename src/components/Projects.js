@@ -2,7 +2,10 @@ import {React} from 'react';
 import { Container , Row , Col , Nav , Tab} from 'react-bootstrap';
 import { ProjectCard } from './ProjectCard';
 import colorSharp2 from "../assets/img/color-sharp2.png";
-import projImg1 from '../assets/img/bg_card.jpeg'
+import projImg1 from '../assets/img/project_soul.jpeg';
+import projImg2 from '../assets/img/project_moon.jpeg';
+import projImg3 from '../assets/img/project_sushi.jpeg';
+
 
 
 export default function Projects() {
@@ -11,31 +14,37 @@ export default function Projects() {
           title: "Souls Space",
           description: "SoulsLike Blog",
           imgUrl: projImg1,
+          imgAncor:"https://github.com/MeloLM/Carmelo_GamesSpace"
         },
         {
           title: "Project 00 Real Estate",
           description: "Laravel Project",
           imgUrl: projImg1,
+          imgAncor:"https://github.com/MeloLM/Project_00_Carmelo__LM"
         },
         {
           title: "Project color:Black",
           description: "Aulab Project",
-          imgUrl: projImg1,
+          imgUrl: projImg2,
+          imgAncor:"https://github.com/MeloLM/Black_template_Carmelo_LM"
         },
         {
-          title: "Business Startup1",
-          description: "Design & Development",
-          imgUrl: projImg1,
+          title: "Project React-sushi",
+          description: "React project",
+          imgUrl: projImg3,
+          imgAncor:"https://github.com/MeloLM/Sushi_Project_Carmelo_LM"
         },
         {
           title: "Business Startup2",
           description: "Design & Development",
           imgUrl: projImg1,
+          imgAncor:"/"
         },
         {
           title: "Business Startup3",
           description: "Design & Development",
           imgUrl: projImg1,
+          imgAncor:"/"
         },
       ];
 
@@ -46,18 +55,18 @@ export default function Projects() {
                 <Row>
                     <Col>
                         <h2>Projects</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis natus non dicta fugit laboriosam. Laboriosam, quisquam in. Itaque ullam consequuntur natus obcaecati delectus iste</p>
+                        <p>Qui sotto alcuni miei progetti: </p>
                         <Tab.Container id="projects-tabs" defaultActiveKey="first">
                         <Nav variant="pills" className='nav-pills mb-5 justify-content-center align-item-center' id='pills-tab'>
                           <Nav.Item>
-                            <Nav.Link eventKey="first">Tab One</Nav.Link>
+                            <Nav.Link eventKey="first">Page One</Nav.Link>
                           </Nav.Item>
                           <Nav.Item>
-                            <Nav.Link eventKey="second">Tab Two</Nav.Link>
+                            <Nav.Link eventKey="second">Page Two</Nav.Link>
                           </Nav.Item>
                           <Nav.Item>
                             <Nav.Link eventKey="third">
-                              Tab Three
+                              Page Three
                             </Nav.Link>
                           </Nav.Item>
                         </Nav>
@@ -77,7 +86,7 @@ export default function Projects() {
                                 </Row>
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">Lorem ipsum</Tab.Pane>
-                            <Tab.Pane eventKey="third">Lorem ipsum</Tab.Pane>
+                            <Tab.Pane eventKey="third" className='text-danger'>Lorem ipsum</Tab.Pane>
                         </Tab.Content>
                         </Tab.Container>
                     </Col>

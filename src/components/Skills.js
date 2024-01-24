@@ -38,7 +38,7 @@ export default function Skills() {
                             <h2>
                                 Skills
                             </h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda voluptas earum ullam molestias ducimus molestiae quae dolorem soluta sed totam rem, quos recusandae tempore quia exercitationem explicabo </p>
+                            <p>Le mie competenze sono specializzate nel web development con focus su frontend (HTML, CSS, JavaScript, React.js) e backend (PHP, Laravel). Conoscenza di sistemi operativi Windows 10, Linux e Unix. Utilizzo di strumenti di collaborazione come Discord e Git/GitHub. Familiarità con il framework Bootstrap e l'editor Visual Studio Code. Esperienza anche con WordPress. </p>
                             <Carousel responsive={responsive} infinite='true' className='skill-slider'>
                                 <div className="item">
                                     <img src={meter1} alt="" />

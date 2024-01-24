@@ -1,7 +1,7 @@
 import { useState , useEffect } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import { ArrowRightCircle } from 'react-bootstrap-icons';
-import headerImg from '../assets/img/header-img.svg';
+import headerImg from '../assets/img/solaire.svg';
 
 
 export default function Banner () {
@@ -48,8 +48,8 @@ export default function Banner () {
                     <Col xs={12} md={6} xl={7}>
                         <span className="tagline text-white">Welcome to my Portfolio</span>
                         <h1>{`Hi, I'm Carmelo La Mantia a `}<span className='wrap'>{text}</span></h1>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore, quis recusandae sit iste blanditiis consequuntur vel. Vel ipsum quisquam quaera</p>
-                        <button onClick={() => console.log('connect')}>Let's connect <ArrowRightCircle size={25}/></button>
+                        <p className='bg-white text-black rounded opacity-50 p-2'>Sono un Junior full stack developer con sede ad Agrigento, in Sicilia. Ho frequentato il corso di Tecnico gestione siti web presso Empatia e ho successivamente proseguito la mia formazione come Full Stack Developer presso Aulab srl a Bari. Durante il bootcamp, ho acquisito competenze tecniche su entrambi i lati del front-end e back-end utilizzando linguaggi come HTML, CSS, JavaScript, PHP e framework come Laravel e Bootstrap. Ho anche sviluppato abilità pratiche utilizzando strumenti come Git, GitHub, Visual Studio Code e WordPress.</p>
+                        <button onClick={() => console.log('connect')}>Per maggiori informazioni <ArrowRightCircle size={25}/></button>
                     </Col>
                     <Col xs={12} md={6} xl={5}>
                         <img src={headerImg} alt='header img' />
