@@ -1,10 +1,14 @@
 import { React } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import Carousel from "react-multi-carousel";
-import meter1 from '../assets/img/meter1.svg';
-import meter2 from '../assets/img/meter2.svg';
-import meter3 from '../assets/img/meter3.svg';
-import colorSharp from '../assets/img/color-sharp.png'
+import logo1 from '../assets/img/icon/phyton.png';
+import logo2 from '../assets/img/icon/github.png';
+import logo3 from '../assets/img/icon/bootstrap.png';
+import logo4 from '../assets/img/icon/chatgbt.png';
+import logo5 from '../assets/img/icon/javascript.png';
+import logo6 from '../assets/img/icon/css.png';
+import logo7 from '../assets/img/icon/react.png';
+import logo8 from '../assets/img/icon/html.png';
 
 
 export default function Skills() {
@@ -38,30 +42,46 @@ export default function Skills() {
                             <h2>
                                 Skills
                             </h2>
-                            <p>Le mie competenze sono specializzate nel web development con focus su frontend (HTML, CSS, JavaScript, React.js) e backend (PHP, Laravel). Conoscenza di sistemi operativi Windows 10, Linux e Unix. Utilizzo di strumenti di collaborazione come Discord e Git/GitHub. Familiarità con il framework Bootstrap e l'editor Visual Studio Code. Esperienza anche con WordPress. </p>
+                            <p>Le mie competenze sono specializzate nel web development nel frontend con HTML, CSS, JavaScript e nel backend con PHP e Python disposto ad imparne dei nuovi. Conoscenza di sistemi operativi Windows 10, Linux e Unix. Utilizzo di strumenti di collaborazione come Discord e Git/GitHub. Familiarità con il framework Bootstrap e l'editor Visual Studio Code. Esperienza anche con WordPress. </p>
                             <Carousel responsive={responsive} infinite='true' className='skill-slider'>
                                 <div className="item">
-                                    <img src={meter1} alt="" />
-                                    <h5>PYTHON SKILL</h5>
+                                    <img src={logo1} className='rounded-5' alt="ico-python" />
+                                    <h5>PYTHON</h5>
                                 </div>
                                 <div className="item">
-                                    <img src={meter1} alt="" />
-                                    <h5>PHP SKILL</h5>
+                                    <img src={logo2} className='rounded-5' alt="ico-gitHub" />
+                                    <h5>GITHUB</h5>
                                 </div>
                                 <div className="item">
-                                    <img src={meter2} alt="" />
-                                    <h5>JAVASCRIPT SKILL</h5>
+                                    <img src={logo3} className='rounded-5' alt="ico-bootstrap" />
+                                    <h5 className='mt-4 pt-2'>BOOTSTRAP</h5>
                                 </div>
                                 <div className="item">
-                                    <img src={meter3} alt="" />
-                                    <h5>HTML SKILL</h5>
+                                    <img src={logo4} className='rounded-5' alt="ico-chatgpt" />
+                                    <h5>CHAT GPT 3.5</h5>
+                                </div>
+                                <div className="item">
+                                    <img src={logo5} className='rounded-5' alt="ico-js" />
+                                    <h5>JAVASCRIPT</h5>
+                                </div>
+                                <div className="item">
+                                    <img src={logo6} className='rounded-5' alt="ico-css" />
+                                    <h5>CSS</h5>
+                                </div>
+                                <div className="item">
+                                    <img src={logo7} className='rounded-5' alt="ico-react" />
+                                    <h5>REACT JS</h5>
+                                </div>
+                                <div className="item">
+                                    <img src={logo8} className='rounded-5' alt="ico-html5" />
+                                    <h5>HTML5</h5>
                                 </div>
                             </Carousel>
                         </div>
                     </Col>
                 </Row>
             </Container>
-            <img className='background-image-left' src={colorSharp} alt="color Sharp" />
+                    
         </section>
     
     )

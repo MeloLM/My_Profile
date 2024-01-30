@@ -47,7 +47,7 @@ export default function Contact() {
                         <img src={contactImg} alt="Contact us" />
                     </Col>
                     <Col md={6}>
-                        <h2>Get the White Stone</h2>
+                        <h2>Get the White Stone <br /> and <span className="text-black">Contact Me</span></h2>
                         <form onSubmit={handleSubmit}>
                             <Row>
                                 <Col sm={6} className="px-1">

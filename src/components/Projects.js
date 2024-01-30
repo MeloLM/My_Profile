@@ -5,6 +5,7 @@ import colorSharp2 from "../assets/img/color-sharp2.png";
 import projImg1 from '../assets/img/project_soul.jpeg';
 import projImg2 from '../assets/img/project_moon.jpeg';
 import projImg3 from '../assets/img/project_sushi.jpeg';
+import projImg4 from '../assets/img/presto_it.jpg';
 
 
 
@@ -17,12 +18,6 @@ export default function Projects() {
           imgAncor:"https://github.com/MeloLM/Carmelo_GamesSpace"
         },
         {
-          title: "Project 00 Real Estate",
-          description: "Laravel Project",
-          imgUrl: projImg1,
-          imgAncor:"https://github.com/MeloLM/Project_00_Carmelo__LM"
-        },
-        {
           title: "Project color:Black",
           description: "Aulab Project",
           imgUrl: projImg2,
@@ -32,16 +27,22 @@ export default function Projects() {
           title: "Project React-sushi",
           description: "React project",
           imgUrl: projImg3,
-          imgAncor:"https://github.com/MeloLM/Sushi_Project_Carmelo_LM"
+          imgAncor:"https://sushi-project-cml.vercel.app/"
         },
         {
-          title: "Business Startup2",
+          title: "E-commerce Presto.it",
+          description: "Laravel Project",
+          imgUrl: projImg4,
+          imgAncor:"https://github.com/Hackademy66/Presto.it_Gruppo_04"
+        },
+        {
+          title: "Startup 1",
           description: "Design & Development",
           imgUrl: projImg1,
           imgAncor:"/"
         },
         {
-          title: "Business Startup3",
+          title: "Startup 2",
           description: "Design & Development",
           imgUrl: projImg1,
           imgAncor:"/"
@@ -74,19 +75,19 @@ export default function Projects() {
                             <Tab.Pane eventKey="first">
                                 <Row className='mt-4'>
                                     {
-                                        projects.map((project , index) => {
-                                            return (
-                                                <ProjectCard 
-                                                key={index}
-                                                {...project}
-                                                />
-                                            )
-                                        })
+                                      projects.map((project , index) => {
+                                          return (
+                                              <ProjectCard 
+                                              key={index}
+                                              {...project}
+                                              />
+                                          )
+                                      })
                                     }
                                 </Row>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="second">Lorem ipsum</Tab.Pane>
-                            <Tab.Pane eventKey="third" className='text-danger'>Lorem ipsum</Tab.Pane>
+                            <Tab.Pane eventKey="second" className='text-danger'>Work in progress...</Tab.Pane>
+                            <Tab.Pane eventKey="third" className='text-danger'>Work in progress...</Tab.Pane>
                         </Tab.Content>
                         </Tab.Container>
                     </Col>
