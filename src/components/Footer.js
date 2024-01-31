@@ -10,7 +10,7 @@ export default function Footer () {
         <Row className="align-item-center">
           <MailForm />
           <Col sm={6}>
-            <a href="/" onClick={window.scrollTo}>
+            <a href="#home" onClick={window.scrollTo}>
               <img src={meloIco} alt="logo-melo" className="rounded-5" />
             </a>
           </Col>
