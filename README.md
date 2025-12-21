@@ -18,6 +18,9 @@
 - ✅ **SEO Ottimizzato** - Meta tags, Open Graph, keywords
 - ✅ **Accessibilità** - aria-labels, roles, semantic HTML
 - ✅ **SocialIcons Component** - Componente riutilizzabile
+- ✅ **Bottoni Banner Uniformi** - Contact Me e Download CV con stesso stile
+- ✅ **Skill Images Uniformi** - Icone skill con dimensioni fisse (80x80px)
+- ✅ **Banner Stabile** - Typewriter con spazio non-breaking per evitare shift
 
 ---
 
@@ -89,7 +92,7 @@ My_Profile-main/
 │
 ├── src/
 │   ├── App.js              # 🎯 ROOT COMPONENT - Assembla tutte le sezioni
-│   ├── App.css             # 🎨 STILI GLOBALI (663 righe) - TUTTO QUI
+│   ├── App.css             # 🎨 STILI GLOBALI (751 righe) - TUTTO QUI
 │   ├── index.js            # Bootstrap React + imports CSS globali
 │   ├── index.css           # Stili aggiuntivi minimi
 │   │
@@ -264,7 +267,7 @@ const postUrl = `${process.env.REACT_APP_MAILCHIMP_URL}?u=${process.env.REACT_AP
 
 ## 🚨 BUG NOTI E FIX NECESSARI
 
-> ✅ **TUTTI I BUG CRITICI SONO STATI RISOLTI** (Dicembre 2024)
+> ✅ **TUTTI I BUG CRITICI SONO STATI RISOLTI** (Dicembre 2025)
 
 ### Bug Risolti:
 1. ✅ Mailchimp URL ($id → &id)
@@ -294,25 +297,27 @@ const postUrl = `${process.env.REACT_APP_MAILCHIMP_URL}?u=${process.env.REACT_AP
 12. ✅ CV download button
 13. ✅ Custom cursor tema gaming
 14. ✅ Hover effects sui progetti
+15. ✅ Bottoni banner uniformi
+16. ✅ Skill images dimensioni uniformi
+17. ✅ Banner stabile (no shift typewriter)
 
 ### 🟡 DA IMPLEMENTARE (Futuro)
 
-15. **Lazy loading** per immagini
-16. **Dark/Light mode toggle**
-17. **Sezione "About Me"** più dettagliata
-18. **Sezione "Testimonials"**
-19. **i18n** (italiano/inglese)
-20. **Blog section**
-21. **PWA completa** con offline support
-22. **Unit tests**
+18. **Lazy loading** per immagini
+19. **Dark/Light mode toggle**
+20. **Sezione "About Me"** più dettagliata
+21. **Sezione "Testimonials"**
+22. **i18n** (italiano/inglese)
+23. **PWA completa** con offline support
+24. **Unit tests**
 
 ### 💡 IDEE CREATIVE (Futuro)
 
-23. **Easter egg Dark Souls** - Suono bonfire al click
-24. **Achievements section** - Certificazioni/Badge
-25. **Timeline carriera** animata
-26. **Effetto parallax** su scroll
-27. **Loading screen** tematico Dark Souls
+25. **Easter egg Dark Souls** - Suono bonfire al click
+26. **Achievements section** - Certificazioni/Badge
+27. **Timeline carriera** animata
+28. **Effetto parallax** su scroll
+29. **Loading screen** tematico Dark Souls
 
 ---
 
@@ -434,5 +439,5 @@ project_*.jpeg   → Screenshot progetti
 
 ---
 
-*Ultimo aggiornamento: Dicembre 2024*  
-*Versione Portfolio: 0.1.0*  
+*Ultimo aggiornamento: 21 Dicembre 2025*  
+*Versione Portfolio: 1.0.0*  
