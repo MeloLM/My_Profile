@@ -358,13 +358,26 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 .banner h1 {
-  font-size: 65px;
+  font-size: 45px;
   font-weight: 700;
   letter-spacing: 0.8px;
-  line-height: 1;
+  line-height: 1.2;
   margin-bottom: 20px;
   display: block;
   min-height: 80px;
+}
+
+@media (min-width: 768px) {
+  .banner h1 {
+    font-size: 55px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .banner h1 {
+    font-size: 65px;
+    line-height: 1;
+  }
 }
 .banner p {
   color: #B8B8B8;
@@ -453,8 +466,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .txt-rotate > .wrap {
   border-right: 0.08em solid #666;
   display: inline-block;
-  min-width: 200px;
   min-height: 1em;
+  white-space: nowrap;
 }
 
 /************ Skills Css ************/
@@ -613,6 +626,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .timeline-section {
   padding: 80px 0;
   background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
+  overflow: hidden;
 }
 .timeline-section h2 {
   font-size: 45px;
@@ -624,91 +638,122 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   text-align: center;
   color: #888;
   font-size: 18px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
-.timeline {
+
+/* Timeline Horizontal Scroll */
+.timeline-wrapper {
   position: relative;
-  max-width: 900px;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.timeline-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   padding: 20px 0;
+  flex: 1;
 }
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--main-color), #ff9500, var(--main-color));
-  transform: translateX(-50%);
+.timeline-scroll::-webkit-scrollbar {
+  display: none;
 }
-.timeline-item {
-  position: relative;
-  width: 50%;
-  padding: 20px 40px;
-  box-sizing: border-box;
+.timeline-horizontal {
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+  min-width: max-content;
 }
-.timeline-item.left {
-  left: 0;
-  text-align: right;
-}
-.timeline-item.right {
-  left: 50%;
-  text-align: left;
+.timeline-card {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 .timeline-content {
   background: rgba(255, 255, 255, 0.05);
   padding: 25px;
-  border-radius: 10px;
+  border-radius: 15px;
   border: 1px solid rgba(224, 136, 33, 0.3);
-  position: relative;
+  width: 280px;
+  min-height: 200px;
   transition: all 0.3s ease;
+  text-align: center;
 }
 .timeline-content:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
   border-color: var(--main-color);
-  box-shadow: 0 10px 30px rgba(224, 136, 33, 0.2);
+  box-shadow: 0 15px 40px rgba(224, 136, 33, 0.3);
 }
 .timeline-icon {
-  font-size: 30px;
+  font-size: 40px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .timeline-year {
   display: inline-block;
   background: var(--main-color);
   color: #000;
-  padding: 5px 15px;
+  padding: 5px 20px;
   border-radius: 20px;
   font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
 }
 .timeline-content h4 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 10px;
   color: #fff;
 }
 .timeline-content p {
-  font-size: 15px;
+  font-size: 14px;
   color: #B8B8B8;
   line-height: 1.5;
   margin: 0;
 }
+.timeline-connector {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--main-color), #ff9500);
+  margin: 0 5px;
+  flex-shrink: 0;
+}
+
+/* Navigation Buttons */
+.timeline-nav {
+  background: var(--main-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  color: #000;
+}
+.timeline-nav:hover {
+  background: #ff9500;
+  transform: scale(1.1);
+}
+
 /* Timeline responsive */
 @media (max-width: 768px) {
-  .timeline-line {
-    left: 20px;
+  .timeline-nav {
+    width: 40px;
+    height: 40px;
   }
-  .timeline-item {
-    width: 100%;
-    padding-left: 60px;
-    padding-right: 20px;
+  .timeline-content {
+    width: 250px;
+    min-height: 180px;
+    padding: 20px;
   }
-  .timeline-item.left,
-  .timeline-item.right {
-    left: 0;
-    text-align: left;
+  .timeline-section h2 {
+    font-size: 35px;
   }
 }
 
