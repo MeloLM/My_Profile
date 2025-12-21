@@ -5,6 +5,7 @@ import contactImg from '../assets/img/bonfire.svg';
 
 export default function Contact() {
   const form = useRef(null);
+  const [bonfireLit, setBonfireLit] = useState(false);
   const formInitialDetails = {
     firstName: '',
     lastName: '',
@@ -77,8 +78,23 @@ export default function Contact() {
   <section className="contact" id="connect">
     <Container>
       <Row className="align-items-center">
-        <Col md={6}>
-          <img src={contactImg} alt="Contact us" />
+        <Col md={6} className="bonfire-container">
+          <img 
+            src={contactImg} 
+            alt="Bonfire - Click to rest" 
+            className={`bonfire-img ${bonfireLit ? 'bonfire-lit' : ''}`}
+            onClick={() => {
+              setBonfireLit(true);
+              setTimeout(() => setBonfireLit(false), 3000);
+            }}
+            style={{ cursor: 'pointer' }}
+            title="🔥 Click to rest at the bonfire"
+          />
+          {bonfireLit && (
+            <div className="bonfire-message">
+              <span>🔥 BONFIRE LIT 🔥</span>
+            </div>
+          )}
         </Col>
         <Col md={6}>
           <h2>Get the White Stone <br /> and <span className="text-black">Contact Me</span></h2>

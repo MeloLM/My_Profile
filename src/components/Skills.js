@@ -73,7 +73,7 @@ export default function Skills() {
                             >
                                 {skills.map((skill, index) => (
                                     <div className="item" key={index}>
-                                        <img src={skill.img} className='rounded-5' alt={`${skill.name} icon`} />
+                                        <img src={skill.img} className='rounded-5' alt={`${skill.name} icon`} loading="lazy" />
                                         <h5>{skill.name}</h5>
                                         <div className="skill-progress">
                                             <div 

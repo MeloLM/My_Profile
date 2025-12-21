@@ -21,6 +21,11 @@
 - ✅ **Bottoni Banner Uniformi** - Contact Me e Download CV con stesso stile
 - ✅ **Skill Images Uniformi** - Icone skill con dimensioni fisse (80x80px)
 - ✅ **Banner Stabile** - Typewriter con spazio non-breaking per evitare shift
+- ✅ **Lazy Loading** - Immagini caricate on-demand per performance
+- ✅ **Loading Screen** - Schermata caricamento tematica Dark Souls con bonfire 🔥
+- ✅ **Easter Egg Bonfire** - Clicca sul bonfire per "BONFIRE LIT!"
+- ✅ **Reveal on Scroll** - Animazioni elementi che appaiono allo scroll
+- ✅ **Timeline Carriera** - Sezione interattiva con percorso formativo animato
 
 ---
 
@@ -102,7 +107,8 @@ My_Profile-main/
 │   │   ├── Skills.js       # Carousel competenze
 │   │   ├── Projects.js     # Griglia progetti con tabs
 │   │   ├── ProjectCard.js  # Card singolo progetto
-│   │   ├── Contact.js      # Form contatto (EmailJS)
+│   │   ├── Contact.js      # Form contatto (EmailJS) + Easter egg bonfire
+│   │   ├── Timeline.js     # Timeline carriera animata
 │   │   ├── Footer.js       # Footer + Newsletter wrapper
 │   │   ├── MailForm.js     # Wrapper Mailchimp
 │   │   └── Newsletter.js   # Form newsletter
@@ -124,11 +130,13 @@ My_Profile-main/
 ### Gerarchia Rendering (App.js)
 ```
 App
+├── Loading Screen           → Dark Souls themed, bonfire animation (2.5s)
 ├── NavBar (Vnavbar.js)     → Fixed top, cambia stile on scroll
 ├── Banner                   → Hero con typewriter animation
 ├── Skills                   → Carousel auto-scroll
-├── Projects                 → Tab system con ProjectCard children
-├── Contact                  → Form EmailJS
+├── Projects                 → ProjectCard children con reveal on scroll
+├── Timeline                 → Carriera animata con reveal on scroll
+├── Contact                  → Form EmailJS + Easter egg bonfire
 └── Footer
     └── MailForm
         └── Newsletter       → Form Mailchimp
@@ -300,24 +308,21 @@ const postUrl = `${process.env.REACT_APP_MAILCHIMP_URL}?u=${process.env.REACT_AP
 15. ✅ Bottoni banner uniformi
 16. ✅ Skill images dimensioni uniformi
 17. ✅ Banner stabile (no shift typewriter)
+18. ✅ Lazy loading immagini
+19. ✅ Loading screen Dark Souls (bonfire animation)
+20. ✅ Easter egg Bonfire (click to lit!)
+21. ✅ Reveal on scroll animations
+22. ✅ Timeline carriera animata
+23. ✅ Effetto parallax su scroll
 
 ### 🟡 DA IMPLEMENTARE (Futuro)
 
-18. **Lazy loading** per immagini
-19. **Dark/Light mode toggle**
-20. **Sezione "About Me"** più dettagliata
-21. **Sezione "Testimonials"**
-22. **i18n** (italiano/inglese)
-23. **PWA completa** con offline support
-24. **Unit tests**
-
-### 💡 IDEE CREATIVE (Futuro)
-
-25. **Easter egg Dark Souls** - Suono bonfire al click
-26. **Achievements section** - Certificazioni/Badge
-27. **Timeline carriera** animata
-28. **Effetto parallax** su scroll
-29. **Loading screen** tematico Dark Souls
+24. **Dark/Light mode toggle**
+25. **Sezione "About Me"** più dettagliata
+26. **i18n** (italiano/inglese)
+27. **PWA completa** con offline support
+28. **Unit tests**
+29. **Achievements section** - Certificazioni/Badge
 
 ---
 
