@@ -704,8 +704,15 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .timeline-content h4 {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: #fff;
+}
+.timeline-location {
+  display: block;
+  font-size: 13px;
+  color: var(--main-color);
+  margin-bottom: 10px;
+  font-style: italic;
 }
 .timeline-content p {
   font-size: 14px;
