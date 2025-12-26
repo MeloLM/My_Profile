@@ -97,7 +97,7 @@ export default function Contact() {
           />
           {bonfireLit && (
             <div className="bonfire-message">
-              <span>🔥 BONFIRE LIT 🔥</span>
+              <span>🔥BONFIRE LIT🔥</span>
             </div>
           )}
         </Col>
