@@ -1,7 +1,12 @@
+/**
+ * 🏠 Banner Component - Layout
+ * Hero section con effetto typewriter
+ */
+
 import { useState , useEffect, useCallback, useMemo } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import { ArrowRightCircle } from 'react-bootstrap-icons';
-import headerImg from '../assets/img/solaire.svg';
+import headerImg from '../../assets/img/solaire.svg';
 
 export default function Banner () {
   const [loopNum , setLoopNum] = useState(0);

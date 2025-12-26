@@ -1,7 +1,12 @@
+/**
+ * 📧 Contact Component - Section
+ * Sezione contatti con form EmailJS
+ */
+
 import { useState, useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { Container , Row , Col } from 'react-bootstrap';
-import contactImg from '../assets/img/bonfire.svg';
+import contactImg from '../../assets/img/bonfire.svg';
 
 export default function Contact() {
   const form = useRef(null);

@@ -1,7 +1,12 @@
+/**
+ * 🦶 Footer Component - Layout
+ * Footer con social e newsletter
+ */
+
 import { Col, Container, Row } from "react-bootstrap";
 import { MailForm } from "./MailForm";
-import { SocialIcons } from './SocialIcons';
-import meloIco from "../assets/img/Melo_icon.png";
+import { SocialIcons } from '../common/SocialIcons';
+import meloIco from "../../assets/img/Melo_icon.png";
 
 export default function Footer () {
   return (

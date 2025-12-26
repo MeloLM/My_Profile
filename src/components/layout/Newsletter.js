@@ -1,3 +1,8 @@
+/**
+ * 📰 Newsletter Component - Layout
+ * Form di iscrizione alla newsletter
+ */
+
 import { useState, useEffect } from "react";
 import { Alert, Col, Row } from "react-bootstrap";
 

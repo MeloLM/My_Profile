@@ -1,7 +1,12 @@
+/**
+ * 📅 Timeline Component - Section
+ * Sezione percorso formativo/lavorativo
+ */
+
 import { Container, Row, Col } from 'react-bootstrap';
 import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
-import { timelineData } from '../data/profileData';
+import { timelineData } from '../../data/profileData';
 
 export default function Timeline() {
   const scrollRef = useRef(null);

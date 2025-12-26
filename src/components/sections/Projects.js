@@ -1,11 +1,15 @@
-import {React} from 'react';
+/**
+ * 📁 Projects Component - Section
+ * Sezione progetti con griglia di cards
+ */
+
 import { Container , Row , Col } from 'react-bootstrap';
-import { ProjectCard } from './ProjectCard';
-import colorSharp2 from "../assets/img/color-sharp2.png";
-import projImg1 from '../assets/img/project_soul.jpeg';
-import projImg2 from '../assets/img/project_moon.jpeg';
-import projImg3 from '../assets/img/project_sushi.jpeg';
-import projImg4 from '../assets/img/presto_it.jpg';
+import { ProjectCard } from '../cards/ProjectCard';
+import colorSharp2 from "../../assets/img/color-sharp2.png";
+import projImg1 from '../../assets/img/project_soul.jpeg';
+import projImg2 from '../../assets/img/project_moon.jpeg';
+import projImg3 from '../../assets/img/project_sushi.jpeg';
+import projImg4 from '../../assets/img/presto_it.jpg';
 
 
 

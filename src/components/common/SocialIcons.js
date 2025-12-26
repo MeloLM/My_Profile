@@ -1,3 +1,8 @@
+/**
+ * 🌐 SocialIcons Component - Common
+ * Icone social media riutilizzabili
+ */
+
 import { BsLinkedin, BsGithub, BsInstagram } from 'react-icons/bs';
 
 export const SocialIcons = ({ githubColor = 'white' }) => {

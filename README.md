@@ -25,7 +25,9 @@
 - ✅ **Loading Screen** - Schermata caricamento tematica Dark Souls con bonfire 🔥
 - ✅ **Easter Egg Bonfire** - Clicca sul bonfire per "BONFIRE LIT!"
 - ✅ **Reveal on Scroll** - Animazioni elementi che appaiono allo scroll
-- ✅ **Timeline Carriera** - Sezione interattiva con percorso formativo animato
+- ✅ **Timeline Orizzontale** - Scorrimento orizzontale con frecce navigazione, 5 tappe carriera
+- ✅ **ProfileData.js** - File centralizzato per dati CV (educazione, skills, progetti, esperienza)
+- ✅ **Banner Responsive** - Font-size adattivo per schermi grandi, no wrap del typewriter
 
 ---
 
@@ -97,9 +99,12 @@ My_Profile-main/
 │
 ├── src/
 │   ├── App.js              # 🎯 ROOT COMPONENT - Assembla tutte le sezioni
-│   ├── App.css             # 🎨 STILI GLOBALI (751 righe) - TUTTO QUI
+│   ├── App.css             # 🎨 STILI GLOBALI (1026+ righe) - TUTTO QUI
 │   ├── index.js            # Bootstrap React + imports CSS globali
 │   ├── index.css           # Stili aggiuntivi minimi
+│   │
+│   ├── data/
+│   │   └── profileData.js  # 📊 DATI CV CENTRALIZZATI - Modifica qui per aggiornare tutto
 │   │
 │   ├── components/
 │   │   ├── Vnavbar.js      # Navigation bar con scroll effect
@@ -108,7 +113,7 @@ My_Profile-main/
 │   │   ├── Projects.js     # Griglia progetti con tabs
 │   │   ├── ProjectCard.js  # Card singolo progetto
 │   │   ├── Contact.js      # Form contatto (EmailJS) + Easter egg bonfire
-│   │   ├── Timeline.js     # Timeline carriera animata
+│   │   ├── Timeline.js     # Timeline orizzontale con frecce, usa profileData.js
 │   │   ├── Footer.js       # Footer + Newsletter wrapper
 │   │   ├── MailForm.js     # Wrapper Mailchimp
 │   │   └── Newsletter.js   # Form newsletter
@@ -132,10 +137,10 @@ My_Profile-main/
 App
 ├── Loading Screen           → Dark Souls themed, bonfire animation (2.5s)
 ├── NavBar (Vnavbar.js)     → Fixed top, cambia stile on scroll
-├── Banner                   → Hero con typewriter animation
+├── Banner                   → Hero con typewriter animation (responsive font-size)
 ├── Skills                   → Carousel auto-scroll
 ├── Projects                 → ProjectCard children con reveal on scroll
-├── Timeline                 → Carriera animata con reveal on scroll
+├── Timeline                 → Scorrimento orizzontale con frecce navigazione (5 tappe)
 ├── Contact                  → Form EmailJS + Easter egg bonfire
 └── Footer
     └── MailForm
@@ -188,6 +193,13 @@ Props: { onValidated, status, message }
 Service: Mailchimp Subscribe
 ```
 
+#### `Timeline.js`
+```javascript
+Data: Importato da profileData.js (5 tappe: 2019-2025)
+Feature: Scorrimento orizzontale, frecce navigazione
+Ref: scrollRef per smooth scroll
+```
+
 ---
 
 ## 🔄 FLUSSO DATI
@@ -207,6 +219,18 @@ Email Input → handleSubmit → onValidated(EMAIL) → Mailchimp API → status
 ```
 Click Nav.Link → setActiveLink() → CSS class .active
 Scroll > 50px → setScrolled(true) → Navbar background change
+```
+
+### ProfileData (src/data/profileData.js)
+```
+File centralizzato → Esporta tutti i dati:
+  - personalInfo (nome, email, social)
+  - summary (profilo professionale)
+  - technicalSkills (languages, frameworks, tools)
+  - education (Diploma, Empatia, Aulab)
+  - projects (SoulsSpace, Sushi, Shooter, etc.)
+  - workExperience (Rueesch, Tabacchi, etc.)
+  - timelineData (5 tappe per Timeline component)
 ```
 
 ---
@@ -230,14 +254,15 @@ Scroll > 50px → setScrolled(true) → Navbar background change
 | Accent | rgb(224,136,33) | CTA, bordi, hover |
 
 ### Sezioni CSS in App.css
-1. **Default CSS** (righe 1-100) - Reset e base
-2. **Scrollbar** (righe 80-100) - Custom scrollbar arancione
-3. **Navbar** (righe 100-250) - Fixed nav con transizioni
-4. **Banner** (righe 250-340) - Hero + typewriter
-5. **Skills** (righe 340-390) - Carousel container
-6. **Projects** (righe 390-500) - Tabs e cards
-7. **Contact** (righe 500-580) - Form styling
-8. **Footer** (righe 580-660) - Newsletter + credits
+1. **Default CSS** (righe 1-150) - Reset, base, loading screen
+2. **Scrollbar** (righe 150-170) - Custom scrollbar arancione
+3. **Navbar** (righe 170-320) - Fixed nav con transizioni
+4. **Banner** (righe 320-470) - Hero + typewriter responsive
+5. **Skills** (righe 470-520) - Carousel container + progress bars
+6. **Projects** (righe 520-620) - Cards con hover effects
+7. **Timeline** (righe 620-730) - Scorrimento orizzontale + frecce
+8. **Contact** (righe 730-850) - Form styling + bonfire easter egg
+9. **Footer** (righe 850-1000+) - Newsletter + credits
 
 ### Background Images
 - `banner-bg2.png` - Background hero (fixed attachment)
@@ -314,15 +339,20 @@ const postUrl = `${process.env.REACT_APP_MAILCHIMP_URL}?u=${process.env.REACT_AP
 21. ✅ Reveal on scroll animations
 22. ✅ Timeline carriera animata
 23. ✅ Effetto parallax su scroll
+24. ✅ Timeline orizzontale con scorrimento
+25. ✅ ProfileData.js centralizzato
+26. ✅ Banner responsive font-size
+27. ✅ Typewriter white-space nowrap
 
 ### 🟡 DA IMPLEMENTARE (Futuro)
 
-24. **Dark/Light mode toggle**
-25. **Sezione "About Me"** più dettagliata
-26. **i18n** (italiano/inglese)
-27. **PWA completa** con offline support
-28. **Unit tests**
-29. **Achievements section** - Certificazioni/Badge
+28. **Dark/Light mode toggle**
+29. **Sezione "About Me"** più dettagliata
+30. **i18n** (italiano/inglese)
+31. **PWA completa** con offline support
+32. **Unit tests**
+33. **Achievements section** - Certificazioni/Badge
+34. **Uso automatico profileData** - Popolare Skills, Projects, Banner da profileData.js
 
 ---
 
@@ -372,10 +402,12 @@ REACT_APP_EMAILJS_KEY=kforPiP9Kqq8o2cYk
 
 | Voglio modificare... | File |
 |---------------------|------|
+| **DATI CV/INFO PERSONALI** | `src/data/profileData.js` 🔥 **MODIFICA QUI!** |
 | Colori/Stili | `src/App.css` |
 | Testo hero | `src/components/Banner.js` |
 | Skills carousel | `src/components/Skills.js` |
 | Progetti | `src/components/Projects.js` |
+| Timeline carriera | `src/data/profileData.js` (timelineData) |
 | Form contatto | `src/components/Contact.js` |
 | Social links | `src/components/Vnavbar.js` + `src/components/Footer.js` |
 | SEO/Title | `public/index.html` |
@@ -445,4 +477,5 @@ project_*.jpeg   → Screenshot progetti
 ---
 
 *Ultimo aggiornamento: 21 Dicembre 2025*  
-*Versione Portfolio: 1.0.0*  
+*Versione Portfolio: 1.2.0*  
+*Ultimo commit: Timeline orizzontale + profileData.js centralizzato*  

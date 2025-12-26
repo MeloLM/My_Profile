@@ -1,21 +1,25 @@
-import { React } from 'react';
+/**
+ * 🛠️ Skills Component - Section
+ * Sezione competenze con carosello
+ */
+
 import { Container , Row , Col } from 'react-bootstrap';
 import Carousel from "react-multi-carousel";
 // Skill icons
-import logo1 from '../assets/img/icon/phyton.png';
-import logo2 from '../assets/img/icon/github.png';
-import logo3 from '../assets/img/icon/bootstrap.png';
-import logo4 from '../assets/img/icon/chatgbt.png';
-import logo5 from '../assets/img/icon/javascript.png';
-import logo6 from '../assets/img/icon/css.png';
-import logo7 from '../assets/img/icon/react.png';
-import logo8 from '../assets/img/icon/html.png';
-import logo9 from '../assets/img/icon/php.png';
-import logo10 from '../assets/img/icon/laravel.jpg';
-import logo11 from '../assets/img/icon/mysql.png';
-import logo12 from '../assets/img/icon/git.png';
-import logo13 from '../assets/img/icon/nodejs.png';
-import logo14 from '../assets/img/icon/wordpress.png';
+import logo1 from '../../assets/img/icon/phyton.png';
+import logo2 from '../../assets/img/icon/github.png';
+import logo3 from '../../assets/img/icon/bootstrap.png';
+import logo4 from '../../assets/img/icon/chatgbt.png';
+import logo5 from '../../assets/img/icon/javascript.png';
+import logo6 from '../../assets/img/icon/css.png';
+import logo7 from '../../assets/img/icon/react.png';
+import logo8 from '../../assets/img/icon/html.png';
+import logo9 from '../../assets/img/icon/php.png';
+import logo10 from '../../assets/img/icon/laravel.jpg';
+import logo11 from '../../assets/img/icon/mysql.png';
+import logo12 from '../../assets/img/icon/git.png';
+import logo13 from '../../assets/img/icon/nodejs.png';
+import logo14 from '../../assets/img/icon/wordpress.png';
 
 export default function Skills() {
     const responsive = {

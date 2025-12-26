@@ -1,13 +1,15 @@
 
 import { useState, useEffect } from 'react';
 import './App.css';
-import Banner from './components/Banner';
-import NavBar from './components/Vnavbar';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Timeline from './components/Timeline';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+// Layout Components
+import Banner from './components/layout/Banner';
+import NavBar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+// Section Components
+import Skills from './components/sections/Skills';
+import Projects from './components/sections/Projects';
+import Timeline from './components/sections/Timeline';
+import Contact from './components/sections/Contact';
 
 function App() {
   const [loading, setLoading] = useState(true);

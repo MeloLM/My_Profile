@@ -1,4 +1,8 @@
-import { React } from 'react';
+/**
+ * 🎴 ProjectCard Component - Card
+ * Card singolo progetto
+ */
+
 import { Col } from 'react-bootstrap';
 
 export const ProjectCard = ({title , description , imgUrl, imgAncor}) => {

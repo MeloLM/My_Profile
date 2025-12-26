@@ -1,6 +1,11 @@
-import {React , useState , useEffect} from 'react';
-import {Navbar , Container , Nav} from 'react-bootstrap';
-import { SocialIcons } from './SocialIcons';
+/**
+ * 🧭 Navbar Component - Layout
+ * Barra di navigazione con effetto scroll
+ */
+
+import { useState , useEffect } from 'react';
+import { Navbar , Container , Nav } from 'react-bootstrap';
+import { SocialIcons } from '../common/SocialIcons';
 
 export default function NavBar() {
     const [activeLink, setActiveLink] = useState('home');

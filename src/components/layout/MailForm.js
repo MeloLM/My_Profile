@@ -1,3 +1,8 @@
+/**
+ * 📧 MailForm Component - Layout
+ * Form per iscrizione newsletter Mailchimp
+ */
+
 import MailchimpSubscribe from "react-mailchimp-subscribe";
 import { Newsletter } from "./Newsletter";
 
