@@ -5,21 +5,7 @@
 
 import { Container , Row , Col } from 'react-bootstrap';
 import Carousel from "react-multi-carousel";
-// Skill icons
-import logo1 from '../../assets/img/icon/phyton.png';
-import logo2 from '../../assets/img/icon/github.png';
-import logo3 from '../../assets/img/icon/bootstrap.png';
-import logo4 from '../../assets/img/icon/chatgbt.png';
-import logo5 from '../../assets/img/icon/javascript.png';
-import logo6 from '../../assets/img/icon/css.png';
-import logo7 from '../../assets/img/icon/react.png';
-import logo8 from '../../assets/img/icon/html.png';
-import logo9 from '../../assets/img/icon/php.png';
-import logo10 from '../../assets/img/icon/laravel.jpg';
-import logo11 from '../../assets/img/icon/mysql.png';
-import logo12 from '../../assets/img/icon/git.png';
-import logo13 from '../../assets/img/icon/nodejs.png';
-import logo14 from '../../assets/img/icon/wordpress.png';
+import { skillsData } from '../../data/profileData';
 
 export default function Skills() {
     const responsive = {
@@ -41,23 +27,6 @@ export default function Skills() {
         }
     };
 
-    const skills = [
-        { img: logo8, name: "HTML5", level: 90 },
-        { img: logo6, name: "CSS3", level: 85 },
-        { img: logo5, name: "JAVASCRIPT", level: 75 },
-        { img: logo7, name: "REACT JS", level: 70 },
-        { img: logo9, name: "PHP", level: 70 },
-        { img: logo10, name: "LARAVEL", level: 65 },
-        { img: logo11, name: "MYSQL", level: 70 },
-        { img: logo1, name: "PYTHON", level: 50 },
-        { img: logo3, name: "BOOTSTRAP", level: 85 },
-        { img: logo12, name: "GIT", level: 75 },
-        { img: logo2, name: "GITHUB", level: 80 },
-        { img: logo13, name: "NODE.JS", level: 40 },
-        { img: logo14, name: "WORDPRESS", level: 60 },
-        { img: logo4, name: "AI TOOLS", level: 85 },
-    ];
-
     return (
         <section className='skill' id='skills' aria-label="Skills section">
             <Container>
@@ -75,7 +44,7 @@ export default function Skills() {
                                 keyBoardControl={true}
                                 transitionDuration={500}
                             >
-                                {skills.map((skill, index) => (
+                                {skillsData.map((skill, index) => (
                                     <div className="item" key={index}>
                                         <img src={skill.img} className='rounded-5' alt={`${skill.name} icon`} loading="lazy" />
                                         <h5>{skill.name}</h5>
