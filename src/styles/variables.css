@@ -72,11 +72,13 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
   --shadow-glow: 0 0 20px rgba(74, 144, 226, 0.3);
+  --shadow-glow-primary: 0 0 20px rgba(224, 136, 33, 0.3);
   
   /* === TRANSITIONS === */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
+  --transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
   
   /* === BREAKPOINTS (da usare con @media) === */
   --breakpoint-xs: 480px;
@@ -94,9 +96,15 @@
   --z-index-modal: 1050;
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
+  
+  /* === PORTFOLIO THEME COLORS === */
+  --main-color: #e08821;
+  --main-color-hover: rgba(224, 135, 33, 0.804);
+  --first-color: #000;
+  --second-color: #0e0e0e;
 }
 
-/* === DARK THEME (opzionale per future implementazioni) === */
+/* === LIGHT THEME === */
 [data-theme="light"] {
   --color-background: #FFFFFF;
   --color-surface: #F5F5F5;
@@ -104,4 +112,18 @@
   --color-text-primary: #1A1A2E;
   --color-text-secondary: #4A4A5E;
   --color-text-muted: #8A8A9E;
+  --first-color: #f5f5f5;
+  --second-color: #e0e0e0;
+}
+
+/* === DARK THEME (default) === */
+[data-theme="dark"] {
+  --color-background: #0F0F1E;
+  --color-surface: #1A1A2E;
+  --color-surface-light: #252541;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8B8D4;
+  --color-text-muted: #7B7B8F;
+  --first-color: #000;
+  --second-color: #0e0e0e;
 }

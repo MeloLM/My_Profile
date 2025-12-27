@@ -45,6 +45,43 @@ export const validateContactForm = (formData) => {
  * @returns {boolean} - True se valido
  */
 export const validatePhone = (phone) => {
+  if (!phone) return true; // Opzionale
   const phoneRegex = /^(\+39)?[\s]?([0-9]{2,4}[\s]?[0-9]{6,7})$/;
-  return phoneRegex.test(phone);
+  return phoneRegex.test(phone.replace(/\s/g, ''));
+};
+
+/**
+ * Valida una URL
+ * @param {string} url - URL da validare
+ * @returns {boolean} - True se valida
+ */
+export const validateUrl = (url) => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Valida che una stringa non sia vuota
+ * @param {string} str - Stringa da validare
+ * @param {number} minLength - Lunghezza minima (default: 1)
+ * @returns {boolean} - True se valida
+ */
+export const validateRequired = (str, minLength = 1) => {
+  return str && str.trim().length >= minLength;
+};
+
+/**
+ * Sanitizza input da caratteri potenzialmente pericolosi
+ * @param {string} input - Input da sanitizzare
+ * @returns {string} - Input sanitizzato
+ */
+export const sanitizeInput = (input) => {
+  if (typeof input !== 'string') return '';
+  return input
+    .replace(/[<>]/g, '') // Rimuove < e >
+    .trim();
 };

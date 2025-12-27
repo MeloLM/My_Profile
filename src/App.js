@@ -1,15 +1,23 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import './App.css';
-// Layout Components
+
+// Context
+import { ThemeProvider } from './context';
+
+// Layout Components (caricati subito)
 import Banner from './components/layout/Banner';
 import NavBar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-// Section Components
-import Skills from './components/sections/Skills';
-import Projects from './components/sections/Projects';
-import Timeline from './components/sections/Timeline';
-import Contact from './components/sections/Contact';
+
+// Lazy loaded Section Components (caricati on-demand)
+const Skills = lazy(() => import('./components/sections/Skills'));
+const Projects = lazy(() => import('./components/sections/Projects'));
+const Timeline = lazy(() => import('./components/sections/Timeline'));
+const Contact = lazy(() => import('./components/sections/Contact'));
+
+// Loader Component per Suspense fallback
+import Loader from './components/common/Loader';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -78,17 +86,19 @@ function App() {
   }
 
   return (
-   <>
+   <ThemeProvider>
    
     <NavBar />
     <Banner />
-    <Skills />
-    <Projects />
-    <Timeline />
-    <Contact />
+    <Suspense fallback={<Loader message="Loading sections..." variant="bonfire" />}>
+      <Skills />
+      <Projects />
+      <Timeline />
+      <Contact />
+    </Suspense>
     <Footer />
 
-   </>
+   </ThemeProvider>
   );
 }
 

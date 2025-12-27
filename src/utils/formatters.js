@@ -56,5 +56,55 @@ export const toKebabCase = (str) => {
  * @returns {string} - Stringa capitalizzata
  */
 export const capitalize = (str) => {
+  if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+/**
+ * Formatta un periodo temporale in modo leggibile
+ * @param {string} startDate - Data inizio
+ * @param {string} endDate - Data fine (opzionale, 'present' per attuale)
+ * @returns {string} - Periodo formattato
+ */
+export const formatPeriod = (startDate, endDate = null) => {
+  const start = formatDate(startDate);
+  if (!endDate || endDate.toLowerCase() === 'present') {
+    return `${start} - Presente`;
+  }
+  return `${start} - ${formatDate(endDate)}`;
+};
+
+/**
+ * Converte bytes in formato leggibile
+ * @param {number} bytes - Numero di bytes
+ * @returns {string} - Dimensione formattata (KB, MB, GB)
+ */
+export const formatFileSize = (bytes) => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+};
+
+/**
+ * Genera un ID univoco
+ * @returns {string} - ID univoco
+ */
+export const generateId = () => {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+};
+
+/**
+ * Estrae le iniziali da un nome
+ * @param {string} name - Nome completo
+ * @returns {string} - Iniziali (max 2 caratteri)
+ */
+export const getInitials = (name) => {
+  if (!name) return '';
+  return name
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase())
+    .slice(0, 2)
+    .join('');
 };
