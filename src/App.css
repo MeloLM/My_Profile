@@ -816,6 +816,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: var(--main-color);
   letter-spacing: 3px;
   text-shadow: 0 0 10px rgba(224, 136, 33, 0.8);
+  white-space: nowrap;
 }
 @keyframes fadeInOut {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
