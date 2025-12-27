@@ -10,14 +10,14 @@ import Banner from './components/layout/Banner';
 import NavBar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 
+// Loader Component per Suspense fallback
+import Loader from './components/common/Loader';
+
 // Lazy loaded Section Components (caricati on-demand)
 const Skills = lazy(() => import('./components/sections/Skills'));
 const Projects = lazy(() => import('./components/sections/Projects'));
 const Timeline = lazy(() => import('./components/sections/Timeline'));
 const Contact = lazy(() => import('./components/sections/Contact'));
-
-// Loader Component per Suspense fallback
-import Loader from './components/common/Loader';
 
 function App() {
   const [loading, setLoading] = useState(true);
