@@ -36,17 +36,40 @@ PROJECT_ROOT/
     │   └── RENDER(<App />, DOM_ROOT)
     │
     ├── App.js              # MAIN_ORCHESTRATOR
-    │   ├── IMPORT all_section_components
-    │   ├── DEFINE routing (if needed)
+    │   ├── IMPORT { Suspense, lazy } from 'react'
+    │   ├── LAZY_LOAD section_components
+    │   │   ├── const Skills = lazy(() => import('./sections/Skills'))
+    │   │   ├── const Projects = lazy(() => import('./sections/Projects'))
+    │   │   └── const Contact = lazy(() => import('./sections/Contact'))
+    │   ├── STATE loading = true (initial screen)
+    │   ├── EFFECT parallax_scroll
+    │   ├── EFFECT reveal_on_scroll (IntersectionObserver)
     │   └── RETURN (
-    │       <Layout>
+    │       <ThemeProvider>
+    │           <NavBar />
     │           <Banner />
-    │           <Skills />
-    │           <Timeline />
-    │           <Projects />
-    │           <Contact />
-    │       </Layout>
+    │           <Suspense fallback={<Loader />}>
+    │               <Skills />
+    │               <Projects />
+    │               <Timeline />
+    │               <Contact />
+    │           </Suspense>
+    │           <Footer />
+    │       </ThemeProvider>
     │   )
+    │
+    ├── context/            # 🆕 GLOBAL_STATE_MANAGEMENT
+    │   ├── ThemeContext.js # Dark/Light Mode + Global Theme State
+    │   │   └── FUNCTION ThemeProvider({ children })
+    │   │       ├── STATE theme = 'dark' | 'light'
+    │   │       ├── FUNCTION toggleTheme()
+    │   │       ├── EFFECT persist_theme_to_localStorage
+    │   │       └── RETURN <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    │   │           {children}
+    │   │       </ThemeContext.Provider>
+    │   │
+    │   └── index.js        # Context Exports
+    │       └── EXPORT { ThemeProvider, useTheme }
     │
     ├── data/
     │   └── profileData.js  # 🧠 SINGLE_SOURCE_OF_TRUTH
@@ -195,23 +218,31 @@ PROJECT_ROOT/
     │   │       │   │   └── APPEND char to displayedText
     │   │       └── RETURN displayedText
     │   │
-    │   └── useEmail.js
-    │       └── FUNCTION useEmail()
-    │           ├── STATE status = { loading, error, success }
-    │           ├── FUNCTION sendEmail(formData)
-    │           │   ├── SET status.loading = true
-    │           │   ├── TRY
-    │           │   │   ├── CALL EmailJS.send(
-    │           │   │   │   service_id: ENV.EMAILJS_SERVICE_ID,
-    │           │   │   │   template_id: ENV.EMAILJS_TEMPLATE_ID,
-    │           │   │   │   data: formData
-    │           │   │   │   )
-    │           │   │   └── SET status.success = true
-    │           │   ├── CATCH error
-    │           │   │   └── SET status.error = error.message
-    │           │   └── FINALLY
-    │           │       └── SET status.loading = false
-    │           └── RETURN { sendEmail, status }
+    │   ├── useEmail.js
+    │   │   └── FUNCTION useEmail()
+    │   │       ├── STATE status = { loading, error, success }
+    │   │       ├── FUNCTION sendEmail(formData)
+    │   │       │   ├── SET status.loading = true
+    │   │       │   ├── TRY
+    │   │       │   │   ├── CALL EmailJS.send(
+    │   │       │   │   │   service_id: ENV.EMAILJS_SERVICE_ID,
+    │   │       │   │   │   template_id: ENV.EMAILJS_TEMPLATE_ID,
+    │   │       │   │   │   data: formData
+    │   │       │   │   │   )
+    │   │       │   │   └── SET status.success = true
+    │   │       │   ├── CATCH error
+    │   │       │   │   └── SET status.error = error.message
+    │   │       │   └── FINALLY
+    │   │       │       └── SET status.loading = false
+    │   │       └── RETURN { sendEmail, status }
+    │   │
+    │   └── useWindowSize.js    # 🆕 RESPONSIVE_HELPER
+    │       └── FUNCTION useWindowSize()
+    │           ├── STATE windowSize = { width: window.innerWidth, height: window.innerHeight }
+    │           ├── EFFECT on_mount
+    │           │   ├── LISTEN window.resize
+    │           │   └── UPDATE windowSize on_resize
+    │           └── RETURN { width, height, isMobile, isTablet, isDesktop }
     │
     ├── styles/             # CSS_ARCHITECTURE
     │   ├── variables.css
@@ -269,13 +300,27 @@ USER_OPENS_APP
     ↓
 index.js → ReactDOM.render(<App />)
     ↓
-App.js → LOAD all_components
+App.js → SHOW loading_screen (2.5s)
+    ↓
+LOAD ThemeProvider (apply saved theme)
+    ↓
+LAZY_LOAD section_components (Skills, Projects, Contact)
     ↓
 COMPONENTS → IMPORT data from profileData.js
     ↓
 RENDER UI with_dynamic_data
     ↓
-USER_INTERACTION (click, scroll, form_submit)
+INITIALIZE scroll_observers (parallax + reveal animations)
+    ↓
+USER_INTERACTION (click, scroll, form_submit, theme_toggle)
+    ↓
+IF theme_toggle THEN
+    ↓
+    useTheme().toggleTheme()
+        ↓
+        UPDATE CSS_VARS for theme
+        ↓
+        SAVE to localStorage
     ↓
 IF form_submit THEN
     ↓
@@ -349,21 +394,27 @@ VALIDATE email
 
 ```
 App.js
+├── ThemeProvider (context)
+│   └── useTheme() hook
+├── Loader.js (Suspense fallback)
 ├── Navbar.js
-│   └── useScroll() hook
+│   ├── useScroll() hook
+│   └── useTheme() hook (for theme toggle)
 ├── Banner.js
 │   ├── profileData.personalInfo
 │   └── useTypewriter() hook
-├── Skills.js
+├── Skills.js (lazy loaded)
 │   ├── profileData.skills
-│   └── SkillItem.js (card)
+│   ├── SkillItem.js (card)
+│   └── useWindowSize() hook (responsive layout)
 ├── Timeline.js
 │   ├── profileData.timeline
 │   └── TimelineItem.js (card)
-├── Projects.js
+├── Projects.js (lazy loaded)
 │   ├── profileData.projects
-│   └── ProjectCard.js (card)
-├── Contact.js
+│   ├── ProjectCard.js (card)
+│   └── useWindowSize() hook (responsive grid)
+├── Contact.js (lazy loaded)
 │   ├── profileData.contactInfo
 │   ├── MailForm.js
 │   │   └── useEmail() hook
@@ -378,44 +429,54 @@ App.js
 ## 📋 CHECKLIST IMPLEMENTAZIONE
 
 ```pseudocode
-STEP_1: CREATE directory_structure
-    └── RUN mkdir commands for all folders
+✅ STEP_1: CREATE directory_structure
+    └── COMPLETED: All folders created
 
-STEP_2: REFACTOR existing_components
-    └── MOVE components to appropriate folders
+✅ STEP_2: REFACTOR existing_components
+    └── COMPLETED: Components organized in folders
         ├── Banner.js → components/layout/
         ├── Skills.js → components/sections/
         ├── ProjectCard.js → components/cards/
         └── etc...
 
-STEP_3: EXTRACT custom_hooks
-    └── CREATE hooks/ folder
-        ├── EXTRACT scroll logic → useScroll.js
-        ├── EXTRACT typewriter effect → useTypewriter.js
-        └── EXTRACT email logic → useEmail.js
+✅ STEP_3: EXTRACT custom_hooks
+    └── COMPLETED: hooks/ folder created
+        ├── useScroll.js ✅
+        ├── useTypewriter.js ✅
+        ├── useEmail.js ✅
+        └── useWindowSize.js 🆕 (TO IMPLEMENT)
 
-STEP_4: CENTRALIZE styles
-    └── CREATE styles/ folder
-        ├── CREATE variables.css
-        ├── CREATE global.css
-        └── REFACTOR component CSS to modules
+🔄 STEP_4: CENTRALIZE styles
+    └── IN PROGRESS: styles/ folder exists
+        ├── variables.css ✅
+        ├── global.css ✅
+        └── Component CSS modules (TO REFACTOR)
 
-STEP_5: CREATE utils
-    └── CREATE utils/ folder
-        ├── CREATE validators.js
-        └── CREATE formatters.js
+✅ STEP_5: CREATE utils
+    └── COMPLETED: utils/ folder created
+        ├── validators.js ✅
+        └── formatters.js ✅
 
-STEP_6: VERIFY data_flow
-    └── ENSURE all components READ from profileData.js
-    └── NO hardcoded strings in JSX
+✅ STEP_6: VERIFY data_flow
+    └── COMPLETED: All components READ from profileData.js
 
-STEP_7: TEST environment_variables
-    └── CREATE .env.example
-    └── DOCUMENT required keys
+✅ STEP_7: TEST environment_variables
+    └── COMPLETED: .env configured with EmailJS
 
-STEP_8: RUN & VALIDATE
-    └── npm start
-    └── TEST all features
+🆕 STEP_8: IMPLEMENT context
+    └── TO IMPLEMENT: Create context/ folder
+        ├── ThemeContext.js (Dark/Light mode)
+        └── index.js (exports)
+
+🆕 STEP_9: ADD lazy_loading
+    └── TO IMPLEMENT: Refactor App.js
+        ├── IMPORT { Suspense, lazy }
+        ├── LAZY load sections (Skills, Projects, Contact)
+        └── ADD <Suspense fallback={<Loader />}>
+
+✅ STEP_10: RUN & VALIDATE
+    └── WORKING: npm start functional
+    └── ALL features tested
 ```
 
 ---
@@ -469,8 +530,76 @@ WHEN generating_code:
     6. USE CSS modules or styled-components
     7. VALIDATE user input in forms
     8. HANDLE loading/error states
-    9. ENSURE responsive design
+    9. ENSURE responsive design (use useWindowSize hook)
     10. ADD meaningful comments
+    11. IMPLEMENT lazy loading for heavy components
+    12. USE Suspense with proper fallback
+    13. INTEGRATE ThemeContext for dark/light mode
+    14. OPTIMIZE performance (memoization, lazy loading)
+    15. USE IntersectionObserver for scroll animations
+```
+
+---
+
+## 🚀 PERFORMANCE OPTIMIZATIONS
+
+```pseudocode
+OPTIMIZATION_STRATEGY:
+    ├── LAZY_LOADING
+    │   ├── IMPORT sections dynamically with React.lazy()
+    │   ├── WRAP with <Suspense fallback={<Loader />}>
+    │   └── REDUCE initial bundle size
+    │
+    ├── CODE_SPLITTING
+    │   ├── SEPARATE routes/sections into chunks
+    │   └── LOAD on-demand
+    │
+    ├── IMAGE_OPTIMIZATION
+    │   ├── USE WebP format when possible
+    │   ├── IMPLEMENT lazy loading for images
+    │   └── ADD loading="lazy" attribute
+    │
+    ├── MEMOIZATION
+    │   ├── USE React.memo() for expensive components
+    │   ├── USE useMemo() for heavy computations
+    │   └── USE useCallback() for function props
+    │
+    └── INTERSECTION_OBSERVER
+        ├── ANIMATE elements on scroll
+        ├── REVEAL content when visible
+        └── IMPROVE perceived performance
+```
+
+---
+
+## 🎨 THEME SYSTEM
+
+```pseudocode
+THEME_ARCHITECTURE:
+    │
+    ├── ThemeContext
+    │   ├── PROVIDE theme state globally
+    │   ├── PERSIST theme to localStorage
+    │   └── EXPOSE toggleTheme() function
+    │
+    ├── CSS_VARIABLES (in variables.css)
+    │   ├── --color-bg-primary
+    │   ├── --color-bg-secondary
+    │   ├── --color-text-primary
+    │   ├── --color-text-secondary
+    │   └── --color-accent
+    │
+    └── THEME_TOGGLE_LOGIC
+        └── FUNCTION toggleTheme()
+            ├── IF theme === 'dark' THEN setTheme('light')
+            ├── ELSE setTheme('dark')
+            ├── UPDATE document.documentElement.dataset.theme
+            └── SAVE to localStorage('theme', newTheme)
+
+USAGE_IN_COMPONENTS:
+    └── IMPORT { useTheme } from '../context'
+    └── DESTRUCTURE { theme, toggleTheme }
+    └── APPLY theme-aware styling
 ```
 
 ---
