@@ -1,10 +1,9 @@
 /**
  * 🦶 Footer Component - Layout
- * Footer con social e newsletter
+ * Footer con logo, social e copyright
  */
 
 import { Col, Container, Row } from "react-bootstrap";
-import { MailForm } from "./MailForm";
 import { SocialIcons } from '../common/SocialIcons';
 import meloIco from "../../assets/img/Melo_icon.png";
 
@@ -12,16 +11,17 @@ export default function Footer () {
   return (
     <footer className="footer" role="contentinfo">
       <Container>
-        <Row className="align-item-center">
-          <MailForm />
-          <Col sm={6}>
+        <Row className="align-items-center justify-content-between py-5">
+          <Col xs={12} md={4} className="text-center text-md-start mb-4 mb-md-0">
             <a href="#home" aria-label="Back to top">
-              <img src={meloIco} alt="Carmelo La Mantia Logo" className="rounded-5" />
+              <img src={meloIco} alt="Carmelo La Mantia Logo" className="footer-logo rounded-5" />
             </a>
           </Col>
-          <Col sm={6} className="text-center text-sm-end">
+          <Col xs={12} md={4} className="text-center mb-3 mb-md-0">
             <SocialIcons githubColor="white" />
-            <p>&#xA9; Copyright | MeloLM | 2025</p>
+          </Col>
+          <Col xs={12} md={4} className="text-center text-md-end">
+            <p className="mb-0">&#xA9; Copyright | MeloLM | 2025</p>
           </Col>
         </Row>
       </Container>
