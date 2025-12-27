@@ -656,6 +656,12 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   -ms-overflow-style: none;
   padding: 20px 0;
   flex: 1;
+  cursor: grab;
+  user-select: none;
+}
+.timeline-scroll.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 .timeline-scroll::-webkit-scrollbar {
   display: none;

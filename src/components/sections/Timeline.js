@@ -1,15 +1,21 @@
 /**
  * 📅 Timeline Component - Section
  * Sezione percorso formativo/lavorativo
+ * Con supporto drag & drop per navigazione mouse
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import { timelineData } from '../../data/profileData';
 
 export default function Timeline() {
   const scrollRef = useRef(null);
+  
+  // State per drag
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -20,6 +26,56 @@ export default function Timeline() {
       });
     }
   };
+
+  // Mouse drag handlers
+  const handleMouseDown = useCallback((e) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+    scrollRef.current.style.cursor = 'grabbing';
+    scrollRef.current.style.userSelect = 'none';
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = 'grab';
+      scrollRef.current.style.userSelect = '';
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isDragging) {
+      setIsDragging(false);
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = 'grab';
+        scrollRef.current.style.userSelect = '';
+      }
+    }
+  }, [isDragging]);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Velocità scroll (2x)
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  }, [isDragging, startX, scrollLeft]);
+
+  // Touch handlers per mobile
+  const handleTouchStart = useCallback((e) => {
+    if (!scrollRef.current) return;
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  }, []);
+
+  const handleTouchMove = useCallback((e) => {
+    if (!scrollRef.current) return;
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  }, [startX, scrollLeft]);
 
   return (
     <section className="timeline-section" id="timeline">
@@ -41,7 +97,17 @@ export default function Timeline() {
                 <ChevronLeft size={30} />
               </button>
               
-              <div className="timeline-scroll" ref={scrollRef}>
+              <div 
+                className={`timeline-scroll ${isDragging ? 'dragging' : ''}`}
+                ref={scrollRef}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+                onMouseMove={handleMouseMove}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                style={{ cursor: 'grab' }}
+              >
                 <div className="timeline-horizontal">
                   {timelineData.map((item, index) => (
                     <div className="timeline-card" key={index}>
