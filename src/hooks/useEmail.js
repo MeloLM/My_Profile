@@ -1,20 +1,33 @@
 /**
  * 🎣 useEmail Hook
- * Gestisce l'invio di email tramite EmailJS
- * Con validazione, retry logic e stato dettagliato
+ * Gestisce l'invio di email tramite EmailJS collegato a Gmail
+ * 
+ * 📧 SETUP GMAIL con EmailJS:
+ * 1. Vai su https://www.emailjs.com/ e crea account
+ * 2. Email Services → Add New Service → Gmail
+ * 3. Autorizza con il tuo account Gmail (carmelo.la.mantia00@gmail.com)
+ * 4. Copia il Service ID (es: service_xxxxxx)
+ * 5. Email Templates → Create New Template
+ * 6. Configura template con variabili: {{from_name}}, {{from_email}}, {{message}}, {{phone}}
+ * 7. Copia Template ID (es: template_xxxxxx)
+ * 8. Account → API Keys → Copia la Public Key
+ * 9. Crea file .env nella root del progetto con:
+ *    REACT_APP_EMAILJS_SERVICE=service_xxxxxx
+ *    REACT_APP_EMAILJS_TEMPLATE=template_xxxxxx
+ *    REACT_APP_EMAILJS_KEY=your_public_key
  */
 
 import { useState, useCallback } from 'react';
 import emailjs from '@emailjs/browser';
 
-// Config EmailJS
+// Config EmailJS - Usa variabili d'ambiente o fallback ai tuoi valori
 const EMAILJS_CONFIG = {
-  serviceId: process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_gt2uoevD',
-  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_y6xpk4a',
-  userId: process.env.REACT_APP_EMAILJS_KEY || 'kforPiP9Kqq8o2cYk',
+  serviceId: process.env.REACT_APP_EMAILJS_SERVICE || 'service_gt2uoev',
+  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE || 'template_y6xpk4a',
+  publicKey: process.env.REACT_APP_EMAILJS_KEY || 'kforPiP9Kqq8o2cYk',
 };
 
-// Validazione email semplice
+// Validazione email
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -37,8 +50,23 @@ export const useEmail = () => {
     });
   }, []);
 
+  /**
+   * Invia email usando EmailJS
+   * @param {Object} formData - Dati del form (firstName, lastName, email, phone, message)
+   * @param {Object} formRef - Ref del form HTML (opzionale, per usare sendForm)
+   */
   const sendEmail = useCallback(async (formData, formRef = null) => {
     // Validazione pre-invio
+    if (!formData.firstName?.trim()) {
+      setStatus({
+        loading: false,
+        success: false,
+        error: 'Name required',
+        message: 'Please enter your name',
+      });
+      return { success: false, error: 'Name required' };
+    }
+
     if (!formData.email || !isValidEmail(formData.email)) {
       setStatus({
         loading: false,
@@ -64,13 +92,13 @@ export const useEmail = () => {
     try {
       let result;
       
-      // Se viene passato un ref del form, usa sendForm
+      // Se viene passato un ref del form, usa sendForm (più affidabile)
       if (formRef?.current) {
         result = await emailjs.sendForm(
           EMAILJS_CONFIG.serviceId,
           EMAILJS_CONFIG.templateId,
           formRef.current,
-          EMAILJS_CONFIG.userId
+          EMAILJS_CONFIG.publicKey
         );
       } else {
         // Altrimenti usa send con i dati
@@ -78,25 +106,27 @@ export const useEmail = () => {
           EMAILJS_CONFIG.serviceId,
           EMAILJS_CONFIG.templateId,
           {
-            from_name: formData.name || formData.firstName || 'Anonymous',
+            from_name: `${formData.firstName} ${formData.lastName || ''}`.trim(),
             from_email: formData.email,
             message: formData.message,
-            phone: formData.phone || '',
+            phone: formData.phone || 'Non fornito',
           },
-          EMAILJS_CONFIG.userId
+          EMAILJS_CONFIG.publicKey
         );
       }
 
+      console.log('✅ Email inviata con successo:', result.text);
+      
       setStatus({
         loading: false,
         success: true,
         error: null,
-        message: 'Message sent successfully!',
+        message: 'Message sent successfully! 🔥',
       });
       
       return { success: true, data: result };
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      console.error('❌ EmailJS Error:', error);
       
       setStatus({
         loading: false,
@@ -116,6 +146,7 @@ export const useEmail = () => {
     isLoading: status.loading,
     isSuccess: status.success,
     isError: !!status.error,
+    config: EMAILJS_CONFIG, // Espone config per debug
   };
 };
 

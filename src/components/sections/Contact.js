@@ -1,12 +1,19 @@
 /**
  * 📧 Contact Component - Section
- * Sezione contatti con form EmailJS
+ * Sezione contatti con form EmailJS collegato a Gmail
  */
 
 import { useState, useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { Container , Row , Col } from 'react-bootstrap';
 import contactImg from '../../assets/img/bonfire.svg';
+
+// Config EmailJS per Gmail
+const EMAILJS_CONFIG = {
+  serviceId: process.env.REACT_APP_EMAILJS_SERVICE || 'service_gt2uoev',
+  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE || 'template_y6xpk4a',
+  publicKey: process.env.REACT_APP_EMAILJS_KEY || 'kforPiP9Kqq8o2cYk',
+};
 
 export default function Contact() {
   const form = useRef(null);
@@ -59,19 +66,19 @@ export default function Contact() {
     setStatus({ loading: true });
 
     emailjs.sendForm(
-      process.env.REACT_APP_EMAILJS_SERVICE || 'service_gt2uoevD',
-      process.env.REACT_APP_EMAILJS_TEMPLATE || 'template_y6xpk4a',
+      EMAILJS_CONFIG.serviceId,
+      EMAILJS_CONFIG.templateId,
       form.current,
-      process.env.REACT_APP_EMAILJS_KEY || 'kforPiP9Kqq8o2cYk'
+      EMAILJS_CONFIG.publicKey
     )
       .then((result) => {
-        console.log(result.text);
+        console.log('✅ Email inviata:', result.text);
         setButtonText("Send");
         setFormDetails(formInitialDetails);
-        setStatus({ success: true, message: 'Message sent successfully!' });
+        setStatus({ success: true, message: 'Message sent successfully! 🔥' });
       })
       .catch((error) => {
-        console.log(error.text);
+        console.error('❌ EmailJS Error:', error.text);
         setButtonText("Send");
         setStatus({ success: false, message: 'Something went wrong, please try again.' });
       });
