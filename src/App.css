@@ -804,7 +804,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.9);
-  padding: 20px 40px;
+  padding: 30px 60px;
   border: 2px solid var(--main-color);
   border-radius: 5px;
   animation: fadeInOut 3s ease-in-out;
@@ -812,7 +812,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 .bonfire-message span {
   font-family: 'OptimusPrinceps', serif;
-  font-size: 24px;
+  font-size: 28px;
   color: var(--main-color);
   letter-spacing: 3px;
   text-shadow: 0 0 10px rgba(224, 136, 33, 0.8);
