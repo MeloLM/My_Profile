@@ -14,16 +14,14 @@ export default function Footer () {
       <Container>
         <Feedback />
         <Row className="align-items-center justify-content-between py-5">
-          <Col xs={12} md={4} className="text-center text-md-start mb-4 mb-md-0">
+          <Col xs={12} md={6} className="text-center text-md-start mb-4 mb-md-0">
             <a href="#home" aria-label="Back to top">
               <img src={meloIco} alt="Carmelo La Mantia Logo" className="footer-logo rounded-5" />
             </a>
           </Col>
-          <Col xs={12} md={4} className="text-center mb-3 mb-md-0">
+          <Col xs={12} md={6} className="text-center text-md-end">
             <SocialIcons githubColor="white" />
-          </Col>
-          <Col xs={12} md={4} className="text-center text-md-end">
-            <p className="mb-0">&#xA9; Copyright | MeloLM | 2025</p>
+            <p className="mb-0 mt-3">&#xA9; Copyright | MeloLM | 2025</p>
           </Col>
         </Row>
       </Container>

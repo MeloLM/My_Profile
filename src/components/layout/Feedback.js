@@ -58,7 +58,8 @@ export const Feedback = () => {
       <div className="newsletter-bx">
         <Row>
           <Col lg={12} md={6} xl={5}>
-            <h3>Send a Feedback</h3>
+            <h3>Share Your Thoughts</h3>
+            <p>Your feedback helps me improve! Drop your email and let me know what you think.</p>
             {status === "sending" && <Alert>Sending...</Alert>}
             {status === "error" && <Alert variant="danger">{message}</Alert>}
             {status === "success" && <Alert variant="success">{message}</Alert>}
@@ -71,10 +72,10 @@ export const Feedback = () => {
                   type="email" 
                   name="from_email"
                   onChange={(e) => setEmail(e.target.value)} 
-                  placeholder="Email Address" 
+                  placeholder="Your email address" 
                 />
                 <button type="submit" disabled={status === 'sending'}>
-                  {status === 'sending' ? 'Sending...' : 'Submit'}
+                  {status === 'sending' ? 'Sending...' : 'Send'}
                 </button>
               </div>
             </form>
