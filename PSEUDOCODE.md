@@ -280,14 +280,13 @@ PROJECT_ROOT/
     │
     └── assets/             # STATIC_RESOURCES
         ├── img/
-        │   ├── avatar.png
-        │   ├── projects/
-        │   │   └── project-*.png
-        │   └── icon/
-        │       └── skill-icons/
-        │           ├── react.svg
-        │           ├── javascript.svg
-        │           └── ...
+        │   ├── solaire.svg, bonfire.svg, logo.svg, etc.
+        │   ├── project_*.jpeg        # Project images
+        │   └── icon/                 # Skill icons
+        │       ├── react.png
+        │       ├── javascript.png
+        │       ├── html.png
+        │       └── ...
         └── fonts/ (optional)
 ```
 

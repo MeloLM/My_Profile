@@ -33,7 +33,7 @@ export default function Banner () {
                 <button onClick={() => document.getElementById('connect').scrollIntoView({ behavior: 'smooth' })} aria-label="Scroll to contact section">
                   Contact Me <ArrowRightCircle size={25}/>
                 </button>
-                <a href="/CV_Carmelo_la_mantia_2025.pdf" download className="cv-download-btn" aria-label="Download CV">
+                <a href="/CV_Carmelo_la_mantia_2026.pdf" download className="cv-download-btn" aria-label="Download CV">
                   Download CV <ArrowRightCircle size={25}/>
                 </a>
               </div>
