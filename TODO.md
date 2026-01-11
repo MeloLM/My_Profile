@@ -1,6 +1,17 @@
 # 📋 TODO - Architecture Compliance Report
 > Generated: 2025-12-26
+> Last Updated: 2026-01-11
 > Script: scripts/checkArchitecture.js
+
+---
+
+## 🔧 Bug Fixes Completed (2026-01-11)
+
+| Task | Status |
+|------|--------|
+| CV Download scaricava versione 2025 invece di 2026 | ✅ Fixed |
+| Rimosso riferimento a color-sharp2.png cancellato | ✅ Fixed |
+| Rebuild con nuovo CV 2026 | ✅ Done |
 
 ---
 
