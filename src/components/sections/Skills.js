@@ -1,13 +1,16 @@
 /**
  * 🛠️ Skills Component - Section
- * Sezione competenze con carosello
+ * Sezione competenze con carosello e filtri
  */
 
+import { useState } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import Carousel from "react-multi-carousel";
 import { skillsData } from '../../data/profileData';
 
 export default function Skills() {
+    const [activeFilter, setActiveFilter] = useState('All');
+    
     const responsive = {
         superLargeDesktop: {
           breakpoint: { max: 4000, min: 3000 },
@@ -27,6 +30,12 @@ export default function Skills() {
         }
     };
 
+    const categories = ['All', 'Frontend', 'Backend', 'Tools'];
+    
+    const filteredSkills = activeFilter === 'All' 
+        ? skillsData 
+        : skillsData.filter(skill => skill.category === activeFilter);
+
     return (
         <section className='skill' id='skills' aria-label="Skills section">
             <Container>
@@ -35,6 +44,21 @@ export default function Skills() {
                         <div className="skill-bx">
                             <h2>Skills</h2>
                             <p>Le mie competenze sono specializzate nel web development nel frontend con HTML, CSS, JavaScript e nel backend con PHP e Python disposto ad imparne dei nuovi. Conoscenza di sistemi operativi Windows 10, Linux e Unix. Utilizzo di strumenti di collaborazione come Discord e Git/GitHub. Familiarità con il framework Bootstrap e l'editor Visual Studio Code. Esperienza anche con WordPress.</p>
+                            
+                            {/* Filter Buttons */}
+                            <div className="skill-filters">
+                                {categories.map(category => (
+                                    <button
+                                        key={category}
+                                        className={`filter-btn ${activeFilter === category ? 'active' : ''}`}
+                                        onClick={() => setActiveFilter(category)}
+                                        aria-pressed={activeFilter === category}
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
+                            </div>
+                            
                             <Carousel 
                                 responsive={responsive} 
                                 infinite={true} 
@@ -43,8 +67,9 @@ export default function Skills() {
                                 autoPlaySpeed={2000}
                                 keyBoardControl={true}
                                 transitionDuration={500}
+                                key={activeFilter}
                             >
-                                {skillsData.map((skill, index) => (
+                                {filteredSkills.map((skill, index) => (
                                     <div className="item" key={index}>
                                         <img src={skill.img} className='rounded-5' alt={`${skill.name} icon`} loading="lazy" />
                                         <h5>{skill.name}</h5>

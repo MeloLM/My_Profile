@@ -7,6 +7,7 @@ import { useState, useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { Container , Row , Col } from 'react-bootstrap';
 import contactImg from '../../assets/img/bonfire.svg';
+import ToastNotification from '../common/ToastNotification';
 
 // Config EmailJS per Gmail
 const EMAILJS_CONFIG = {
@@ -18,6 +19,7 @@ const EMAILJS_CONFIG = {
 export default function Contact() {
   const form = useRef(null);
   const [bonfireLit, setBonfireLit] = useState(false);
+  const [toast, setToast] = useState(null);
   const formInitialDetails = {
     firstName: '',
     lastName: '',
@@ -28,7 +30,7 @@ export default function Contact() {
 
   const [formDetails , setFormDetails] = useState(formInitialDetails);
   const [buttonText , setButtonText] = useState('Send');
-  const [status , setStatus] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const onFormUpdate = (category , value) => {
       setFormDetails({...formDetails, [category] : value})
@@ -37,20 +39,20 @@ export default function Contact() {
   // Validazione form
   const validateForm = () => {
     if (!formDetails.firstName.trim()) {
-      setStatus({ success: false, message: 'Please enter your first name' });
+      setToast({ message: 'Please enter your first name', type: 'warning' });
       return false;
     }
     if (!formDetails.email.trim()) {
-      setStatus({ success: false, message: 'Please enter your email' });
+      setToast({ message: 'Please enter your email', type: 'warning' });
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formDetails.email)) {
-      setStatus({ success: false, message: 'Please enter a valid email address' });
+      setToast({ message: 'Please enter a valid email address', type: 'warning' });
       return false;
     }
     if (!formDetails.message.trim()) {
-      setStatus({ success: false, message: 'Please enter a message' });
+      setToast({ message: 'Please enter a message', type: 'warning' });
       return false;
     }
     return true;
@@ -63,7 +65,7 @@ export default function Contact() {
     if (!validateForm()) return;
     
     setButtonText('');
-    setStatus({ loading: true });
+    setIsLoading(true);
 
     emailjs.sendForm(
       EMAILJS_CONFIG.serviceId,
@@ -75,12 +77,14 @@ export default function Contact() {
         console.log('✅ Email inviata:', result.text);
         setButtonText("Send");
         setFormDetails(formInitialDetails);
-        setStatus({ success: true, message: 'Message sent successfully! 🔥' });
+        setIsLoading(false);
+        setToast({ message: 'Message sent successfully! 🔥', type: 'success' });
       })
       .catch((error) => {
         console.error('❌ EmailJS Error:', error.text);
         setButtonText("Send");
-        setStatus({ success: false, message: 'Something went wrong, please try again.' });
+        setIsLoading(false);
+        setToast({ message: 'Something went wrong, please try again.', type: 'error' });
       });
   }
 
@@ -88,6 +92,13 @@ export default function Contact() {
 
   return (
   <section className="contact" id="connect">
+    {toast && (
+      <ToastNotification
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast(null)}
+      />
+    )}
     <Container>
       <Row className="align-items-center">
         <Col md={6} className="bonfire-container">
@@ -101,6 +112,7 @@ export default function Contact() {
             }}
             style={{ cursor: 'pointer' }}
             title="🔥 Click to rest at the bonfire"
+            loading="lazy"
           />
           {bonfireLit && (
             <div className="bonfire-message">
@@ -126,17 +138,11 @@ export default function Contact() {
               </Col>
               <Col>
                 <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message' , e.target.value)} name="message"></textarea>
-                <button type="submit" disabled={status.loading}>
-                  {status.loading && <span className="spinner"></span>}
-                  <span>{status.loading ? 'Sending...' : buttonText}</span>
+                <button type="submit" disabled={isLoading}>
+                  {isLoading && <span className="spinner"></span>}
+                  <span>{isLoading ? 'Sending...' : buttonText}</span>
                 </button>
               </Col>
-              {
-                status.message && 
-                <Col>
-                    <p className={status.success === false ? "danger" : "success"}>{status.message}</p>
-                </Col>
-              }
             </Row>
           </form>
         </Col>

@@ -29,7 +29,7 @@ import projImg4 from '../assets/img/presto_it.jpg';
 
 export const personalInfo = {
   name: "Carmelo La Mantia",
-  role: "Junior Full Stack Developer",
+  role: "Jr Web Developer",
   location: "Agrigento, Sicilia, Italy",
   birthDate: "12/09/2000",
   phone: "+39 3510845851",
@@ -43,30 +43,38 @@ export const summary = `Junior full stack developer con formazione pregressa da 
 
 export const technicalSkills = {
   languages: ["HTML", "CSS", "JavaScript", "PHP"],
-  software: ["Windows 10", "Linux", "Unix", "Office"],
-  tools: ["Discord", "Git", "GitHub"],
+  software: ["Linux", "Office"],
+  tools: ["Git", "GitHub"],
   frameworks: ["Laravel", "Bootstrap", "React.js"],
-  editors: ["Visual Studio Code", "WordPress", "AutoCAD"]
+  editors: ["Visual Studio Code", "WordPress"],
+  aiTools: ["GitHub Copilot", "Prompt Engineering"]
 };
 
 export const skillsData = [
-  { img: logo8, name: "HTML5", level: 90 },
-  { img: logo6, name: "CSS3", level: 85 },
-  { img: logo5, name: "JAVASCRIPT", level: 75 },
-  { img: logo7, name: "REACT JS", level: 70 },
-  { img: logo9, name: "PHP", level: 70 },
-  { img: logo10, name: "LARAVEL", level: 65 },
-  { img: logo11, name: "MYSQL", level: 70 },
-  { img: logo1, name: "PYTHON", level: 50 },
-  { img: logo3, name: "BOOTSTRAP", level: 85 },
-  { img: logo12, name: "GIT", level: 75 },
-  { img: logo2, name: "GITHUB", level: 80 },
-  { img: logo13, name: "NODE.JS", level: 40 },
-  { img: logo14, name: "WORDPRESS", level: 60 },
-  { img: logo4, name: "AI TOOLS", level: 85 },
+  { img: logo8, name: "HTML5", level: 90, category: "Frontend" },
+  { img: logo6, name: "CSS3", level: 85, category: "Frontend" },
+  { img: logo5, name: "JAVASCRIPT", level: 75, category: "Frontend" },
+  { img: logo7, name: "REACT JS", level: 70, category: "Frontend" },
+  { img: logo9, name: "PHP", level: 70, category: "Backend" },
+  { img: logo10, name: "LARAVEL", level: 65, category: "Backend" },
+  { img: logo11, name: "MYSQL", level: 70, category: "Backend" },
+  { img: logo1, name: "PYTHON", level: 50, category: "Backend" },
+  { img: logo3, name: "BOOTSTRAP", level: 85, category: "Frontend" },
+  { img: logo12, name: "GIT", level: 75, category: "Tools" },
+  { img: logo2, name: "GITHUB", level: 80, category: "Tools" },
+  { img: logo13, name: "NODE.JS", level: 40, category: "Backend" },
+  { img: logo14, name: "WORDPRESS", level: 60, category: "Tools" },
+  { img: logo4, name: "AI TOOLS", level: 85, category: "Tools" },
 ];
 
 export const education = [
+  {
+    period: "2025 - in corso",
+    institution: "Università Enna Kore Sicilia",
+    location: "Enna, Sicilia",
+    title: "Laurea Triennale, Ingegneria Informatica",
+    description: "Corso di laurea in Ingegneria Informatica - attualmente in corso."
+  },
   {
     period: "Gennaio 2023 - Aprile 2023",
     institution: "Aulab srl",
@@ -75,87 +83,89 @@ export const education = [
     description: "Bootcamp intensivo: PHP, Laravel, React, MySQL. Metodologia Agile Scrum."
   },
   {
-    period: "Gennaio 2021 - Settembre 2022",
+    period: "2021 - 2022",
     institution: "Empatia",
     location: "Canicattì (Agrigento)",
     title: "Corso di Tecnico Gestione Siti Web",
     description: "HTML, CSS, WordPress. Primo approccio al web development."
   },
   {
-    period: "Settembre 2014 - Giugno 2019",
+    period: "2014 - 2019",
     institution: "IISS Galileo Galilei",
     location: "Canicattì (Agrigento)",
-    title: "Diploma di Geometra",
-    description: "Diploma tecnico con basi di informatica, AutoCAD e progettazione."
+    title: "Diploma di Istruzione Tecnica - C.A.T.",
+    description: "Diploma tecnico in Costruzioni, Ambiente e Territorio (ex Geometra)."
   }
 ];
 
 export const projects = [
   {
-    title: "Souls Space",
-    description: "SoulsLike Blog",
-    imgUrl: projImg1,
-    imgAncor: "https://github.com/MeloLM/Carmelo_GamesSpace"
-  },
-  {
-    title: "Project color:Black",
-    description: "Aulab Project",
+    title: "Shooter Project",
+    description: "Progetto di un gioco javascript sviluppato con Phaser 3",
     imgUrl: projImg2,
-    imgAncor: "https://github.com/MeloLM/Black_template_Carmelo_LM"
+    imgAncor: "#", // Link demo da aggiungere
+    tech: ["JavaScript", "Phaser 3"]
   },
   {
-    title: "Project React-sushi",
-    description: "React project",
+    title: "My Profile",
+    description: "Portfolio custom sviluppato con framework React",
+    imgUrl: projImg1,
+    imgAncor: "https://github.com/MeloLM", // Link portfolio
+    tech: ["React", "JavaScript", "CSS"]
+  },
+  {
+    title: "SoulsSpace Blog",
+    description: "Blog funzionale sviluppato con framework Laravel (in progress)",
+    imgUrl: projImg1,
+    imgAncor: "https://github.com/MeloLM/Carmelo_GamesSpace",
+    tech: ["Laravel", "PHP", "MySQL"]
+  },
+  {
+    title: "Sushi Project",
+    description: "Menu interattivo all-you-can-eat fatto interamente con React",
     imgUrl: projImg3,
-    imgAncor: "https://sushi-project-cml.vercel.app/"
-  },
-  {
-    title: "E-commerce Presto.it",
-    description: "Laravel Project",
-    imgUrl: projImg4,
-    imgAncor: "https://github.com/Hackademy66/Presto.it_Gruppo_04"
-  },
+    imgAncor: "https://sushi-project-cml.vercel.app/",
+    tech: ["React", "JavaScript"]
+  }
 ];
 
 export const workExperience = [
   {
     period: "2025 - in corso",
-    company: "Rueesch Abbigliamento Professionale",
+    company: "Ruessch srl",
     location: "Canicattì (Agrigento, Sicilia)",
-    role: "Magazziniere"
+    role: "Addetto alla logistica",
+    skills: ["Team Management", "Lavoro in team", "Precisione operativa"]
   },
   {
     period: "2023 - 2024",
-    company: "Rivendita Tabacchi 25",
+    company: "Riva degli Etruschi 2S - Canicattì",
     location: "Canicattì (Agrigento, Sicilia)",
-    role: "Addetto alle Vendite"
+    role: "Addetto alle vendite",
+    skills: ["Problem Solving", "Customer Care", "Affidabilità e gestione cassa"]
   },
   {
     period: "2022 - 2023",
-    company: "VII Coorte Ristorante",
+    company: "VII Coorie Ristorante",
     location: "Roma (Lazio)",
-    role: "Cameriere"
-  },
-  {
-    period: "2018 - 2022",
-    company: "Adenzia Sicily Industrial",
-    location: "Canicattì (Agrigento, Sicilia)",
-    role: "Cameriere"
+    role: "Cameriere",
+    skills: ["Gestione dello stress", "Comunicazione efficace", "Adattabilità in ambienti dinamici"]
   }
 ];
 
 export const languages = [
-  { language: "Italiano", level: "Madrelingua" },
-  { language: "Inglese", level: "Intermedio" }
+  { language: "Italiano", level: "Madrelingua", stars: 5 },
+  { language: "Inglese", level: "Intermedio", stars: 4 },
+  { language: "Spagnolo", level: "Base", stars: 1 }
 ];
 
 // Timeline data per la sezione Il Mio Percorso
 export const timelineData = [
   {
     year: "2019",
-    title: "Diploma di Geometra",
+    title: "Diploma C.A.T.",
     subtitle: "IISS Galileo Galilei - Canicattì",
-    description: "Conclusione studi superiori. Basi di informatica, AutoCAD e progettazione tecnica.",
+    description: "Diploma di Istruzione Tecnica - Costruzioni, Ambiente e Territorio.",
     icon: "🎓",
     type: "education"
   },
@@ -177,17 +187,25 @@ export const timelineData = [
   },
   {
     year: "2023-2024",
-    title: "Sviluppo Progetti & Lavoro",
-    subtitle: "Portfolio & Esperienza",
-    description: "Creazione SoulsSpace Blog, Sushi Project, Shooter Game. Esperienza in retail.",
+    title: "Sviluppo Progetti & Esperienza",
+    subtitle: "Portfolio & Addetto vendite",
+    description: "Creazione Shooter Project, SoulsSpace Blog, Sushi Project, My Profile. Esperienza in retail.",
     icon: "🚀",
     type: "work"
   },
   {
     year: "2025",
-    title: "Open to Work",
-    subtitle: "Junior Full Stack Developer",
-    description: "Alla ricerca di nuove opportunità nel mondo dello sviluppo web. React, Laravel, JavaScript.",
+    title: "Laurea in Ingegneria Informatica",
+    subtitle: "Università Enna Kore Sicilia",
+    description: "Inizio percorso universitario in Ingegneria Informatica. Focus su sviluppo web e AI.",
+    icon: "🎓",
+    type: "education"
+  },
+  {
+    year: "2026",
+    title: "Jr Web Developer",
+    subtitle: "Open to Work",
+    description: "Alla ricerca di opportunità come Jr Web Developer. React, Laravel, JavaScript, AI Tools.",
     icon: "⚔️",
     type: "career"
   }

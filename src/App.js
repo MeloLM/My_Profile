@@ -12,6 +12,8 @@ import Footer from './components/layout/Footer';
 
 // Loader Component per Suspense fallback
 import Loader from './components/common/Loader';
+import ScrollProgressBar from './components/common/ScrollProgressBar';
+import BackToTop from './components/common/BackToTop';
 
 // Lazy loaded Section Components (caricati on-demand)
 const Skills = lazy(() => import('./components/sections/Skills'));
@@ -87,7 +89,8 @@ function App() {
 
   return (
    <ThemeProvider>
-   
+   <ScrollProgressBar />
+   <BackToTop />
     <NavBar />
     <Banner />
     <Suspense fallback={<Loader message="Loading sections..." variant="bonfire" />}>

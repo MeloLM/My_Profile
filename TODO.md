@@ -99,37 +99,30 @@
 
 ---
 
-## � IDEE DA IMPLEMENTARE (20 Features)
+## 💡 IDEE DA IMPLEMENTARE
 
-> Aggiornato: Dicembre 2024
+> Aggiornato: Gennaio 2026
 > Priorità: 🔴 Alta | 🟡 Media | 🟢 Bassa
 
 ### 🎨 UI/UX Improvements
 
-- [ ] 🔴 **1. Theme Toggle Button** - Aggiungere un pulsante nella navbar per switchare tra Dark/Light mode (ThemeContext già pronto!)
-- [ ] 🔴 **2. Scroll Progress Bar** - Barra di progresso in alto che mostra quanto hai scrollato della pagina
-- [ ] 🟡 **3. Back to Top Button** - Pulsante che appare dopo scroll per tornare in cima
 - [ ] 🟡 **4. Skeleton Loading** - Placeholder animati mentre i componenti lazy si caricano
 - [ ] 🟢 **5. Cursor Trail Effect** - Effetto particelle/trail che segue il cursore custom
 
 ### ⚡ Performance & Technical
-
-- [ ] 🔴 **6. Image Lazy Loading** - Aggiungere `loading="lazy"` a tutte le immagini progetti/skills
+ 
 - [ ] 🟡 **7. Service Worker (PWA)** - Rendere l'app installabile e funzionante offline
 - [ ] 🟡 **8. Preload Critical Assets** - Preload font OptimusPrinceps e immagini hero
 - [ ] 🟢 **9. Bundle Analyzer** - Analizzare e ottimizzare dimensione bundle
 
 ### 🎮 Interattività
 
-- [ ] 🔴 **10. Skill Filters** - Filtri per categoria skills (Frontend, Backend, Tools)
-- [ ] 🟡 **11. Project Filters/Search** - Filtrare progetti per tecnologia usata
 - [ ] 🟡 **12. Animated Skill Bars** - Barre skills che si animano al scroll (progress animation)
 - [ ] 🟢 **13. Easter Egg Konami Code** - Segreto attivabile con combinazione tasti (effetto Dark Souls)
 - [ ] 🟢 **14. Sound Effects** - Suoni opzionali bonfire/souls style (con toggle mute)
 
 ### 📧 Contact & Social
 
-- [ ] 🔴 **15. Form Feedback Migliorato** - Toast notifications invece di testo inline
 - [ ] 🟡 **16. Download CV Button** - Pulsante per scaricare PDF del curriculum
 - [ ] 🟡 **17. Share Buttons** - Pulsanti per condividere portfolio su social
 - [ ] 🟢 **18. Live Chat Widget** - Integrazione chatbot o WhatsApp business
@@ -141,8 +134,24 @@
 
 ---
 
-### ✅ Completati Recentemente
+## ✅ COMPLETATI (Gennaio 2026)
 
+### UI/UX
+- [x] 🔴 **1. Theme Toggle Button** - Pulsante Dark/Light mode nella navbar
+- [x] 🔴 **2. Scroll Progress Bar** - Barra di progresso scroll in alto
+- [x] 🟡 **3. Back to Top Button** - Pulsante floating per tornare in cima
+
+### Performance
+- [x] 🔴 **6. Image Lazy Loading** - `loading="lazy"` su tutte le immagini
+
+### Interattività
+- [x] 🔴 **10. Skill Filters** - Filtri per categoria (Frontend, Backend, Tools)
+- [x] 🟡 **11. Project Filters/Search** - Search bar per filtrare progetti
+
+### Contact
+- [x] 🔴 **15. Form Feedback Migliorato** - Toast notifications
+
+### Completati Precedentemente
 - [x] Lazy Loading componenti (Suspense)
 - [x] ThemeContext (Dark/Light mode base)
 - [x] useWindowSize hook (responsive)
@@ -152,7 +161,7 @@
 
 ---
 
-## �🔧 How to Fix
+## 🔧 How to Fix
 
 ### Missing Files
 ```bash

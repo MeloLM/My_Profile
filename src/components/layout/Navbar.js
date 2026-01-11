@@ -1,29 +1,22 @@
 /**
  * 🧭 Navbar Component - Layout
  * Barra di navigazione con effetto scroll
+ * REFACTORED: Usa useScroll hook come da PSEUDOCODE.md
  */
 
-import { useState , useEffect } from 'react';
+import { useState } from 'react';
 import { Navbar , Container , Nav } from 'react-bootstrap';
 import { SocialIcons } from '../common/SocialIcons';
+import { useTheme } from '../../context';
+import { useScroll } from '../../hooks';
+import { Sun, Moon } from 'react-bootstrap-icons';
+import { personalInfo } from '../../data/profileData';
 
 export default function NavBar() {
     const [activeLink, setActiveLink] = useState('home');
-    const [scrolled , setScrolled] = useState(false);
-
-    useEffect(() => {
-        const onScroll = () => {
-            if (window.scrollY > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        }
-
-        window.addEventListener("scroll" , onScroll);
-
-        return () => window.removeEventListener("scroll" , onScroll);
-    }, []);
+    // REFACTORED: Uso dell'hook useScroll invece di useState/useEffect manuale
+    const { scrolled } = useScroll(50);
+    const { isDark, toggleTheme } = useTheme();
 
     const onUpdateActiveLink = (value) => {
         setActiveLink(value);
@@ -35,7 +28,7 @@ export default function NavBar() {
 
         <Navbar expand="lg" className={scrolled ? "scrolled" : ""} role="navigation" aria-label="Main navigation">
             <Container fluid className=''>
-                <Navbar.Brand href="/" className='text-white'>Carmelo La Mantia</Navbar.Brand>
+                <Navbar.Brand href="/" className='text-white'>{personalInfo.name}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" aria-label="Toggle navigation menu">
                     <span className="navbar-toggler-icon"></span>
                 </Navbar.Toggle>
@@ -48,7 +41,15 @@ export default function NavBar() {
             </Nav>
             <span className="navbar-text">
                 <SocialIcons githubColor={scrolled ? 'white' : 'black'} />
-                <button className="vvd" onClick={() => window.open('mailto:carmelo.la.mantia00@gmail.com')} aria-label="Send email to Carmelo"><span>Contact Me</span></button>
+                <button 
+                    className="theme-toggle-btn" 
+                    onClick={toggleTheme}
+                    aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                    title={isDark ? 'Light Mode' : 'Dark Mode'}
+                >
+                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                </button>
+                <button className="vvd" onClick={() => window.open(`mailto:${personalInfo.email}`)} aria-label={`Send email to ${personalInfo.name}`}><span>Contact Me</span></button>
             </span>
             </Navbar.Collapse>
             </Container>

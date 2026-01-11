@@ -1,0 +1,29 @@
+/**
+ * Scroll Progress Bar Styles
+ */
+
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 10000;
+  overflow: hidden;
+}
+
+[data-theme="light"] .scroll-progress-container {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--main-color), #ff9500);
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px var(--main-color);
+}
+
+[data-theme="light"] .scroll-progress-bar {
+  box-shadow: 0 0 8px rgba(224, 136, 33, 0.6);
+}

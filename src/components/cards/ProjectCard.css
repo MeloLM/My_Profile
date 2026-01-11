@@ -1,0 +1,78 @@
+/**
+ * 🎴 ProjectCard Styles
+ * Stili per le cards dei progetti
+ */
+
+/* === PROJECT LINK === */
+.project-link {
+  text-decoration: none;
+  display: block;
+}
+
+/* === TECH STACK BADGES === */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.tech-badge {
+  background: rgba(224, 136, 33, 0.2);
+  color: var(--main-color, #e08821);
+  padding: 4px 10px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: var(--font-weight-medium, 500);
+  border: 1px solid rgba(224, 136, 33, 0.3);
+  transition: all var(--transition-fast, 150ms ease-in-out);
+}
+
+.tech-badge:hover {
+  background: var(--main-color, #e08821);
+  color: #fff;
+}
+
+/* === CARD ACTIONS === */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm, 0.875rem);
+  text-decoration: none;
+  transition: all var(--transition-base, 250ms ease-in-out);
+}
+
+.action-btn:hover {
+  background: var(--main-color, #e08821);
+  border-color: var(--main-color, #e08821);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.action-btn i {
+  font-size: 1em;
+}
+
+/* === LIGHT THEME === */
+[data-theme="light"] .tech-badge {
+  background: rgba(224, 136, 33, 0.1);
+}
+
+[data-theme="light"] .action-btn {
+  color: var(--color-text-primary);
+  border-color: rgba(0, 0, 0, 0.2);
+}

@@ -10,7 +10,7 @@
 
 [🌐 Live Demo](https://melolm.github.io/My_Profile) · [💼 LinkedIn](https://www.linkedin.com/in/carmelo-la-mantia-web-developer/) · [📧 Contact](mailto:carmelo.la.mantia00@gmail.com)
 
-<img src="src/assets/img/banner-bg2.png" alt="Portfolio Preview" width="800"/>
+<img src="src/assets/img/Screen_HomePage_Portfolio.png" alt="Portfolio Preview" width="800"/>
 
 </div>
 
