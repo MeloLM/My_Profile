@@ -974,16 +974,93 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /* Timeline responsive */
 @media (max-width: 768px) {
   .timeline-nav {
-    width: 40px;
-    height: 40px;
+    display: none; /* Nascondi frecce su mobile - scroll verticale */
   }
+  
+  .timeline-wrapper {
+    flex-direction: column;
+  }
+  
+  .timeline-scroll {
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding: 10px 0;
+    cursor: auto;
+    max-height: none;
+  }
+  
+  .timeline-horizontal {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 15px;
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .timeline-card {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  
   .timeline-content {
-    width: 250px;
-    min-height: 180px;
+    width: 100%;
+    min-height: auto;
     padding: 20px;
+    margin-bottom: 0;
   }
+  
+  .timeline-content:hover {
+    transform: none; /* Disabilita hover transform su mobile */
+  }
+  
+  /* Connector diventa verticale su mobile */
+  .timeline-connector {
+    width: 3px;
+    height: 30px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, var(--main-color), #ff9500);
+  }
+  
   .timeline-section h2 {
-    font-size: 35px;
+    font-size: 28px;
+  }
+  
+  .timeline-subtitle {
+    font-size: 14px;
+    padding: 0 15px;
+  }
+  
+  .timeline-icon {
+    font-size: 32px;
+  }
+  
+  .timeline-year {
+    font-size: 14px;
+    padding: 4px 16px;
+  }
+  
+  .timeline-content h4 {
+    font-size: 16px;
+  }
+  
+  .timeline-content p {
+    font-size: 13px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .timeline-content {
+    padding: 15px;
+  }
+  
+  .timeline-section h2 {
+    font-size: 24px;
+  }
+  
+  .timeline-connector {
+    height: 25px;
   }
 }
 
