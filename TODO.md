@@ -1,17 +1,20 @@
 # 📋 TODO - Architecture Compliance Report
 > Generated: 2025-12-26
-> Last Updated: 2026-01-11
+> Last Updated: 2026-01-14
 > Script: scripts/checkArchitecture.js
 
 ---
 
-## 🔧 Bug Fixes Completed (2026-01-11)
+## 🔧 Bug Fixes Completed (2026-01-14)
 
 | Task | Status |
 |------|--------|
 | CV Download scaricava versione 2025 invece di 2026 | ✅ Fixed |
 | Rimosso riferimento a color-sharp2.png cancellato | ✅ Fixed |
 | Rebuild con nuovo CV 2026 | ✅ Done |
+| Cursor custom disabilitato su touch devices | ✅ Fixed |
+| Navbar mobile auto-close on link click | ✅ Fixed |
+| Loading screen timeout ridotto (2500ms → 1500ms) | ✅ Fixed |
 
 ---
 
@@ -117,50 +120,84 @@
 
 ### 🎨 UI/UX Improvements
 
-- [ ] 🟡 **4. Skeleton Loading** - Placeholder animati mentre i componenti lazy si caricano
+- [ ] 🔴 **1. Fix Carousel Touch** - Caroselli progetti non funzionano con il touch (mobile)
+- [ ] 🟡 **2. Multiple Project Screenshots** - Inserire più screenshot per ogni progetto
+- [ ] 🟡 **3. Language Switcher** - Sostituire dark/light theme con switch ITA/ENG
+- [x] 🟡 **4. Skeleton Loading** - ✅ Placeholder animati mentre i componenti lazy si caricano
 - [ ] 🟢 **5. Cursor Trail Effect** - Effetto particelle/trail che segue il cursore custom
 
 ### ⚡ Performance & Technical
  
-- [ ] 🟡 **7. Service Worker (PWA)** - Rendere l'app installabile e funzionante offline
 - [ ] 🟡 **8. Preload Critical Assets** - Preload font OptimusPrinceps e immagini hero
 - [ ] 🟢 **9. Bundle Analyzer** - Analizzare e ottimizzare dimensione bundle
+- [ ] 🟢 **10. Service Worker PWA** - Supporto offline con caching assets
 
 ### 🎮 Interattività
 
-- [ ] 🟡 **12. Animated Skill Bars** - Barre skills che si animano al scroll (progress animation)
+- [x] 🟡 **12. Animated Skill Bars** - ✅ Barre skills che si animano al scroll (progress animation)
 - [ ] 🟢 **13. Easter Egg Konami Code** - Segreto attivabile con combinazione tasti (effetto Dark Souls)
 - [ ] 🟢 **14. Sound Effects** - Suoni opzionali bonfire/souls style (con toggle mute)
+- [ ] 🟢 **15. Typing Animation Speed** - Slider per velocità animazione typewriter
 
 ### 📧 Contact & Social
 
-- [ ] 🟡 **16. Download CV Button** - Pulsante per scaricare PDF del curriculum
+- [x] 🟡 **16. Download CV Button** - ✅ Pulsante per scaricare PDF del curriculum
 - [ ] 🟡 **17. Share Buttons** - Pulsanti per condividere portfolio su social
 - [ ] 🟢 **18. Live Chat Widget** - Integrazione chatbot o WhatsApp business
+- [ ] 🟢 **19. LinkedIn Badge** - Widget LinkedIn profile embeddato
 
 ### 📊 Analytics & SEO
 
-- [ ] 🟡 **19. Google Analytics/Plausible** - Tracciare visite e comportamento utenti
-- [ ] 🟡 **20. Meta Tags Dinamici** - OG tags per preview social quando condiviso
+- [ ] 🟡 **20. Google Analytics/Plausible** - Tracciare visite e comportamento utenti
+- [x] 🟡 **21. Meta Tags Dinamici** - ✅ OG tags e Twitter Cards per preview social
+
+### 🆕 NUOVE IDEE (Gennaio 2026)
+
+- [ ] 🟡 **22. Blog Section** - Sezione articoli/tutorial con markdown
+- [ ] 🟡 **23. Testimonials Carousel** - Recensioni/raccomandazioni da colleghi
+- [ ] 🟢 **24. 3D Background Effect** - Three.js particles o wave effect nel banner
+- [ ] 🟢 **25. Achievements Section** - Certificazioni, badge, stats GitHub
+- [ ] 🟢 **26. Interactive Resume Timeline** - Timeline con zoom e filtri per periodo
+- [ ] 🟢 **27. Project Demo Modal** - Modal con iframe per demo live dei progetti
+- [ ] 🟢 **28. Spotify Integration** - Widget "Now Playing" (opzionale)
+- [ ] 🟡 **29. Sitemap.xml** - Generare sitemap per SEO
+- [ ] 🟢 **30. Page Transitions** - Animazioni di transizione tra sezioni
 
 ---
 
 ## ✅ COMPLETATI (Gennaio 2026)
 
 ### UI/UX
-- [x] 🔴 **1. Theme Toggle Button** - Pulsante Dark/Light mode nella navbar
-- [x] 🔴 **2. Scroll Progress Bar** - Barra di progresso scroll in alto
-- [x] 🟡 **3. Back to Top Button** - Pulsante floating per tornare in cima
+- [x] 🔴 **Theme Toggle Button** - Pulsante Dark/Light mode nella navbar
+- [x] 🔴 **Scroll Progress Bar** - Barra di progresso scroll in alto
+- [x] 🟡 **Back to Top Button** - Pulsante floating per tornare in cima
+- [x] 🟡 **Skeleton Loading** - Placeholder shimmer per lazy components
+- [x] 🟡 **Animated Skill Bars** - Progress bars animate al scroll
 
 ### Performance
-- [x] 🔴 **6. Image Lazy Loading** - `loading="lazy"` su tutte le immagini
+- [x] 🔴 **Image Lazy Loading** - `loading="lazy"` su tutte le immagini
+- [x] 🔴 **Loading Screen Ottimizzato** - Ridotto da 2500ms a 1500ms
 
 ### Interattività
-- [x] 🔴 **10. Skill Filters** - Filtri per categoria (Frontend, Backend, Tools)
-- [x] 🟡 **11. Project Filters/Search** - Search bar per filtrare progetti
+- [x] 🔴 **Skill Filters** - Filtri per categoria (Frontend, Backend, Tools)
+- [x] 🟡 **Project Filters/Search** - Search bar per filtrare progetti
 
 ### Contact
-- [x] 🔴 **15. Form Feedback Migliorato** - Toast notifications
+- [x] 🔴 **Form Feedback Migliorato** - Toast notifications
+- [x] 🟡 **Download CV Button** - Pulsante per scaricare PDF curriculum
+
+### SEO
+- [x] 🟡 **Meta Tags Dinamici** - OG tags e Twitter Cards aggiunti
+
+### Mobile (2026-01-14)
+- [x] 🔴 **Cursor Touch Disabled** - Cursor custom disabilitato su touch
+- [x] 🔴 **Navbar Mobile Auto-close** - Menu si chiude al click su link
+- [x] 🔴 **Navbar Mobile Overlay** - Overlay scuro quando menu aperto
+- [x] 🔴 **Safe Area Insets** - Supporto notch iPhone e home indicator
+- [x] 🔴 **Touch Feedback** - Active states e tap highlight su buttons
+- [x] 🔴 **Mobile Typography** - Font-size responsive con clamp()
+- [x] 🔴 **Mobile Media Queries** - Breakpoints per tutte le sezioni
+- [x] 🟡 **Form Mobile Optimized** - inputMode per tastiere appropriate
 
 ### Completati Precedentemente
 - [x] Lazy Loading componenti (Suspense)
@@ -169,6 +206,7 @@
 - [x] Loader component (bonfire style)
 - [x] Timeline drag scroll (mouse + touch)
 - [x] Enhanced hooks (scroll direction, typewriter loop)
+- [x] Prefers-color-scheme (rispetto preferenze sistema)
 
 ---
 

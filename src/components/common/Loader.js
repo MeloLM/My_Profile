@@ -6,6 +6,54 @@
 import React from 'react';
 
 /**
+ * Skeleton Placeholder - Animazione shimmer per loading states
+ */
+export const Skeleton = ({ 
+  width = '100%', 
+  height = '20px', 
+  borderRadius = '4px',
+  className = '' 
+}) => (
+  <div 
+    className={`skeleton-loader ${className}`}
+    style={{ width, height, borderRadius }}
+  />
+);
+
+/**
+ * Skeleton Card - Per ProjectCard loading
+ */
+export const SkeletonCard = () => (
+  <div className="skeleton-card">
+    <Skeleton height="200px" borderRadius="20px" className="skeleton-image" />
+    <div className="skeleton-content">
+      <Skeleton width="70%" height="24px" />
+      <Skeleton width="100%" height="16px" />
+      <Skeleton width="90%" height="16px" />
+      <div className="skeleton-tags">
+        <Skeleton width="60px" height="20px" borderRadius="10px" />
+        <Skeleton width="80px" height="20px" borderRadius="10px" />
+        <Skeleton width="50px" height="20px" borderRadius="10px" />
+      </div>
+    </div>
+  </div>
+);
+
+/**
+ * Skeleton Section - Per sezioni che si caricano
+ */
+export const SkeletonSection = ({ title = true, cards = 3 }) => (
+  <div className="skeleton-section">
+    {title && <Skeleton width="200px" height="45px" className="skeleton-title" />}
+    <div className="skeleton-grid">
+      {Array.from({ length: cards }).map((_, i) => (
+        <SkeletonCard key={i} />
+      ))}
+    </div>
+  </div>
+);
+
+/**
  * Loader con animazione bonfire (coerente con il tema Dark Souls)
  */
 const Loader = ({ 
@@ -120,6 +168,59 @@ const styles = `
 
   .dots-loader .dot:nth-child(2) { animation-delay: 0.2s; }
   .dots-loader .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  /* Skeleton Loading Styles */
+  .skeleton-loader {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  .skeleton-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .skeleton-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .skeleton-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .skeleton-section {
+    padding: 80px 50px;
+  }
+  
+  .skeleton-title {
+    margin: 0 auto 40px;
+  }
+  
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
 
   @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 1; }

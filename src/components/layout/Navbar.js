@@ -4,7 +4,7 @@
  * REFACTORED: Usa useScroll hook come da PSEUDOCODE.md
  */
 
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Navbar , Container , Nav } from 'react-bootstrap';
 import { SocialIcons } from '../common/SocialIcons';
 import { useTheme } from '../../context';
@@ -14,19 +14,51 @@ import { personalInfo } from '../../data/profileData';
 
 export default function NavBar() {
     const [activeLink, setActiveLink] = useState('home');
+    const [expanded, setExpanded] = useState(false);
     // REFACTORED: Uso dell'hook useScroll invece di useState/useEffect manuale
     const { scrolled } = useScroll(50);
     const { isDark, toggleTheme } = useTheme();
 
-    const onUpdateActiveLink = (value) => {
+    const onUpdateActiveLink = useCallback((value) => {
         setActiveLink(value);
-    }
+        // Chiudi menu mobile dopo click su link
+        setExpanded(false);
+    }, []);
 
+    // Chiudi menu quando si clicca fuori
+    const handleOverlayClick = useCallback(() => {
+        setExpanded(false);
+    }, []);
+
+    // Previeni scroll body quando menu è aperto su mobile
+    useEffect(() => {
+        if (expanded) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [expanded]);
 
     return (
         <>
+        {/* Overlay scuro quando menu mobile è aperto */}
+        <div 
+            className={`navbar-overlay ${expanded ? 'show' : ''}`} 
+            onClick={handleOverlayClick}
+            aria-hidden="true"
+        />
 
-        <Navbar expand="lg" className={scrolled ? "scrolled" : ""} role="navigation" aria-label="Main navigation">
+        <Navbar 
+            expand="lg" 
+            className={scrolled ? "scrolled" : ""} 
+            role="navigation" 
+            aria-label="Main navigation"
+            expanded={expanded}
+            onToggle={(isExpanded) => setExpanded(isExpanded)}
+        >
             <Container fluid className=''>
                 <Navbar.Brand href="/" className='text-white'>{personalInfo.name}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" aria-label="Toggle navigation menu">
@@ -49,7 +81,7 @@ export default function NavBar() {
                 >
                     {isDark ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
-                <button className="vvd" onClick={() => window.open(`mailto:${personalInfo.email}`)} aria-label={`Send email to ${personalInfo.name}`}><span>Contact Me</span></button>
+                <button className="vvd" onClick={() => { window.open(`mailto:${personalInfo.email}`); setExpanded(false); }} aria-label={`Send email to ${personalInfo.name}`}><span>Contact Me</span></button>
             </span>
             </Navbar.Collapse>
             </Container>

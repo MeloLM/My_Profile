@@ -11,6 +11,13 @@
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff9500' d='M7 2l10 10-3 3 6 8-2 1-7-7-3 3z'/%3E%3C/svg%3E"), pointer;
 }
 
+/* Disabilita cursor custom su dispositivi touch */
+@media (hover: none) and (pointer: coarse) {
+  *, *:hover {
+    cursor: auto !important;
+  }
+}
+
 /************ Loading Screen - Dark Souls Theme ************/
 .loading-screen {
   position: fixed;
@@ -599,12 +606,12 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   height: 100%;
   background: linear-gradient(90deg, var(--main-color), #ff9500);
   border-radius: 10px;
-  transition: width 1s ease-in-out;
-  animation: skillLoad 1.5s ease-out;
+  transition: width 1.2s ease-out;
+  width: 0;
 }
 
-@keyframes skillLoad {
-  from { width: 0; }
+.skill-progress-bar.animate {
+  /* Width viene settato inline da React quando visibile */
 }
 
 .skill-percent {
@@ -1266,4 +1273,258 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 .size_lg{
     width: 60px;
+}
+
+/************ Mobile Responsive Styles ************/
+
+/* Safe Area Insets per iPhone notch/home indicator */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  nav.navbar {
+    padding-top: calc(18px + env(safe-area-inset-top));
+  }
+  
+  .footer {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Touch Feedback per dispositivi mobile */
+@media (hover: none) and (pointer: coarse) {
+  /* Rimuovi highlight default */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Active states per buttons */
+  button:active,
+  .vvd:active,
+  .filter-btn:active,
+  .timeline-nav:active,
+  a:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  
+  /* Input fields min touch target 44x44px */
+  input, textarea, select {
+    min-height: 44px;
+    font-size: 16px; /* Previene zoom su iOS */
+  }
+  
+  /* Buttons min touch target */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Typography Responsive con clamp() */
+@media (max-width: 768px) {
+  .banner h1 {
+    font-size: clamp(28px, 6vw, 45px);
+    min-height: 60px;
+  }
+  
+  .skill h2,
+  .project h2,
+  .timeline-section h2,
+  .contact h2 {
+    font-size: clamp(28px, 5vw, 45px);
+  }
+  
+  .banner p {
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .banner {
+    padding: 180px 0 60px 0;
+  }
+  
+  .banner .tagline {
+    font-size: 16px;
+  }
+  
+  .banner-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .banner-buttons button,
+  .cv-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Skills section mobile */
+  .skill-bx {
+    padding: 40px 20px;
+    border-radius: 30px;
+    margin-top: -30px;
+  }
+  
+  .skill p {
+    font-size: 15px;
+    margin: 14px 0 40px 0;
+  }
+  
+  .skill-slider {
+    width: 95%;
+  }
+  
+  /* Projects section mobile */
+  .project {
+    padding: 50px 0;
+  }
+  
+  .project p {
+    width: 90%;
+    font-size: 15px;
+  }
+  
+  .proj-imgbx {
+    border-radius: 20px;
+  }
+  
+  .proj-txtx h4 {
+    font-size: 22px;
+  }
+  
+  /* Contact section mobile */
+  .contact {
+    padding: 40px 0 150px 0;
+  }
+  
+  .contact h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .contact form input,
+  .contact form textarea {
+    padding: 14px 18px;
+    font-size: 16px;
+    border-radius: 15px;
+  }
+  
+  .contact form button {
+    width: 100%;
+    padding: 14px 30px;
+  }
+  
+  /* Footer mobile */
+  .footer {
+    margin-top: 40px;
+    padding: 30px 0 15px;
+  }
+  
+  .newsletter-bx {
+    padding: 40px 25px;
+    border-radius: 30px;
+    margin-top: -80px;
+    margin-bottom: 40px;
+  }
+  
+  .new-email-bx {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .new-email-bx input {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .new-email-bx button {
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .banner h1 {
+    font-size: 26px;
+  }
+  
+  .timeline-content {
+    width: 220px;
+    min-height: 160px;
+    padding: 15px;
+  }
+  
+  .timeline-content h4 {
+    font-size: 16px;
+  }
+  
+  .timeline-connector {
+    width: 25px;
+  }
+  
+  .bonfire-message {
+    padding: 20px 30px;
+  }
+  
+  .bonfire-message span {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+}
+
+/* Navbar Mobile Overlay */
+.navbar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navbar-overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: rgba(18, 18, 18, 0.98);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 15px;
+    border: 1px solid rgba(224, 136, 33, 0.3);
+  }
+  
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  nav.navbar .navbar-nav .nav-link.navbar-link:last-child {
+    border-bottom: none;
+  }
+  
+  span.navbar-text {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar-text button.vvd {
+    width: 100%;
+  }
 }

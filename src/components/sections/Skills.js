@@ -3,13 +3,34 @@
  * Sezione competenze con carosello e filtri
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import Carousel from "react-multi-carousel";
 import { skillsData } from '../../data/profileData';
 
 export default function Skills() {
     const [activeFilter, setActiveFilter] = useState('All');
+    const [isVisible, setIsVisible] = useState(false);
+    const skillsRef = useRef(null);
+    
+    // Intersection Observer per animare le skill bars quando visibili
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect(); // Anima solo la prima volta
+                }
+            },
+            { threshold: 0.3 }
+        );
+        
+        if (skillsRef.current) {
+            observer.observe(skillsRef.current);
+        }
+        
+        return () => observer.disconnect();
+    }, []);
     
     const responsive = {
         superLargeDesktop: {
@@ -37,7 +58,7 @@ export default function Skills() {
         : skillsData.filter(skill => skill.category === activeFilter);
 
     return (
-        <section className='skill' id='skills' aria-label="Skills section">
+        <section className='skill' id='skills' aria-label="Skills section" ref={skillsRef}>
             <Container>
                 <Row>
                     <Col>
@@ -75,8 +96,8 @@ export default function Skills() {
                                         <h5>{skill.name}</h5>
                                         <div className="skill-progress">
                                             <div 
-                                                className="skill-progress-bar" 
-                                                style={{ width: `${skill.level}%` }}
+                                                className={`skill-progress-bar ${isVisible ? 'animate' : ''}`}
+                                                style={{ width: isVisible ? `${skill.level}%` : '0%' }}
                                                 role="progressbar"
                                                 aria-valuenow={skill.level}
                                                 aria-valuemin="0"

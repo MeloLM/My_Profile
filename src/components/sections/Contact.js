@@ -125,16 +125,16 @@ export default function Contact() {
           <form ref={form} onSubmit={handleSubmit}>
             <Row>
               <Col sm={6} className="px-1">
-                <input type="text" name="firstName" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName' , e.target.value)} />
+                <input type="text" name="firstName" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName' , e.target.value)} autoComplete="given-name" />
               </Col>
               <Col sm={6} className="px-1">
-                <input type="text" name="lastName" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName' , e.target.value)} />
+                <input type="text" name="lastName" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName' , e.target.value)} autoComplete="family-name" />
               </Col>
               <Col sm={6} className="px-1">
-                <input type="email" name="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email' , e.target.value)} />
+                <input type="email" name="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email' , e.target.value)} inputMode="email" autoComplete="email" />
               </Col>
               <Col sm={6} className="px-1">
-                <input type="tel" name="phone" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone' , e.target.value)} />
+                <input type="tel" name="phone" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone' , e.target.value)} inputMode="tel" autoComplete="tel" />
               </Col>
               <Col>
                 <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message' , e.target.value)} name="message"></textarea>

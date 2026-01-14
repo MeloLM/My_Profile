@@ -25,10 +25,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simula loading time per mostrare la schermata
+    // Loading time ridotto per mobile (1500ms invece di 2500ms)
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2500);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
