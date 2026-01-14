@@ -26,6 +26,7 @@ import projImg1 from '../assets/img/project_soul.jpeg';
 import projImg2 from '../assets/img/project_moon.jpeg';
 import projImg3 from '../assets/img/project_sushi.jpeg';
 import projImg4 from '../assets/img/presto_it.jpg';
+import projImgPortfolio from '../assets/img/Screen_HomePage_Portfolio.png';
 
 export const personalInfo = {
   name: "Carmelo La Mantia",
@@ -70,8 +71,8 @@ export const skillsData = [
 export const education = [
   {
     period: "2025 - in corso",
-    institution: "Università Enna Kore Sicilia",
-    location: "Enna, Sicilia",
+    institution: "Università E-campus",
+    location: "Online / Novedrate (CO)",
     title: "Laurea Triennale, Ingegneria Informatica",
     description: "Corso di laurea in Ingegneria Informatica - attualmente in corso."
   },
@@ -109,8 +110,8 @@ export const projects = [
   {
     title: "My Profile",
     description: "Portfolio custom sviluppato con framework React",
-    imgUrl: projImg1,
-    imgAncor: "https://github.com/MeloLM", // Link portfolio
+    imgUrl: projImgPortfolio,
+    imgAncor: "https://github.com/MeloLM/My_Profile", // Link portfolio
     tech: ["React", "JavaScript", "CSS"]
   },
   {
@@ -132,21 +133,21 @@ export const projects = [
 export const workExperience = [
   {
     period: "2025 - in corso",
-    company: "Ruessch srl",
+    company: "Rueesch srl",
     location: "Canicattì (Agrigento, Sicilia)",
     role: "Addetto alla logistica",
     skills: ["Team Management", "Lavoro in team", "Precisione operativa"]
   },
   {
     period: "2023 - 2024",
-    company: "Riva degli Etruschi 2S - Canicattì",
+    company: "Rivendita Tabacchi 25",
     location: "Canicattì (Agrigento, Sicilia)",
     role: "Addetto alle vendite",
     skills: ["Problem Solving", "Customer Care", "Affidabilità e gestione cassa"]
   },
   {
     period: "2022 - 2023",
-    company: "VII Coorie Ristorante",
+    company: "VII Coorte Ristorante",
     location: "Roma (Lazio)",
     role: "Cameriere",
     skills: ["Gestione dello stress", "Comunicazione efficace", "Adattabilità in ambienti dinamici"]
@@ -162,10 +163,10 @@ export const languages = [
 // Timeline data per la sezione Il Mio Percorso
 export const timelineData = [
   {
-    year: "2019",
+    year: "2014-2019",
     title: "Diploma C.A.T.",
     subtitle: "IISS Galileo Galilei - Canicattì",
-    description: "Diploma di Istruzione Tecnica - Costruzioni, Ambiente e Territorio.",
+    description: "Diploma di Istruzione Tecnica - Costruzioni, Ambiente e Territorio (ex Geometra).",
     icon: "🎓",
     type: "education"
   },
@@ -178,6 +179,14 @@ export const timelineData = [
     type: "education"
   },
   {
+    year: "2022-2023",
+    title: "Cameriere",
+    subtitle: "VII Coorte Ristorante - Roma",
+    description: "Esperienza lavorativa a Roma. Gestione dello stress, comunicazione e adattabilità.",
+    icon: "🍽️",
+    type: "work"
+  },
+  {
     year: "2023",
     title: "Full Stack Developer Bootcamp",
     subtitle: "Aulab srl - Bari",
@@ -187,25 +196,25 @@ export const timelineData = [
   },
   {
     year: "2023-2024",
-    title: "Sviluppo Progetti & Esperienza",
-    subtitle: "Portfolio & Addetto vendite",
-    description: "Creazione Shooter Project, SoulsSpace Blog, Sushi Project, My Profile. Esperienza in retail.",
-    icon: "🚀",
+    title: "Addetto Vendite",
+    subtitle: "Rivendita Tabacchi 25 - Canicattì",
+    description: "Problem Solving, Customer Care, gestione cassa. Sviluppo progetti personali in parallelo.",
+    icon: "🏪",
     type: "work"
   },
   {
     year: "2025",
-    title: "Laurea in Ingegneria Informatica",
-    subtitle: "Università Enna Kore Sicilia",
-    description: "Inizio percorso universitario in Ingegneria Informatica. Focus su sviluppo web e AI.",
-    icon: "🎓",
-    type: "education"
+    title: "Addetto Logistica & Università",
+    subtitle: "Rueesch srl | Università E-campus",
+    description: "Inizio percorso universitario in Ingegneria Informatica e lavoro presso Rueesch srl.",
+    icon: "📦",
+    type: "work"
   },
   {
     year: "2026",
-    title: "Jr Web Developer",
+    title: "Jr Full Stack Developer",
     subtitle: "Open to Work",
-    description: "Alla ricerca di opportunità come Jr Web Developer. React, Laravel, JavaScript, AI Tools.",
+    description: "Alla ricerca di opportunità come Jr Full Stack Developer. React, Laravel, JavaScript, AI Tools.",
     icon: "⚔️",
     type: "career"
   }
