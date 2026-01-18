@@ -1,11 +1,26 @@
 /**
  * 🎣 useScroll Hook
  * Gestisce lo stato dello scroll per effetti sulla navbar
- * Ottimizzato con throttling per performance
+ * Ottimizzato con throttling via requestAnimationFrame per performance
+ * 
+ * @module hooks/useScroll
+ * @example
+ * const { scrolled, scrollDirection, isAtTop } = useScroll(50);
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+/**
+ * Custom hook per tracciare stato e direzione scroll
+ * @param {number} [threshold=50] - Soglia in px per attivare stato "scrolled"
+ * @returns {Object} Oggetto con stati scroll
+ * @returns {boolean} return.scrolled - True se scrollato oltre threshold
+ * @returns {number} return.scrollY - Posizione scroll corrente
+ * @returns {'up'|'down'} return.scrollDirection - Direzione scroll
+ * @returns {boolean} return.isAtTop - True se in cima alla pagina
+ * @returns {boolean} return.isScrollingDown - True se scrollando verso il basso
+ * @returns {boolean} return.isScrollingUp - True se scrollando verso l'alto
+ */
 export const useScroll = (threshold = 50) => {
   const [scrolled, setScrolled] = useState(false);
   const [scrollY, setScrollY] = useState(0);

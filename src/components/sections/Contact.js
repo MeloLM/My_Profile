@@ -1,92 +1,98 @@
 /**
  * 📧 Contact Component - Section
  * Sezione contatti con form EmailJS collegato a Gmail
+ * 
+ * @module components/sections/Contact
  */
 
-import { useState, useRef } from "react";
-import emailjs from '@emailjs/browser';
-import { Container , Row , Col } from 'react-bootstrap';
+import { useState, useRef, useCallback } from "react";
+import { Container, Row, Col } from 'react-bootstrap';
+import { useEmail } from '../../hooks';
+import { validateEmail, validateRequired } from '../../utils/validators';
 import contactImg from '../../assets/img/bonfire.svg';
 import ToastNotification from '../common/ToastNotification';
 
-// Config EmailJS per Gmail
-const EMAILJS_CONFIG = {
-  serviceId: process.env.REACT_APP_EMAILJS_SERVICE || 'service_gt2uoev',
-  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE || 'template_y6xpk4a',
-  publicKey: process.env.REACT_APP_EMAILJS_KEY || 'kforPiP9Kqq8o2cYk',
+/** @constant {Object} INITIAL_FORM_STATE - Stato iniziale del form */
+const INITIAL_FORM_STATE = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  message: ''
 };
 
+/**
+ * Contact Component
+ * Form di contatto con validazione e invio email tramite EmailJS
+ * @returns {JSX.Element} Sezione contatti
+ */
 export default function Contact() {
-  const form = useRef(null);
+  const formRef = useRef(null);
   const [bonfireLit, setBonfireLit] = useState(false);
   const [toast, setToast] = useState(null);
-  const formInitialDetails = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: ''
-  }
+  const [formDetails, setFormDetails] = useState(INITIAL_FORM_STATE);
+  
+  // Hook per gestione email - elimina duplicazione logica
+  const { sendEmail, isLoading } = useEmail();
 
-  const [formDetails , setFormDetails] = useState(formInitialDetails);
-  const [buttonText , setButtonText] = useState('Send');
-  const [isLoading, setIsLoading] = useState(false);
+  /**
+   * Aggiorna un campo del form
+   * @param {string} field - Nome del campo
+   * @param {string} value - Nuovo valore
+   */
+  const onFormUpdate = useCallback((field, value) => {
+    setFormDetails(prev => ({ ...prev, [field]: value }));
+  }, []);
 
-  const onFormUpdate = (category , value) => {
-      setFormDetails({...formDetails, [category] : value})
-  }
-
-  // Validazione form
-  const validateForm = () => {
-    if (!formDetails.firstName.trim()) {
+  /**
+   * Valida il form prima dell'invio
+   * @returns {boolean} True se valido
+   */
+  const validateForm = useCallback(() => {
+    if (!validateRequired(formDetails.firstName, 2)) {
       setToast({ message: 'Please enter your first name', type: 'warning' });
       return false;
     }
-    if (!formDetails.email.trim()) {
-      setToast({ message: 'Please enter your email', type: 'warning' });
-      return false;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formDetails.email)) {
+    
+    if (!validateEmail(formDetails.email)) {
       setToast({ message: 'Please enter a valid email address', type: 'warning' });
       return false;
     }
-    if (!formDetails.message.trim()) {
-      setToast({ message: 'Please enter a message', type: 'warning' });
+    
+    if (!validateRequired(formDetails.message, 5)) {
+      setToast({ message: 'Please enter a message (min 5 characters)', type: 'warning' });
       return false;
     }
+    
     return true;
-  }
+  }, [formDetails]);
 
+  /**
+   * Gestisce l'invio del form
+   * @param {Event} e - Submit event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Valida prima di inviare
     if (!validateForm()) return;
     
-    setButtonText('');
-    setIsLoading(true);
+    const result = await sendEmail(formDetails, formRef);
+    
+    if (result.success) {
+      setFormDetails(INITIAL_FORM_STATE);
+      setToast({ message: 'Message sent successfully! 🔥', type: 'success' });
+    } else {
+      setToast({ message: 'Something went wrong, please try again.', type: 'error' });
+    }
+  };
 
-    emailjs.sendForm(
-      EMAILJS_CONFIG.serviceId,
-      EMAILJS_CONFIG.templateId,
-      form.current,
-      EMAILJS_CONFIG.publicKey
-    )
-      .then((result) => {
-        console.log('✅ Email inviata:', result.text);
-        setButtonText("Send");
-        setFormDetails(formInitialDetails);
-        setIsLoading(false);
-        setToast({ message: 'Message sent successfully! 🔥', type: 'success' });
-      })
-      .catch((error) => {
-        console.error('❌ EmailJS Error:', error.text);
-        setButtonText("Send");
-        setIsLoading(false);
-        setToast({ message: 'Something went wrong, please try again.', type: 'error' });
-      });
-  }
+  /**
+   * Gestisce click sul bonfire (easter egg)
+   */
+  const handleBonfireClick = useCallback(() => {
+    setBonfireLit(true);
+    setTimeout(() => setBonfireLit(false), 3000);
+  }, []);
 
     
 
@@ -106,10 +112,7 @@ export default function Contact() {
             src={contactImg} 
             alt="Bonfire - Click to rest" 
             className={`bonfire-img ${bonfireLit ? 'bonfire-lit' : ''}`}
-            onClick={() => {
-              setBonfireLit(true);
-              setTimeout(() => setBonfireLit(false), 3000);
-            }}
+            onClick={handleBonfireClick}
             style={{ cursor: 'pointer' }}
             title="🔥 Click to rest at the bonfire"
             loading="lazy"
@@ -122,25 +125,61 @@ export default function Contact() {
         </Col>
         <Col md={6}>
           <h2>Get the White Stone <br /> and <span className="text-black">Contact Me</span></h2>
-          <form ref={form} onSubmit={handleSubmit}>
+          <form ref={formRef} onSubmit={handleSubmit}>
             <Row>
               <Col sm={6} className="px-1">
-                <input type="text" name="firstName" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName' , e.target.value)} autoComplete="given-name" />
+                <input 
+                  type="text" 
+                  name="firstName" 
+                  value={formDetails.firstName} 
+                  placeholder="First Name" 
+                  onChange={(e) => onFormUpdate('firstName', e.target.value)} 
+                  autoComplete="given-name" 
+                />
               </Col>
               <Col sm={6} className="px-1">
-                <input type="text" name="lastName" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName' , e.target.value)} autoComplete="family-name" />
+                <input 
+                  type="text" 
+                  name="lastName" 
+                  value={formDetails.lastName} 
+                  placeholder="Last Name" 
+                  onChange={(e) => onFormUpdate('lastName', e.target.value)} 
+                  autoComplete="family-name" 
+                />
               </Col>
               <Col sm={6} className="px-1">
-                <input type="email" name="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email' , e.target.value)} inputMode="email" autoComplete="email" />
+                <input 
+                  type="email" 
+                  name="email" 
+                  value={formDetails.email} 
+                  placeholder="Email Address" 
+                  onChange={(e) => onFormUpdate('email', e.target.value)} 
+                  inputMode="email" 
+                  autoComplete="email" 
+                />
               </Col>
               <Col sm={6} className="px-1">
-                <input type="tel" name="phone" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone' , e.target.value)} inputMode="tel" autoComplete="tel" />
+                <input 
+                  type="tel" 
+                  name="phone" 
+                  value={formDetails.phone} 
+                  placeholder="Phone No." 
+                  onChange={(e) => onFormUpdate('phone', e.target.value)} 
+                  inputMode="tel" 
+                  autoComplete="tel" 
+                />
               </Col>
               <Col>
-                <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message' , e.target.value)} name="message"></textarea>
+                <textarea 
+                  rows="6" 
+                  name="message"
+                  value={formDetails.message} 
+                  placeholder="Message" 
+                  onChange={(e) => onFormUpdate('message', e.target.value)} 
+                />
                 <button type="submit" disabled={isLoading}>
                   {isLoading && <span className="spinner"></span>}
-                  <span>{isLoading ? 'Sending...' : buttonText}</span>
+                  <span>{isLoading ? 'Sending...' : 'Send'}</span>
                 </button>
               </Col>
             </Row>
@@ -149,5 +188,5 @@ export default function Contact() {
       </Row>
     </Container>
   </section>
-  )
+  );
 }

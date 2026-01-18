@@ -15,22 +15,22 @@
  *    REACT_APP_EMAILJS_SERVICE=service_xxxxxx
  *    REACT_APP_EMAILJS_TEMPLATE=template_xxxxxx
  *    REACT_APP_EMAILJS_KEY=your_public_key
+ * 
+ * @module hooks/useEmail
  */
 
 import { useState, useCallback } from 'react';
 import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG, VALIDATION } from '../constants';
+import logger from '../utils/logger';
 
-// Config EmailJS - Usa variabili d'ambiente o fallback ai tuoi valori
-const EMAILJS_CONFIG = {
-  serviceId: process.env.REACT_APP_EMAILJS_SERVICE || 'service_gt2uoev',
-  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE || 'template_y6xpk4a',
-  publicKey: process.env.REACT_APP_EMAILJS_KEY || 'kforPiP9Kqq8o2cYk',
-};
-
-// Validazione email
+/**
+ * Valida un indirizzo email
+ * @param {string} email - Email da validare
+ * @returns {boolean} True se valida
+ */
 const isValidEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+  return VALIDATION.emailRegex.test(email);
 };
 
 export const useEmail = () => {
@@ -115,7 +115,7 @@ export const useEmail = () => {
         );
       }
 
-      console.log('✅ Email inviata con successo:', result.text);
+      logger.success('Email inviata con successo:', result.text);
       
       setStatus({
         loading: false,
@@ -126,7 +126,7 @@ export const useEmail = () => {
       
       return { success: true, data: result };
     } catch (error) {
-      console.error('❌ EmailJS Error:', error);
+      logger.error('EmailJS Error:', error);
       
       setStatus({
         loading: false,

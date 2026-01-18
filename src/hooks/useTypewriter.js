@@ -2,10 +2,37 @@
  * 🎣 useTypewriter Hook
  * Effetto macchina da scrivere per testo animato
  * Supporta array di testi con loop, cursor e delay personalizzabili
+ * 
+ * @module hooks/useTypewriter
+ * @example
+ * const { displayedText, isComplete } = useTypewriter(['Dev', 'Designer'], { loop: true });
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+/**
+ * @typedef {Object} TypewriterOptions
+ * @property {number} [speed=100] - Velocità digitazione (ms per carattere)
+ * @property {number} [deleteSpeed=50] - Velocità cancellazione (ms per carattere)
+ * @property {number} [delayBetween=2000] - Pausa tra parole (ms)
+ * @property {boolean} [loop=false] - Se ripetere il ciclo
+ * @property {boolean} [cursor=true] - Se mostrare il cursore
+ */
+
+/**
+ * @typedef {Object} TypewriterReturn
+ * @property {string} displayedText - Testo attualmente visualizzato
+ * @property {boolean} isComplete - True se animazione completata
+ * @property {boolean} isDeleting - True se in fase di cancellazione
+ * @property {string} textWithCursor - Testo con cursore "|"
+ */
+
+/**
+ * Custom hook per effetto typewriter
+ * @param {string|string[]} text - Testo o array di testi da animare
+ * @param {TypewriterOptions} [options] - Opzioni di configurazione
+ * @returns {TypewriterReturn} Stato dell'animazione
+ */
 export const useTypewriter = (
   text,
   {

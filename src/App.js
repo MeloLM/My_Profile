@@ -1,6 +1,20 @@
+/**
+ * 🎮 App Component
+ * Componente principale dell'applicazione portfolio
+ * Gestisce lazy loading, animazioni scroll e tema globale
+ * 
+ * @module App
+ */
 
 import { useState, useEffect, lazy, Suspense } from 'react';
 import './App.css';
+
+// Constants
+import { 
+  LOADING_SCREEN_DURATION, 
+  PARALLAX_SPEED, 
+  INTERSECTION_THRESHOLD 
+} from './constants';
 
 // Context
 import { ThemeProvider } from './context';
@@ -21,14 +35,19 @@ const Projects = lazy(() => import('./components/sections/Projects'));
 const Timeline = lazy(() => import('./components/sections/Timeline'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
+/**
+ * App Component
+ * Entry point dell'applicazione React
+ * @returns {JSX.Element} Applicazione completa
+ */
 function App() {
   const [loading, setLoading] = useState(true);
 
+  // Loading screen timer
   useEffect(() => {
-    // Loading time ridotto per mobile (1500ms invece di 2500ms)
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, LOADING_SCREEN_DURATION);
 
     return () => clearTimeout(timer);
   }, []);
@@ -41,12 +60,11 @@ function App() {
       const scrolled = window.scrollY;
       const parallaxElements = document.querySelectorAll('.parallax-bg');
       parallaxElements.forEach(el => {
-        const speed = 0.5;
-        el.style.transform = `translateY(${scrolled * speed}px)`;
+        el.style.transform = `translateY(${scrolled * PARALLAX_SPEED}px)`;
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading]);
 
@@ -62,7 +80,7 @@ function App() {
           entry.target.classList.add('revealed');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: INTERSECTION_THRESHOLD });
 
     revealElements.forEach(el => {
       el.classList.add('reveal-on-scroll');

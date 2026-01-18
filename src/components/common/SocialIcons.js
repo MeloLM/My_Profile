@@ -1,15 +1,25 @@
 /**
  * 🌐 SocialIcons Component - Common
  * Icone social media riutilizzabili
+ * 
+ * @module components/common/SocialIcons
  */
 
+import PropTypes from 'prop-types';
 import { BsLinkedin, BsGithub, BsInstagram } from 'react-icons/bs';
+import { personalInfo } from '../../data/profileData';
 
+/**
+ * SocialIcons Component
+ * @param {Object} props - Component props
+ * @param {string} [props.githubColor='white'] - Colore icona GitHub
+ * @returns {JSX.Element} Container icone social
+ */
 export const SocialIcons = ({ githubColor = 'white' }) => {
     return (
         <div className="social-icon">
             <a 
-                href="https://www.linkedin.com/in/carmelo-la-mantia-web-developer/" 
+                href={personalInfo.linkedin}
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
@@ -17,7 +27,7 @@ export const SocialIcons = ({ githubColor = 'white' }) => {
                 <BsLinkedin style={{ color: 'rgb(0, 119, 181)'}} />
             </a>
             <a 
-                href="https://www.instagram.com/carmelo_coding" 
+                href={personalInfo.instagram}
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="Instagram Profile"
@@ -25,7 +35,7 @@ export const SocialIcons = ({ githubColor = 'white' }) => {
                 <BsInstagram className='insta_color'/>
             </a>
             <a 
-                href="https://github.com/MeloLM" 
+                href={personalInfo.github}
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
@@ -34,4 +44,12 @@ export const SocialIcons = ({ githubColor = 'white' }) => {
             </a>
         </div>
     );
+};
+
+SocialIcons.propTypes = {
+    githubColor: PropTypes.string,
+};
+
+SocialIcons.defaultProps = {
+    githubColor: 'white',
 };

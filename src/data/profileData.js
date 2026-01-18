@@ -1,11 +1,13 @@
 /**
- * DATI PROFILO - AGGIORNATO AL 2026
+ * 📋 Profile Data
+ * Dati del profilo centralizzati - Aggiornato al 2026
  * Basato su CV_Carmelo_la_mantia_2026.pdf
- * =========================================================
+ * 
+ * @module data/profileData
  */
 
-// Import immagini per Skills (Invariato)
-import logo1 from '../assets/img/icon/phyton.png';
+// Import immagini per Skills
+// Note: logo1 (Python) e logo14 (WordPress) importati per utilizzo futuro
 import logo2 from '../assets/img/icon/github.png';
 import logo3 from '../assets/img/icon/bootstrap.png';
 import logo4 from '../assets/img/icon/chatgbt.png';
@@ -18,7 +20,6 @@ import logo10 from '../assets/img/icon/laravel.jpg';
 import logo11 from '../assets/img/icon/mysql.png';
 import logo12 from '../assets/img/icon/git.png';
 import logo13 from '../assets/img/icon/nodejs.png';
-import logo14 from '../assets/img/icon/wordpress.png';
 
 // Import immagini per Progetti (Invariato - assicurati che i file esistano)
 import projImg1 from '../assets/img/project_soul.jpeg';

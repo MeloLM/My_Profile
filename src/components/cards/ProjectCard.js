@@ -2,13 +2,19 @@
  * 🎴 ProjectCard Component - Card
  * Card singolo progetto con TechStack badges
  * REFACTORED: Aggiunto supporto per tech array come da PSEUDOCODE.md
+ * 
+ * @module components/cards/ProjectCard
  */
 
+import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
 import './ProjectCard.css';
 
 /**
  * TechStack Component - Mostra i badge delle tecnologie
+ * @param {Object} props - Component props
+ * @param {string[]} props.techs - Array di nomi tecnologie
+ * @returns {JSX.Element|null} Badge tecnologie o null se vuoto
  */
 const TechStack = ({ techs = [] }) => {
     if (!techs || techs.length === 0) return null;
@@ -24,29 +30,21 @@ const TechStack = ({ techs = [] }) => {
     );
 };
 
-/**
- * CardActions Component - Link al progetto
- */
-const CardActions = ({ links }) => {
-    if (!links) return null;
-    
-    return (
-        <div className="card-actions">
-            {links.demo && (
-                <a href={links.demo} target="_blank" rel="noopener noreferrer" className="action-btn">
-                    <i className="bi bi-eye"></i> Demo
-                </a>
-            )}
-            {links.github && (
-                <a href={links.github} target="_blank" rel="noopener noreferrer" className="action-btn">
-                    <i className="bi bi-github"></i> Code
-                </a>
-            )}
-        </div>
-    );
+TechStack.propTypes = {
+    techs: PropTypes.arrayOf(PropTypes.string),
 };
 
-export const ProjectCard = ({ title, description, imgUrl, imgAncor, tech, links }) => {
+/**
+ * ProjectCard Component - Card singolo progetto
+ * @param {Object} props - Component props
+ * @param {string} props.title - Titolo del progetto
+ * @param {string} props.description - Descrizione del progetto
+ * @param {string} props.imgUrl - URL immagine preview
+ * @param {string} props.imgAncor - URL link al progetto
+ * @param {string[]} [props.tech] - Array tecnologie usate
+ * @returns {JSX.Element} Card progetto
+ */
+export const ProjectCard = ({ title, description, imgUrl, imgAncor, tech }) => {
     return (
         <Col sm={6} md={4}>
             <a href={imgAncor} target='_blank' rel="noopener noreferrer" className='text-white project-link' aria-label={`View project: ${title}`}>
@@ -61,6 +59,19 @@ export const ProjectCard = ({ title, description, imgUrl, imgAncor, tech, links 
             </a>
         </Col>
     );
+};
+
+ProjectCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    imgUrl: PropTypes.string.isRequired,
+    imgAncor: PropTypes.string,
+    tech: PropTypes.arrayOf(PropTypes.string),
+};
+
+ProjectCard.defaultProps = {
+    imgAncor: '#',
+    tech: [],
 };
 
 export default ProjectCard;

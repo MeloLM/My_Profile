@@ -1,7 +1,22 @@
 # 📋 TODO - Architecture Compliance Report
 > Generated: 2025-12-26
-> Last Updated: 2026-01-14
+> Last Updated: 2026-01-18
 > Script: scripts/checkArchitecture.js
+
+---
+
+## 🔧 Code Quality Refactoring (2026-01-18)
+
+| Task | Status | Description |
+|------|--------|-------------|
+| PropTypes sui componenti | ✅ Done | Aggiunto prop-types a ProjectCard, ToastNotification, Loader, SocialIcons |
+| Refactoring Contact.js | ✅ Done | Integrato hook useEmail, rimossa duplicazione logica EmailJS |
+| Validators integration | ✅ Done | Usate funzioni da utils/validators.js invece di validazione inline |
+| Constants file | ✅ Done | Creato src/constants/index.js per magic numbers |
+| Dead code removal | ✅ Done | Rimosso componente CardActions non utilizzato |
+| Logger system | ✅ Done | Creato utils/logger.js per logging condizionale (dev only) |
+| JSDoc documentation | ✅ Done | Tipizzazione @param/@returns sui custom hooks |
+| Unused imports cleanup | ✅ Done | Rimossi import logo1 e logo14 non utilizzati |
 
 ---
 
