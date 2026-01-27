@@ -10,7 +10,26 @@
 
 # production
 /build
+/.next
+/out
+
+# Next.js
+.next
+out
 
 # misc
 .DS_Store
 .env
+.env*.local
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
