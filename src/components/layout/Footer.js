@@ -10,6 +10,9 @@ import { SocialIcons } from '../common/SocialIcons';
 import { personalInfo } from '../../data/profileData';
 import meloIco from "../../assets/img/Melo_icon.png";
 
+// Next.js restituisce un oggetto per le immagini importate
+const meloIcoSrc = typeof meloIco === 'object' && meloIco?.src ? meloIco.src : meloIco;
+
 export default function Footer () {
   const currentYear = new Date().getFullYear();
   
@@ -20,7 +23,7 @@ export default function Footer () {
         <Row className="align-items-center justify-content-between py-5">
           <Col xs={12} md={6} className="text-center text-md-start mb-4 mb-md-0">
             <a href="#home" aria-label="Back to top">
-              <img src={meloIco} alt={`${personalInfo.name} Logo`} className="footer-logo rounded-5" loading="lazy" />
+              <img src={meloIcoSrc} alt={`${personalInfo.name} Logo`} className="footer-logo rounded-5" loading="lazy" />
             </a>
           </Col>
           <Col xs={12} md={6} className="text-center text-md-end">

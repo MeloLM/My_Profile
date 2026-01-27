@@ -10,6 +10,9 @@ import { useTypewriter } from '../../hooks';
 import { personalInfo, summary } from '../../data/profileData';
 import headerImg from '../../assets/img/solaire.svg';
 
+// Next.js restituisce un oggetto per le immagini importate
+const headerImgSrc = typeof headerImg === 'object' && headerImg?.src ? headerImg.src : headerImg;
+
 export default function Banner() {
   // REFACTORED: Uso dell'hook useTypewriter invece della logica inline
   // useMemo per evitare re-render loop con useTypewriter
@@ -40,7 +43,7 @@ export default function Banner() {
             </div>
           </Col>
           <Col xs={12} md={6} xl={5}>
-            <img src={headerImg} alt='Solaire of Astora - Dark Souls themed illustration' />
+            <img src={headerImgSrc} alt='Solaire of Astora - Dark Souls themed illustration' />
           </Col>
         </Row>
       </Container>

@@ -90,9 +90,12 @@ export default function Skills() {
                                 transitionDuration={500}
                                 key={activeFilter}
                             >
-                                {filteredSkills.map((skill, index) => (
+                                {filteredSkills.map((skill, index) => {
+                                    // Next.js restituisce un oggetto per le immagini importate
+                                    const skillImgSrc = typeof skill.img === 'object' && skill.img?.src ? skill.img.src : skill.img;
+                                    return (
                                     <div className="item" key={index}>
-                                        <img src={skill.img} className='rounded-5' alt={`${skill.name} icon`} loading="lazy" />
+                                        <img src={skillImgSrc} className='rounded-5' alt={`${skill.name} icon`} loading="lazy" />
                                         <h5>{skill.name}</h5>
                                         <div className="skill-progress">
                                             <div 
@@ -106,7 +109,8 @@ export default function Skills() {
                                         </div>
                                         <span className="skill-percent">{skill.level}%</span>
                                     </div>
-                                ))}
+                                    );
+                                })}
                             </Carousel>
                         </div>
                     </Col>

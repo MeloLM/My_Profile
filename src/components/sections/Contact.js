@@ -12,6 +12,9 @@ import { validateEmail, validateRequired } from '../../utils/validators';
 import contactImg from '../../assets/img/bonfire.svg';
 import ToastNotification from '../common/ToastNotification';
 
+// Next.js restituisce un oggetto per le immagini importate
+const contactImgSrc = typeof contactImg === 'object' && contactImg?.src ? contactImg.src : contactImg;
+
 /** @constant {Object} INITIAL_FORM_STATE - Stato iniziale del form */
 const INITIAL_FORM_STATE = {
   firstName: '',
@@ -109,7 +112,7 @@ export default function Contact() {
       <Row className="align-items-center">
         <Col md={6} className="bonfire-container">
           <img 
-            src={contactImg} 
+            src={contactImgSrc} 
             alt="Bonfire - Click to rest" 
             className={`bonfire-img ${bonfireLit ? 'bonfire-lit' : ''}`}
             onClick={handleBonfireClick}

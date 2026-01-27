@@ -45,11 +45,14 @@ TechStack.propTypes = {
  * @returns {JSX.Element} Card progetto
  */
 export const ProjectCard = ({ title, description, imgUrl, imgAncor, tech }) => {
+    // Next.js restituisce un oggetto per le immagini importate
+    const imageSrc = typeof imgUrl === 'object' && imgUrl?.src ? imgUrl.src : imgUrl;
+    
     return (
         <Col sm={6} md={4}>
             <a href={imgAncor} target='_blank' rel="noopener noreferrer" className='text-white project-link' aria-label={`View project: ${title}`}>
                 <div className="proj-imgbx">
-                    <img src={imgUrl} alt={title} loading="lazy"/>
+                    <img src={imageSrc} alt={title} loading="lazy"/>
                     <div className="proj-txtx">
                         <h4>{title}</h4>
                         <span>{description}</span>

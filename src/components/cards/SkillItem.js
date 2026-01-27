@@ -36,6 +36,8 @@ const SkillItem = ({
     size = 'medium' 
 }) => {
     const iconSrc = icon || img;
+    // Next.js restituisce un oggetto per le immagini importate
+    const imageSrc = typeof iconSrc === 'object' && iconSrc?.src ? iconSrc.src : iconSrc;
     
     const sizeClasses = {
         small: 'skill-item-small',
@@ -45,9 +47,9 @@ const SkillItem = ({
 
     return (
         <div className={`skill-item ${sizeClasses[size]}`}>
-            {iconSrc && (
+            {imageSrc && (
                 <div className="skill-icon">
-                    <img src={iconSrc} alt={`${name} icon`} loading="lazy" />
+                    <img src={imageSrc} alt={`${name} icon`} loading="lazy" />
                 </div>
             )}
             <div className="skill-info">
