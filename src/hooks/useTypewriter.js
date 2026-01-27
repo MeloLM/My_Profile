@@ -99,13 +99,9 @@ export const useTypewriter = (
 
   // Reset quando cambia il testo SOLO se il contenuto cambia davvero
   useEffect(() => {
-    // Evita reset se l'array è tecnicamente diverso ma ha lo stesso contenuto
-    const textStr = JSON.stringify(text);
-    const prevTextStr = JSON.stringify(texts); // Check logic improvement needed
-
-    // Semplificazione: reset solo se text cambia, ma per array passed inline this triggers always.
-    // Better fix: use a ref to track prev text or rely on component to memoize.
-    // Assuming component fix in Banner.js, keeping this hook simple but safe.
+    // Semplificazione: reset solo se text cambia
+    // Nota: per array passed inline questo può triggerare sempre,
+    // il componente dovrebbe memoizzare l'array
 
     setDisplayedText('');
     setTextIndex(0);
