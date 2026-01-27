@@ -1,0 +1,146 @@
+/**
+ * 🔗 LinkedInBadge Styles
+ * Stili per il badge LinkedIn
+ */
+
+/* === CARD VARIANT === */
+.linkedin-badge-card {
+  background: linear-gradient(135deg, #0077B5 0%, #005582 100%);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 280px;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.linkedin-badge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+}
+
+.linkedin-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.linkedin-icon {
+  font-size: 24px;
+}
+
+.linkedin-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.linkedin-badge-body {
+  margin-bottom: 15px;
+}
+
+.linkedin-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+}
+
+.linkedin-role {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.linkedin-connect-btn {
+  width: 100%;
+  padding: 10px 20px;
+  background: #fff;
+  color: #0077B5;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.linkedin-connect-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.02);
+}
+
+/* === BUTTON VARIANT === */
+.linkedin-badge-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: #0077B5;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.linkedin-badge-button:hover {
+  background: #005582;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 119, 181, 0.3);
+}
+
+.linkedin-badge-button i {
+  font-size: 20px;
+}
+
+/* === MINIMAL VARIANT === */
+.linkedin-badge-minimal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0077B5;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.linkedin-badge-minimal:hover {
+  background: rgba(0, 119, 181, 0.1);
+  color: #005582;
+}
+
+.linkedin-badge-minimal i {
+  font-size: 18px;
+}
+
+/* === LIGHT THEME === */
+[data-theme="light"] .linkedin-badge-card {
+  box-shadow: 0 4px 20px rgba(0, 119, 181, 0.2);
+}
+
+[data-theme="light"] .linkedin-badge-minimal {
+  background: rgba(0, 119, 181, 0.05);
+}
+
+/* === MOBILE === */
+@media (max-width: 576px) {
+  .linkedin-badge-card {
+    max-width: 100%;
+  }
+
+  .linkedin-badge-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

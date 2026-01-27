@@ -1,0 +1,105 @@
+/**
+ * 📤 ShareButtons Styles
+ * Stili per i pulsanti di condivisione social
+ */
+
+.share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.share-label {
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.share-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--share-color, var(--main-color));
+  background: transparent;
+  color: var(--share-color, var(--main-color));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.share-btn:hover {
+  background: var(--share-color, var(--main-color));
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.share-btn:active {
+  transform: translateY(-1px);
+}
+
+.share-btn-native {
+  background: var(--main-color);
+  color: #121212;
+  border-color: var(--main-color);
+}
+
+.share-btn-native:hover {
+  background: #ff9500;
+  border-color: #ff9500;
+}
+
+/* Sizes */
+.share-btn-small .share-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.share-btn-small .share-label {
+  font-size: 12px;
+}
+
+.share-btn-large .share-btn {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.share-btn-large .share-label {
+  font-size: 16px;
+}
+
+/* Light theme */
+[data-theme="light"] .share-btn {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .share-btn:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .share-buttons {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .share-label {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .share-btn {
+    width: 44px;
+    height: 44px;
+  }
+}

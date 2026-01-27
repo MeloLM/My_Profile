@@ -8,64 +8,80 @@
   --color-primary: #4A90E2;
   --color-primary-light: #6BAEF5;
   --color-primary-dark: #2E5C8A;
-  
+
   --color-secondary: #E94B3C;
   --color-secondary-light: #FF6B5E;
   --color-secondary-dark: #C23327;
-  
+
   /* === COLORI NEUTRI === */
   --color-background: #0F0F1E;
   --color-surface: #1A1A2E;
   --color-surface-light: #252541;
-  
+
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #B8B8D4;
   --color-text-muted: #7B7B8F;
-  
+
   /* === COLORI SEMANTICI === */
   --color-success: #2ECC71;
   --color-warning: #F39C12;
   --color-error: #E74C3C;
   --color-info: #3498DB;
-  
+
   /* === TIPOGRAFIA === */
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-family-heading: 'Poppins', 'Inter', sans-serif;
   --font-family-mono: 'Fira Code', 'Courier New', monospace;
-  
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
-  --font-size-5xl: 3rem;      /* 48px */
-  
+
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-base: 1rem;
+  /* 16px */
+  --font-size-lg: 1.125rem;
+  /* 18px */
+  --font-size-xl: 1.25rem;
+  /* 20px */
+  --font-size-2xl: 1.5rem;
+  /* 24px */
+  --font-size-3xl: 1.875rem;
+  /* 30px */
+  --font-size-4xl: 2.25rem;
+  /* 36px */
+  --font-size-5xl: 3rem;
+  /* 48px */
+
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
+
   /* === SPACING === */
   --spacing-unit: 8px;
-  --spacing-xs: calc(var(--spacing-unit) * 0.5);  /* 4px */
-  --spacing-sm: var(--spacing-unit);              /* 8px */
-  --spacing-md: calc(var(--spacing-unit) * 2);    /* 16px */
-  --spacing-lg: calc(var(--spacing-unit) * 3);    /* 24px */
-  --spacing-xl: calc(var(--spacing-unit) * 4);    /* 32px */
-  --spacing-2xl: calc(var(--spacing-unit) * 6);   /* 48px */
-  --spacing-3xl: calc(var(--spacing-unit) * 8);   /* 64px */
-  
+  --spacing-xs: calc(var(--spacing-unit) * 0.5);
+  /* 4px */
+  --spacing-sm: var(--spacing-unit);
+  /* 8px */
+  --spacing-md: calc(var(--spacing-unit) * 2);
+  /* 16px */
+  --spacing-lg: calc(var(--spacing-unit) * 3);
+  /* 24px */
+  --spacing-xl: calc(var(--spacing-unit) * 4);
+  /* 32px */
+  --spacing-2xl: calc(var(--spacing-unit) * 6);
+  /* 48px */
+  --spacing-3xl: calc(var(--spacing-unit) * 8);
+  /* 64px */
+
   /* === BORDER RADIUS === */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-full: 9999px;
-  
+
   /* === SHADOWS === */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -73,13 +89,13 @@
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
   --shadow-glow: 0 0 20px rgba(74, 144, 226, 0.3);
   --shadow-glow-primary: 0 0 20px rgba(224, 136, 33, 0.3);
-  
+
   /* === TRANSITIONS === */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
   --transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
+
   /* === BREAKPOINTS (da usare con @media) === */
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
@@ -87,7 +103,7 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
-  
+
   /* === Z-INDEX === */
   --z-index-dropdown: 1000;
   --z-index-sticky: 1020;
@@ -96,7 +112,7 @@
   --z-index-modal: 1050;
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
-  
+
   /* === PORTFOLIO THEME COLORS === */
   --main-color: #e08821;
   --main-color-hover: rgba(224, 135, 33, 0.804);
@@ -104,16 +120,16 @@
   --second-color: #0e0e0e;
 }
 
-/* === LIGHT THEME === */
+/* === LIGHT THEME (Warm Amber variant) === */
 [data-theme="light"] {
-  --color-background: #FFFFFF;
-  --color-surface: #F5F5F5;
-  --color-surface-light: #E0E0E0;
-  --color-text-primary: #1A1A2E;
-  --color-text-secondary: #4A4A5E;
-  --color-text-muted: #8A8A9E;
-  --first-color: #f5f5f5;
-  --second-color: #e0e0e0;
+  --color-background: #1e1e2a;
+  --color-surface: #252532;
+  --color-surface-light: #2f2f40;
+  --color-text-primary: #f5e6d3;
+  --color-text-secondary: #d4c4b0;
+  --color-text-muted: #a89888;
+  --first-color: #1e1e2a;
+  --second-color: #252532;
 }
 
 /* === DARK THEME (default) === */

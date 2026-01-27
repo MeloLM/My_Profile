@@ -25,6 +25,7 @@ import logo13 from '../assets/img/icon/nodejs.png';
 import projImg1 from '../assets/img/project_soul.jpeg';
 import projImg2 from '../assets/img/project_moon.jpeg';
 import projImg3 from '../assets/img/project_sushi.jpeg';
+import projImgShooter from '../assets/img/project_Shooter_knight.jpeg';
 import projImgPortfolio from '../assets/img/Screen_HomePage_Portfolio.png';
 
 export const personalInfo = {
@@ -102,31 +103,38 @@ export const education = [
 // Aggiornato con i titoli e le descrizioni tecniche specifiche del PDF 
 export const projects = [
   {
-    title: "Knight Shooter (Survival Game)", // 
-    description: "Browser game 2D con architettura Event-Driven Modular. Logica Object Pooling per nemici e pathfinding.", // 
-    imgUrl: projImg2,
-    imgAncor: "#", 
+    title: "Knight Shooter (Survival Game)",
+    description: "Browser game 2D con architettura Event-Driven Modular. Logica Object Pooling per nemici e pathfinding.",
+    imgUrl: projImgShooter,
+    imgAncor: "https://game-shooter-clm.vercel.app/",
     tech: ["JavaScript", "Phaser 3", "Vite"]
   },
   {
-    title: "SoulsLike Themed Portfolio", // 
-    description: "SPA con design system ispirato a Dark Souls. Animazioni CSS complesse e UX gamificata.", // 
+    title: "SoulsLike Themed Portfolio",
+    description: "SPA con design system ispirato a Dark Souls. Animazioni CSS complesse e UX gamificata.",
     imgUrl: projImgPortfolio,
-    imgAncor: "https://github.com/MeloLM/My_Profile",
+    imgAncor: "https://my-profile-ten-beta.vercel.app/",
     tech: ["React.js", "CSS3 Animations", "Custom UI"]
   },
   {
-    title: "Souls Space Platform", // 
-    description: "Piattaforma full-stack MVC. Autenticazione Laravel Fortify e gestione 'Boss Area' con CRUD completo.", // 
+    title: "Souls Space Platform",
+    description: "Piattaforma full-stack MVC. Autenticazione Laravel Fortify e gestione 'Boss Area' con CRUD completo.",
     imgUrl: projImg1,
     imgAncor: "https://github.com/MeloLM/Carmelo_GamesSpace",
     tech: ["Laravel 10", "PHP", "MySQL", "Bootstrap"]
   },
   {
-    title: "Sushi Restaurant App", // 
-    description: "Interfaccia moderna per consultazione menù. Architettura a componenti riutilizzabili.", // 
+    title: "Black Template (Project Moon)",
+    description: "Template moderno e personalizzabile con design scuro minimalista. Struttura responsive.",
+    imgUrl: projImg2,
+    imgAncor: "https://github.com/MeloLM/Black_template_Carmelo_LM",
+    tech: ["HTML5", "CSS3", "JavaScript"]
+  },
+  {
+    title: "Sushi Restaurant App",
+    description: "Interfaccia moderna per consultazione menù. Architettura a componenti riutilizzabili.",
     imgUrl: projImg3,
-    imgAncor: "https://sushi-project-cml.vercel.app/",
+    imgAncor: "https://sushi-project-carmelo-lm.vercel.app/",
     tech: ["React.js", "CSS Modules"]
   }
 ];

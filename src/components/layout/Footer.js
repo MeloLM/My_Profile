@@ -26,6 +26,9 @@ export default function Footer () {
           <Col xs={12} md={6} className="text-center text-md-end">
             <SocialIcons githubColor="white" />
             <p className="mb-0 mt-3">&#xA9; Copyright | {personalInfo.name} | {currentYear}</p>
+            <p className="easter-egg-hint mt-2" title="↑↑↓↓←→←→BA">
+              <span role="img" aria-label="gamepad">🎮</span> Prova il Konami Code...
+            </p>
           </Col>
         </Row>
       </Container>

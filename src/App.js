@@ -8,12 +8,13 @@
 
 import { useState, useEffect, lazy, Suspense } from 'react';
 import './App.css';
+import './styles/components/loading-screen.css';
 
 // Constants
-import { 
-  LOADING_SCREEN_DURATION, 
-  PARALLAX_SPEED, 
-  INTERSECTION_THRESHOLD 
+import {
+  LOADING_SCREEN_DURATION,
+  PARALLAX_SPEED,
+  INTERSECTION_THRESHOLD
 } from './constants';
 
 // Context
@@ -28,6 +29,8 @@ import Footer from './components/layout/Footer';
 import Loader from './components/common/Loader';
 import ScrollProgressBar from './components/common/ScrollProgressBar';
 import BackToTop from './components/common/BackToTop';
+import EasterEgg from './components/common/EasterEgg';
+import CursorTrail from './components/common/CursorTrail';
 
 // Lazy loaded Section Components (caricati on-demand)
 const Skills = lazy(() => import('./components/sections/Skills'));
@@ -55,7 +58,7 @@ function App() {
   // Parallax scroll effect
   useEffect(() => {
     if (loading) return;
-    
+
     const handleScroll = () => {
       const scrolled = window.scrollY;
       const parallaxElements = document.querySelectorAll('.parallax-bg');
@@ -73,7 +76,7 @@ function App() {
     if (loading) return;
 
     const revealElements = document.querySelectorAll('.skill-bx, .proj-imgbx, .contact form, .timeline-content');
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -95,8 +98,9 @@ function App() {
       <div className="loading-screen">
         <div className="loading-content">
           <div className="bonfire-animation">🔥</div>
+
           <h1 className="loading-title">CARMELO LA MANTIA</h1>
-          <p className="loading-subtitle">Linking to the Portfolio...</p>
+          <p className="loading-subtitle">loading character ...</p>
           <div className="loading-bar">
             <div className="loading-progress"></div>
           </div>
@@ -106,20 +110,22 @@ function App() {
   }
 
   return (
-   <ThemeProvider>
-   <ScrollProgressBar />
-   <BackToTop />
-    <NavBar />
-    <Banner />
-    <Suspense fallback={<Loader message="Loading sections..." variant="bonfire" />}>
-      <Skills />
-      <Projects />
-      <Timeline />
-      <Contact />
-    </Suspense>
-    <Footer />
+    <ThemeProvider>
+      <ScrollProgressBar />
+      <BackToTop />
+      <EasterEgg />
+      <CursorTrail enabled={false} color="#e08821" />
+      <NavBar />
+      <Banner />
+      <Suspense fallback={<Loader message="Loading sections..." variant="bonfire" />}>
+        <Skills />
+        <Projects />
+        <Timeline />
+        <Contact />
+      </Suspense>
+      <Footer />
 
-   </ThemeProvider>
+    </ThemeProvider>
   );
 }
 

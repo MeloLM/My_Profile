@@ -1,11 +1,11 @@
 /**
  * 📅 Timeline Component - Section
  * Sezione percorso formativo/lavorativo
- * Con supporto drag & drop per navigazione mouse
+ * Con supporto drag & drop per navigazione mouse e indicatori carousel
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import { timelineData } from '../../data/profileData';
 
@@ -16,12 +16,43 @@ export default function Timeline() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  
+  // State per carousel indicators
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Update active index based on scroll position
+  const updateActiveIndex = useCallback(() => {
+    if (!scrollRef.current) return;
+    const scrollContainer = scrollRef.current;
+    const cardWidth = 300; // Approximate card width + gap
+    const newIndex = Math.round(scrollContainer.scrollLeft / cardWidth);
+    setActiveIndex(Math.min(newIndex, timelineData.length - 1));
+  }, []);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+    
+    scrollContainer.addEventListener('scroll', updateActiveIndex);
+    return () => scrollContainer.removeEventListener('scroll', updateActiveIndex);
+  }, [updateActiveIndex]);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
       const scrollAmount = 350;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Navigate to specific card
+  const scrollToCard = (index) => {
+    if (scrollRef.current) {
+      const cardWidth = 300;
+      scrollRef.current.scrollTo({
+        left: index * cardWidth,
         behavior: 'smooth'
       });
     }
@@ -133,6 +164,19 @@ export default function Timeline() {
               >
                 <ChevronRight size={30} />
               </button>
+            </div>
+            
+            {/* Carousel Indicators */}
+            <div className="timeline-indicators">
+              {timelineData.map((_, index) => (
+                <button
+                  key={index}
+                  className={`timeline-indicator ${index === activeIndex ? 'active' : ''}`}
+                  onClick={() => scrollToCard(index)}
+                  aria-label={`Vai al punto ${index + 1}`}
+                  aria-current={index === activeIndex ? 'true' : 'false'}
+                />
+              ))}
             </div>
           </Col>
         </Row>

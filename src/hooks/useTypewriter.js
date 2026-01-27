@@ -47,9 +47,9 @@ export const useTypewriter = (
   const [isDeleting, setIsDeleting] = useState(false);
   const [textIndex, setTextIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
-  
+
   const timeoutRef = useRef(null);
-  
+
   // Supporta sia stringa singola che array di stringhe
   const texts = Array.isArray(text) ? text : [text];
   const currentText = texts[textIndex];
@@ -89,7 +89,7 @@ export const useTypewriter = (
 
   useEffect(() => {
     timeoutRef.current = setTimeout(typeText, speed);
-    
+
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -97,13 +97,22 @@ export const useTypewriter = (
     };
   }, [typeText, speed]);
 
-  // Reset quando cambia il testo
+  // Reset quando cambia il testo SOLO se il contenuto cambia davvero
   useEffect(() => {
+    // Evita reset se l'array è tecnicamente diverso ma ha lo stesso contenuto
+    const textStr = JSON.stringify(text);
+    const prevTextStr = JSON.stringify(texts); // Check logic improvement needed
+
+    // Semplificazione: reset solo se text cambia, ma per array passed inline this triggers always.
+    // Better fix: use a ref to track prev text or rely on component to memoize.
+    // Assuming component fix in Banner.js, keeping this hook simple but safe.
+
     setDisplayedText('');
     setTextIndex(0);
     setIsDeleting(false);
     setIsComplete(false);
-  }, [text]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(text)]);
 
   return {
     displayedText,
