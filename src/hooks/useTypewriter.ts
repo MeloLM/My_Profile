@@ -10,45 +10,51 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-/**
- * @typedef {Object} TypewriterOptions
- * @property {number} [speed=100] - Velocità digitazione (ms per carattere)
- * @property {number} [deleteSpeed=50] - Velocità cancellazione (ms per carattere)
- * @property {number} [delayBetween=2000] - Pausa tra parole (ms)
- * @property {boolean} [loop=false] - Se ripetere il ciclo
- * @property {boolean} [cursor=true] - Se mostrare il cursore
- */
+export interface TypewriterOptions {
+  /** Velocità digitazione (ms per carattere) */
+  speed?: number;
+  /** Velocità cancellazione (ms per carattere) */
+  deleteSpeed?: number;
+  /** Pausa tra parole (ms) */
+  delayBetween?: number;
+  /** Se ripetere il ciclo */
+  loop?: boolean;
+  /** Se mostrare il cursore */
+  cursor?: boolean;
+}
 
-/**
- * @typedef {Object} TypewriterReturn
- * @property {string} displayedText - Testo attualmente visualizzato
- * @property {boolean} isComplete - True se animazione completata
- * @property {boolean} isDeleting - True se in fase di cancellazione
- * @property {string} textWithCursor - Testo con cursore "|"
- */
+export interface TypewriterReturn {
+  /** Testo attualmente visualizzato */
+  displayedText: string;
+  /** True se animazione completata */
+  isComplete: boolean;
+  /** True se in fase di cancellazione */
+  isDeleting: boolean;
+  /** Testo con cursore "|" */
+  textWithCursor: string;
+}
 
 /**
  * Custom hook per effetto typewriter
- * @param {string|string[]} text - Testo o array di testi da animare
- * @param {TypewriterOptions} [options] - Opzioni di configurazione
- * @returns {TypewriterReturn} Stato dell'animazione
+ * @param text - Testo o array di testi da animare
+ * @param options - Opzioni di configurazione
  */
 export const useTypewriter = (
-  text,
+  text: string | string[],
   {
     speed = 100,
     deleteSpeed = 50,
     delayBetween = 2000,
     loop = false,
     cursor = true,
-  } = {}
-) => {
+  }: TypewriterOptions = {}
+): TypewriterReturn => {
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [textIndex, setTextIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Supporta sia stringa singola che array di stringhe
   const texts = Array.isArray(text) ? text : [text];
@@ -97,12 +103,8 @@ export const useTypewriter = (
     };
   }, [typeText, speed]);
 
-  // Reset quando cambia il testo SOLO se il contenuto cambia davvero
+  // Reset quando cambia il testo
   useEffect(() => {
-    // Semplificazione: reset solo se text cambia
-    // Nota: per array passed inline questo può triggerare sempre,
-    // il componente dovrebbe memoizzare l'array
-
     setDisplayedText('');
     setTextIndex(0);
     setIsDeleting(false);

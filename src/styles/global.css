@@ -109,6 +109,47 @@ button {
   background: none;
 }
 
+/* === ACCESSIBILITY: Focus Management === */
+/* Rimuovi outline di default per click mouse */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Stile focus visibile per navigazione tastiera */
+:focus-visible {
+  outline: 3px solid var(--color-primary, #0d6efd);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Focus per link e bottoni */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-primary, #0d6efd);
+  outline-offset: 3px;
+}
+
+/* Focus per input e form elements */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary, #0d6efd);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+}
+
+/* Riduce motion per utenti con preferenze */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* === FORM ELEMENTS === */
 input,
 textarea,
@@ -121,20 +162,20 @@ select {
 
 /* === SCROLLBAR CUSTOM === */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: var(--second-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: var(--radius-full);
+  background: var(--main-color);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-light);
+  background: var(--hover-color);
 }
 
 /* === SELECTION === */

@@ -10,21 +10,29 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+export interface UseScrollReturn {
+  /** True se scrollato oltre threshold */
+  scrolled: boolean;
+  /** Posizione scroll corrente in px */
+  scrollY: number;
+  /** Direzione scroll corrente */
+  scrollDirection: 'up' | 'down';
+  /** True se in cima alla pagina */
+  isAtTop: boolean;
+  /** True se scrollando verso il basso */
+  isScrollingDown: boolean;
+  /** True se scrollando verso l'alto */
+  isScrollingUp: boolean;
+}
+
 /**
  * Custom hook per tracciare stato e direzione scroll
- * @param {number} [threshold=50] - Soglia in px per attivare stato "scrolled"
- * @returns {Object} Oggetto con stati scroll
- * @returns {boolean} return.scrolled - True se scrollato oltre threshold
- * @returns {number} return.scrollY - Posizione scroll corrente
- * @returns {'up'|'down'} return.scrollDirection - Direzione scroll
- * @returns {boolean} return.isAtTop - True se in cima alla pagina
- * @returns {boolean} return.isScrollingDown - True se scrollando verso il basso
- * @returns {boolean} return.isScrollingUp - True se scrollando verso l'alto
+ * @param threshold - Soglia in px per attivare stato "scrolled" (default: 50)
  */
-export const useScroll = (threshold = 50) => {
+export const useScroll = (threshold: number = 50): UseScrollReturn => {
   const [scrolled, setScrolled] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState('up');
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
 

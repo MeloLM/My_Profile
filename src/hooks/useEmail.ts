@@ -2,39 +2,54 @@
  * 🎣 useEmail Hook
  * Gestisce l'invio di email tramite EmailJS collegato a Gmail
  * 
- * 📧 SETUP GMAIL con EmailJS:
- * 1. Vai su https://www.emailjs.com/ e crea account
- * 2. Email Services → Add New Service → Gmail
- * 3. Autorizza con il tuo account Gmail (carmelo.la.mantia00@gmail.com)
- * 4. Copia il Service ID (es: service_xxxxxx)
- * 5. Email Templates → Create New Template
- * 6. Configura template con variabili: {{from_name}}, {{from_email}}, {{message}}, {{phone}}
- * 7. Copia Template ID (es: template_xxxxxx)
- * 8. Account → API Keys → Copia la Public Key
- * 9. Crea file .env nella root del progetto con:
- *    REACT_APP_EMAILJS_SERVICE=service_xxxxxx
- *    REACT_APP_EMAILJS_TEMPLATE=template_xxxxxx
- *    REACT_APP_EMAILJS_KEY=your_public_key
- * 
  * @module hooks/useEmail
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, RefObject } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, VALIDATION } from '../constants';
 import logger from '../utils/logger';
 
+export interface EmailFormData {
+  firstName: string;
+  lastName?: string;
+  email: string;
+  phone?: string;
+  message: string;
+}
+
+export interface EmailStatus {
+  loading: boolean;
+  success: boolean;
+  error: string | null;
+  message: string;
+}
+
+export interface SendEmailResult {
+  success: boolean;
+  error?: string;
+  data?: unknown;
+}
+
+export interface UseEmailReturn {
+  sendEmail: (formData: EmailFormData, formRef?: RefObject<HTMLFormElement>) => Promise<SendEmailResult>;
+  resetStatus: () => void;
+  status: EmailStatus;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  config: typeof EMAILJS_CONFIG;
+}
+
 /**
  * Valida un indirizzo email
- * @param {string} email - Email da validare
- * @returns {boolean} True se valida
  */
-const isValidEmail = (email) => {
+const isValidEmail = (email: string): boolean => {
   return VALIDATION.emailRegex.test(email);
 };
 
-export const useEmail = () => {
-  const [status, setStatus] = useState({
+export const useEmail = (): UseEmailReturn => {
+  const [status, setStatus] = useState<EmailStatus>({
     loading: false,
     success: false,
     error: null,
@@ -52,10 +67,11 @@ export const useEmail = () => {
 
   /**
    * Invia email usando EmailJS
-   * @param {Object} formData - Dati del form (firstName, lastName, email, phone, message)
-   * @param {Object} formRef - Ref del form HTML (opzionale, per usare sendForm)
    */
-  const sendEmail = useCallback(async (formData, formRef = null) => {
+  const sendEmail = useCallback(async (
+    formData: EmailFormData, 
+    formRef?: RefObject<HTMLFormElement>
+  ): Promise<SendEmailResult> => {
     // Validazione pre-invio
     if (!formData.firstName?.trim()) {
       setStatus({
@@ -126,16 +142,17 @@ export const useEmail = () => {
       
       return { success: true, data: result };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send';
       logger.error('EmailJS Error:', error);
       
       setStatus({
         loading: false,
         success: false,
-        error: error.message || 'Failed to send',
+        error: errorMessage,
         message: 'Something went wrong. Please try again.',
       });
       
-      return { success: false, error: error.message };
+      return { success: false, error: errorMessage };
     }
   }, []);
 
@@ -146,7 +163,7 @@ export const useEmail = () => {
     isLoading: status.loading,
     isSuccess: status.success,
     isError: !!status.error,
-    config: EMAILJS_CONFIG, // Espone config per debug
+    config: EMAILJS_CONFIG,
   };
 };
 

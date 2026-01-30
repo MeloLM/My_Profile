@@ -24,12 +24,14 @@ import Banner from './layout/Banner';
 import NavBar from './layout/Navbar';
 import Footer from './layout/Footer';
 
-// Loader Component per Suspense fallback
+// Common Components
 import Loader from './common/Loader';
 import ScrollProgressBar from './common/ScrollProgressBar';
 import BackToTop from './common/BackToTop';
 import EasterEgg from './common/EasterEgg';
 import CursorTrail from './common/CursorTrail';
+import ErrorBoundary from './common/ErrorBoundary';
+import SkipToContent from './common/SkipToContent';
 
 // Lazy loaded Section Components (caricati on-demand)
 const Skills = lazy(() => import('./sections/Skills'));
@@ -108,18 +110,35 @@ export default function HomePage() {
 
   return (
     <ThemeProvider>
+      <SkipToContent targetId="main-content" />
       <ScrollProgressBar />
       <BackToTop />
       <EasterEgg />
       <CursorTrail enabled={false} color="#e08821" />
       <NavBar />
       <Banner />
-      <Suspense fallback={<Loader message="Loading sections..." variant="bonfire" />}>
-        <Skills />
-        <Projects />
-        <Timeline />
-        <Contact />
-      </Suspense>
+      <main id="main-content" tabIndex={-1}>
+        <ErrorBoundary sectionName="Skills Section">
+          <Suspense fallback={<Loader message="Loading skills..." variant="bonfire" />}>
+            <Skills />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Projects Section">
+          <Suspense fallback={<Loader message="Loading projects..." variant="bonfire" />}>
+            <Projects />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Timeline Section">
+          <Suspense fallback={<Loader message="Loading timeline..." variant="bonfire" />}>
+            <Timeline />
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Contact Section">
+          <Suspense fallback={<Loader message="Loading contact..." variant="bonfire" />}>
+            <Contact />
+          </Suspense>
+        </ErrorBoundary>
+      </main>
       <Footer />
     </ThemeProvider>
   );

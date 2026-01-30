@@ -10,8 +10,8 @@
 // 🕐 TIMING CONSTANTS (in millisecondi)
 // ============================================
 
-/** Tempo di visualizzazione loading screen iniziale */
-export const LOADING_SCREEN_DURATION = 1500;
+/** Tempo di visualizzazione loading screen iniziale (ridotto per performance) */
+export const LOADING_SCREEN_DURATION = 800;
 
 /** Threshold scroll per attivare navbar sticky */
 export const SCROLL_THRESHOLD = 50;

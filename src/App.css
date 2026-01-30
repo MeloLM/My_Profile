@@ -48,8 +48,30 @@ button:active, a:active, .nav-link:active {
 }
 
 /* Hover glow effect for interactive elements */
-.social-icon:hover, .nav-link:hover, .souls-btn:hover {
-  animation: glowPulse 0.6s ease-in-out;
+.social-icon, 
+.nav-link, 
+.souls-btn,
+.badge,
+.btn,
+.skill-icon,
+.project-link,
+.linkedin-badge,
+.share-btn,
+[class*="icon"] {
+  transition: filter 0.3s ease-in-out;
+}
+
+.social-icon:hover, 
+.nav-link:hover, 
+.souls-btn:hover,
+.badge:hover,
+.btn:hover,
+.skill-icon:hover,
+.project-link:hover,
+.linkedin-badge:hover,
+.share-btn:hover,
+[class*="icon"]:hover {
+  filter: drop-shadow(0 0 12px rgba(224, 136, 33, 0.8));
 }
 
 @keyframes glowPulse {

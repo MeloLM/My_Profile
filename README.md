@@ -2,15 +2,17 @@
 
 # 🎮 Carmelo La Mantia | Portfolio
 
-[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 **Full Stack Developer** | Agrigento, Sicily 🇮🇹
 
-[🌐 Live Demo](https://melolm.github.io/My_Profile) · [💼 LinkedIn](https://www.linkedin.com/in/carmelo-la-mantia-web-developer/) · [📧 Contact](mailto:carmelo.la.mantia00@gmail.com)
+[🌐 Live Demo](https://carmelolamantia.it) · [💼 LinkedIn](https://www.linkedin.com/in/carmelo-la-mantia-web-developer/) · [📧 Contact](mailto:carmelo.la.mantia00@gmail.com)
 
-<img src="src/assets/img/Screen_HomePage_Portfolio.png" alt="Portfolio Preview" width="800"/>
+<img src="./src/assets/img/Screen_HomePage_Portfolio.png" alt="Portfolio Preview" width="800"/>
 
 </div>
 
@@ -20,16 +22,18 @@
 
 | Feature | Description |
 |---------|-------------|
+| ⚡ **Next.js 14 App Router** | Server-side rendering with optimized performance |
+| 🖼️ **Automatic Image Optimization** | WebP/AVIF with `next/image` |
 | 🎬 **Typewriter Effect** | Animated hero text with smooth transitions |
-| 🖱️ **Custom Cursor** | Gaming-themed cursor (orange sword) |
+| 🌓 **Dark/Light Theme** | Persistent theme with system preference sync |
 | 📊 **Skill Progress Bars** | Animated bars with percentage indicators |
-| 🎠 **Skills Carousel** | Auto-scrolling showcase of 14+ technologies |
+| 🎠 **Skills Carousel** | Auto-scrolling showcase with category filters |
 | 🔥 **Dark Souls Theme** | Loading screen with animated bonfire |
-| 🎯 **Easter Egg** | Click the bonfire for "BONFIRE LIT!" |
+| 🎮 **Easter Eggs** | Konami Code + Bonfire click interactions |
 | 📜 **Horizontal Timeline** | Interactive career journey with navigation |
 | 📱 **Fully Responsive** | Optimized for all screen sizes |
-| ♿ **Accessible** | ARIA labels and semantic HTML |
-| 🚀 **Performance** | Lazy loading and optimized assets |
+| ♿ **Accessible** | ARIA labels, semantic HTML, keyboard navigation |
+| 🔍 **SEO Optimized** | Metadata API, JSON-LD, sitemap, robots.txt |
 
 ---
 
@@ -37,12 +41,12 @@
 
 <div align="center">
 
-![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Bootstrap](https://img.shields.io/badge/-Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
-![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Next.js](https://img.shields.io/badge/-Next.js_14-000000?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/-React_18-61DAFB?style=flat-square&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/-Bootstrap_5-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
 ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![EmailJS](https://img.shields.io/badge/-EmailJS-FC5C7D?style=flat-square&logo=gmail&logoColor=white)
-![Mailchimp](https://img.shields.io/badge/-Mailchimp-FFE01B?style=flat-square&logo=mailchimp&logoColor=black)
 
 </div>
 
@@ -52,7 +56,7 @@
 
 ### Prerequisites
 
-- **Node.js** >= 16
+- **Node.js** >= 18
 - **npm** or **yarn**
 
 ### Installation
@@ -68,7 +72,7 @@ cd My_Profile
 npm install
 
 # Start development server
-npm start
+npm run dev
 ```
 
 The app will open at `http://localhost:3000`
@@ -76,25 +80,29 @@ The app will open at `http://localhost:3000`
 ### Build for Production
 
 ```bash
+# Create optimized production build
 npm run build
+
+# Start production server
+npm start
 ```
 
 ---
 
 ## ⚙️ Configuration
 
-Create a `.env` file in the root directory:
+Create a `.env.local` file in the root directory:
 
 ```env
 # EmailJS Configuration
-REACT_APP_EMAILJS_SERVICE=your_service_id
-REACT_APP_EMAILJS_TEMPLATE=your_template_id
-REACT_APP_EMAILJS_KEY=your_public_key
+NEXT_PUBLIC_EMAILJS_SERVICE=your_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE=your_template_id
+NEXT_PUBLIC_EMAILJS_KEY=your_public_key
 
-# Mailchimp Configuration
-REACT_APP_MAILCHIMP_URL=your_mailchimp_url
-REACT_APP_MAILCHIMP_U=your_u_value
-REACT_APP_MAILCHIMP_ID=your_list_id
+# Mailchimp Configuration (optional)
+NEXT_PUBLIC_MAILCHIMP_URL=your_mailchimp_url
+NEXT_PUBLIC_MAILCHIMP_U=your_u_value
+NEXT_PUBLIC_MAILCHIMP_ID=your_list_id
 ```
 
 ---
@@ -103,15 +111,21 @@ REACT_APP_MAILCHIMP_ID=your_list_id
 
 ```
 src/
+├── app/                 # Next.js App Router
+│   ├── layout.tsx       # Root layout with Metadata API
+│   ├── page.tsx         # Home page entry point
+│   ├── robots.ts        # Dynamic robots.txt
+│   └── sitemap.ts       # Dynamic sitemap.xml
 ├── components/
-│   ├── layout/          # Navbar, Banner, Footer, Newsletter
+│   ├── layout/          # Navbar, Banner, Footer
 │   ├── sections/        # Skills, Projects, Timeline, Contact
-│   ├── cards/           # ProjectCard
-│   └── common/          # SocialIcons
+│   ├── cards/           # ProjectCard, SkillItem, TimelineItem
+│   └── common/          # BackToTop, Loader, EasterEgg, etc.
+├── context/             # ThemeContext (Dark/Light mode)
+├── hooks/               # useScroll, useTypewriter, useEmail, useKonamiCode
 ├── data/
-│   └── profileData.js   # Centralized CV data
-├── hooks/               # Custom React hooks
-├── utils/               # Helper functions
+│   └── profileData.js   # Centralized CV data (Single Source of Truth)
+├── utils/               # Validators, formatters, logger
 ├── styles/              # CSS variables & global styles
 └── assets/img/          # Images and icons
 ```
@@ -120,13 +134,30 @@ src/
 
 ## 🎨 Color Palette
 
-| Color | Value | Usage |
-|-------|-------|-------|
-| 🟠 Primary | `rgb(224, 136, 33)` | Accent, CTAs, Hover states |
-| ⚫ Background | `#121212` | Main background |
-| ⬛ Secondary | `rgb(14, 14, 14)` | Cards, sections |
-| ⬜ Text | `#FFFFFF` | Primary text |
-| 🔘 Muted | `#B8B8B8` | Secondary text |
+| Theme | Color | Value | Usage |
+|-------|-------|-------|-------|
+| 🌙 Dark | Primary | `#e08821` | Accent, CTAs, Hover states |
+| 🌙 Dark | Background | `#121212` | Main background |
+| 🌙 Dark | Surface | `#1e1e1e` | Cards, sections |
+| ☀️ Light | Primary | `#d4781a` | Accent (darker for contrast) |
+| ☀️ Light | Background | `#faf8f5` | Warm paper-like background |
+| ☀️ Light | Surface | `#ffffff` | Cards, sections |
+
+---
+
+## 🎮 Easter Eggs
+
+- **Konami Code**: `↑ ↑ ↓ ↓ ← → ← → B A` - Triggers Dark Souls themed modal
+- **Bonfire Click**: Click the bonfire in Contact section for "BONFIRE LIT!" animation
+
+---
+
+## 📈 Performance
+
+- ⚡ **Lighthouse Score**: 90+ on all metrics
+- 🖼️ **Image Optimization**: Automatic WebP/AVIF with `next/image`
+- 📦 **Code Splitting**: Lazy loading with React.lazy + Suspense
+- 🗜️ **Bundle Size**: ~132KB First Load JS
 
 ---
 

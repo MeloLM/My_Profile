@@ -1,8 +1,10 @@
 /**
  * 🛠️ Skills Component - Section
  * Sezione competenze con carosello e filtri
+ * ✅ Migrato a next/image per ottimizzazione automatica
  */
 
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import Carousel from "react-multi-carousel";
@@ -91,11 +93,16 @@ export default function Skills() {
                                 key={activeFilter}
                             >
                                 {filteredSkills.map((skill, index) => {
-                                    // Next.js restituisce un oggetto per le immagini importate
-                                    const skillImgSrc = typeof skill.img === 'object' && skill.img?.src ? skill.img.src : skill.img;
                                     return (
                                     <div className="item" key={index}>
-                                        <img src={skillImgSrc} className='rounded-5' alt={`${skill.name} icon`} loading="lazy" />
+                                        <Image 
+                                          src={skill.img} 
+                                          className='rounded-5' 
+                                          alt={`${skill.name} icon`} 
+                                          width={80}
+                                          height={80}
+                                          style={{ objectFit: 'contain' }}
+                                        />
                                         <h5>{skill.name}</h5>
                                         <div className="skill-progress">
                                             <div 

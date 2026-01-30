@@ -2,16 +2,15 @@
  * 🏠 Banner Component - Layout
  * Hero section con effetto typewriter
  * REFACTORED: Usa useTypewriter hook e profileData come da PSEUDOCODE.md
+ * ✅ Migrato a next/image per ottimizzazione automatica
  */
 
+import Image from 'next/image';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import { useTypewriter } from '../../hooks';
 import { personalInfo, summary } from '../../data/profileData';
 import headerImg from '../../assets/img/solaire.svg';
-
-// Next.js restituisce un oggetto per le immagini importate
-const headerImgSrc = typeof headerImg === 'object' && headerImg?.src ? headerImg.src : headerImg;
 
 export default function Banner() {
   // REFACTORED: Uso dell'hook useTypewriter invece della logica inline
@@ -43,7 +42,14 @@ export default function Banner() {
             </div>
           </Col>
           <Col xs={12} md={6} xl={5}>
-            <img src={headerImgSrc} alt='Solaire of Astora - Dark Souls themed illustration' />
+            <Image 
+              src={headerImg} 
+              alt='Solaire of Astora - Dark Souls themed illustration'
+              priority
+              width={500}
+              height={500}
+              style={{ width: '100%', height: 'auto' }}
+            />
           </Col>
         </Row>
       </Container>

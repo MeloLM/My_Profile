@@ -2,9 +2,11 @@
  * 🎴 SkillItem Component - Card
  * Card singola skill con progress bar
  * Come da PSEUDOCODE.md: SkillItem({ name, level, icon })
+ * ✅ Migrato a next/image per ottimizzazione automatica
  */
 
 import React from 'react';
+import Image from 'next/image';
 import './SkillItem.css';
 
 /**
@@ -36,8 +38,6 @@ const SkillItem = ({
     size = 'medium' 
 }) => {
     const iconSrc = icon || img;
-    // Next.js restituisce un oggetto per le immagini importate
-    const imageSrc = typeof iconSrc === 'object' && iconSrc?.src ? iconSrc.src : iconSrc;
     
     const sizeClasses = {
         small: 'skill-item-small',
@@ -47,9 +47,15 @@ const SkillItem = ({
 
     return (
         <div className={`skill-item ${sizeClasses[size]}`}>
-            {imageSrc && (
+            {iconSrc && (
                 <div className="skill-icon">
-                    <img src={imageSrc} alt={`${name} icon`} loading="lazy" />
+                    <Image 
+                      src={iconSrc} 
+                      alt={`${name} icon`} 
+                      width={48}
+                      height={48}
+                      style={{ objectFit: 'contain' }}
+                    />
                 </div>
             )}
             <div className="skill-info">

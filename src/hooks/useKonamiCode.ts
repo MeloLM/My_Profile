@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-const KONAMI_CODE = [
+const KONAMI_CODE: string[] = [
   'ArrowUp', 'ArrowUp',
   'ArrowDown', 'ArrowDown',
   'ArrowLeft', 'ArrowRight',
@@ -16,16 +16,31 @@ const KONAMI_CODE = [
   'KeyB', 'KeyA'
 ];
 
+export interface UseKonamiCodeOptions {
+  /** Tempo in ms prima del reset della sequenza */
+  resetDelay?: number;
+}
+
+export interface UseKonamiCodeReturn {
+  /** True se il codice è stato inserito correttamente */
+  isActivated: boolean;
+  /** Funzione per resettare lo stato */
+  resetEasterEgg: () => void;
+  /** Progresso corrente nella sequenza (0-10) */
+  progress: number;
+}
+
 /**
  * Hook per rilevare la sequenza Konami Code
- * @param {Function} callback - Funzione da eseguire quando il codice viene inserito
- * @param {Object} options - Opzioni del hook
- * @param {number} options.resetDelay - Tempo in ms prima del reset della sequenza (default: 3000)
- * @returns {Object} - { isActivated, resetEasterEgg }
+ * @param callback - Funzione da eseguire quando il codice viene inserito
+ * @param options - Opzioni del hook
  */
-export function useKonamiCode(callback, options = {}) {
+export function useKonamiCode(
+  callback?: () => void,
+  options: UseKonamiCodeOptions = {}
+): UseKonamiCodeReturn {
   const { resetDelay = 3000 } = options;
-  const [keySequence, setKeySequence] = useState([]);
+  const [keySequence, setKeySequence] = useState<string[]>([]);
   const [isActivated, setIsActivated] = useState(false);
 
   const resetEasterEgg = useCallback(() => {
@@ -34,9 +49,9 @@ export function useKonamiCode(callback, options = {}) {
   }, []);
 
   useEffect(() => {
-    let timeoutId;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.code;
 
       setKeySequence((prev) => {

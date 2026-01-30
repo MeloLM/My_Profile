@@ -9,3 +9,6 @@ export { SocialIcons } from './SocialIcons';
 export { default as ScrollProgressBar } from './ScrollProgressBar';
 export { default as BackToTop } from './BackToTop';
 export { default as ToastNotification } from './ToastNotification';
+export { default as ErrorBoundary, withErrorBoundary } from './ErrorBoundary';
+export { default as SkipToContent } from './SkipToContent';
+

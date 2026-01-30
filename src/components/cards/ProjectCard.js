@@ -2,10 +2,12 @@
  * 🎴 ProjectCard Component - Card
  * Card singolo progetto con TechStack badges
  * REFACTORED: Aggiunto supporto per tech array come da PSEUDOCODE.md
+ * ✅ Migrato a next/image per ottimizzazione automatica
  * 
  * @module components/cards/ProjectCard
  */
 
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
 import './ProjectCard.css';
@@ -45,14 +47,17 @@ TechStack.propTypes = {
  * @returns {JSX.Element} Card progetto
  */
 export const ProjectCard = ({ title, description, imgUrl, imgAncor, tech }) => {
-    // Next.js restituisce un oggetto per le immagini importate
-    const imageSrc = typeof imgUrl === 'object' && imgUrl?.src ? imgUrl.src : imgUrl;
-    
     return (
         <Col sm={6} md={4}>
             <a href={imgAncor} target='_blank' rel="noopener noreferrer" className='text-white project-link' aria-label={`View project: ${title}`}>
                 <div className="proj-imgbx">
-                    <img src={imageSrc} alt={title} loading="lazy"/>
+                    <Image 
+                      src={imgUrl} 
+                      alt={title} 
+                      width={400}
+                      height={300}
+                      style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                    />
                     <div className="proj-txtx">
                         <h4>{title}</h4>
                         <span>{description}</span>

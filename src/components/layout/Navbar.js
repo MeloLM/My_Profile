@@ -2,8 +2,10 @@
  * 🧭 Navbar Component - Layout
  * Barra di navigazione con effetto scroll
  * REFACTORED: Usa useScroll hook come da PSEUDOCODE.md
+ * ✅ Migrato a next/link per prefetching client-side
  */
 
+import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
 import { Navbar , Container , Nav } from 'react-bootstrap';
 import { SocialIcons } from '../common/SocialIcons';
@@ -60,16 +62,16 @@ export default function NavBar() {
             onToggle={(isExpanded) => setExpanded(isExpanded)}
         >
             <Container fluid className=''>
-                <Navbar.Brand href="/" className='text-white'>{personalInfo.name}</Navbar.Brand>
+                <Link href="/" className='navbar-brand text-white'>{personalInfo.name}</Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" aria-label="Toggle navigation menu">
                     <span className="navbar-toggler-icon"></span>
                 </Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-                <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
-                <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
-                <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
-                <Nav.Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('connect')}>Contact</Nav.Link>
+                <Link href="#home" className={activeLink === 'home' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('home')}>Home</Link>
+                <Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Link>
+                <Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Link>
+                <Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('connect')}>Contact</Link>
             </Nav>
             <span className="navbar-text">
                 <SocialIcons githubColor={scrolled ? 'white' : 'black'} />

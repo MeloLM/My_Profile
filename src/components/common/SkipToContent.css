@@ -1,0 +1,46 @@
+/**
+ * ⏭️ Skip to Content - Styles
+ * 
+ * Link nascosto visivamente ma accessibile via tastiera
+ * Appare quando riceve focus (Tab)
+ */
+
+.skip-to-content {
+  /* Posizionamento iniziale: fuori schermo */
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  
+  /* Styling */
+  padding: 1rem 2rem;
+  background-color: var(--primary-color, #0d6efd);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  /* Transizione smooth */
+  transition: top 0.3s ease-in-out;
+}
+
+/* Quando riceve focus: appare in cima alla pagina */
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid var(--accent-color, #ffc107);
+  outline-offset: 2px;
+}
+
+/* Hover state */
+.skip-to-content:hover {
+  background-color: var(--primary-color-dark, #0b5ed7);
+}
+
+/* Dark mode support */
+[data-theme="dark"] .skip-to-content {
+  background-color: var(--primary-color-dark, #0d6efd);
+  color: white;
+}
