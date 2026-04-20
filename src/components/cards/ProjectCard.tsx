@@ -8,6 +8,7 @@
  */
 
 import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 import { Col } from 'react-bootstrap';
 import './ProjectCard.css';
 
@@ -32,6 +33,8 @@ interface ProjectCardProps {
   imgAncor?: string;
   /** Array tecnologie usate (opzionale) */
   tech?: string[];
+  /** Slug per la pagina case study (opzionale) */
+  slug?: string;
 }
 
 // ============================================
@@ -69,7 +72,8 @@ export const ProjectCard = ({
   description, 
   imgUrl, 
   imgAncor = '#', 
-  tech = [] 
+  tech = [],
+  slug,
 }: ProjectCardProps): JSX.Element => {
   return (
     <Col sm={6} md={4}>
@@ -92,6 +96,15 @@ export const ProjectCard = ({
             <h4>{title}</h4>
             <span>{description}</span>
             <TechStack techs={tech} />
+            {slug && (
+              <Link
+                href={`/projects/${slug}`}
+                className="case-study-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Case Study →
+              </Link>
+            )}
           </div>
         </div>
       </a>

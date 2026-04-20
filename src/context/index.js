@@ -4,3 +4,4 @@
  */
 
 export { ThemeProvider, useTheme, THEMES } from './ThemeContext';
+export { LangProvider, useLang } from './LangContext';

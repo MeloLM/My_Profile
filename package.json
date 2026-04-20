@@ -11,13 +11,18 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@emailjs/browser": "^3.12.1",
+    "@next/bundle-analyzer": "^16.2.4",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
+    "gray-matter": "^4.0.3",
+    "lottie-react": "^2.4.1",
     "next": "^14.2.0",
+    "next-mdx-remote": "^6.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",

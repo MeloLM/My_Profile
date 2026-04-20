@@ -404,6 +404,31 @@ span.navbar-text {
   display: none;
 }
 
+.navbar-text button.lang-toggle-btn {
+  padding: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  border: 2px solid rgba(224, 136, 33, 0.5);
+  background-color: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-text button.lang-toggle-btn:hover {
+  border-color: var(--main-color);
+  transform: scale(1.1);
+}
+
+.navbar-text button.lang-toggle-btn::before {
+  display: none;
+}
+
 .navbar-text button span {
   z-index: 1;
 }
@@ -1001,6 +1026,21 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+}
+
+/* Current/active card - last item */
+.timeline-card:last-child .timeline-content {
+  border-color: var(--main-color);
+  animation: roadmapPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes roadmapPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(224, 136, 33, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(224, 136, 33, 0.5), 0 0 50px rgba(224, 136, 33, 0.2);
+  }
 }
 
 .timeline-content {

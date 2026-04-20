@@ -58,10 +58,9 @@
   - Inter + Poppins self-hosted (zero richieste esterne a runtime)
   - `display: swap` + subset `latin`
   - CSS variables `--font-inter` / `--font-poppins` in `layout.tsx`
-- [ ] 🟡 **Bundle Analysis & Optimization**
-  - Installare `@next/bundle-analyzer`
-  - Identificare e lazy-load dependencies pesanti (`react-multi-carousel`)
-  - Target: First Load JS < 100KB
+- [x] ✅ **Bundle Analysis & Optimization** - `@next/bundle-analyzer` configurato
+  - Script `npm run analyze` per analisi bundle
+  - Wrapped `next.config.js` con `withBundleAnalyzer`
 - [x] ✅ **Skeleton Loaders** - Placeholder integrati nel Suspense fallback
   - `SkeletonSection` per Skills e Projects (evita CLS)
   - Shimmer animation con prefers-reduced-motion
@@ -80,22 +79,29 @@
 ## 🚀 Features Portfolio - Priorità Media
 
 ### 🟡 Showcase Enhancements
-- [ ] 🟡 **Project Case Studies** - Route dinamiche `/projects/[slug]`
+- [x] ✅ **Project Case Studies** - Route dinamiche `/projects/[slug]`
   - Metadata dinamica con `generateMetadata()`
   - Sezioni: Problema → Soluzione → Tech Stack → Risultati
-- [ ] 🟡 **Tech Blog / DevLog** - Sezione articoli in MDX
-  - Dimostra capacità di comunicazione tecnica
-  - next-mdx-remote per rendering
+  - `ProjectCaseStudy.tsx` + CSS dedicato
+- [x] ✅ **Tech Blog / DevLog** - Sezione articoli in MDX
+  - `/blog` con lista articoli, `/blog/[slug]` per singolo post
+  - `next-mdx-remote/rsc` + `gray-matter` per parsing
+  - Reading time calcolato automaticamente
 - [x] ✅ **Loading/Error States** - `loading.tsx` e `error.tsx` nelle route
   - `loading.tsx` con bonfire animation (Dark Souls theme)
   - `error.tsx` con "YOU DIED" e bottone RESPAWN AT BONFIRE
 
 ### 🟢 Nice to Have
-- [ ] 🟢 **Custom Cursor Context-Aware** - Cursor che cambia su hover elementi
-- [ ] 🟢 **Parallax 3D Avanzato** - Effetto profondità al movimento mouse
-- [ ] 🟢 **Internationalization (i18n)** - IT/EN con next-intl
-- [ ] 🟢 **Lottie Micro-animations** - Per stati vuoti e loading
-- [ ] 🟢 **Interactive Roadmap** - Timeline percorso professionale
+- [x] ✅ **Custom Cursor Context-Aware** - Cursor con label (APRI, CLICK, LEGGI) su hover
+  - `CursorTrail.js` aggiornato con `getCursorContext()`
+- [x] ✅ **Parallax 3D Avanzato** - Tilt effect sull'immagine hero Banner
+  - `handleMouseMove` con `perspective()`, `rotateY()`, `rotateX()`
+- [x] ✅ **Internationalization (i18n)** - Toggle IT/EN in Navbar
+  - `LangContext.tsx` con traduzioni, `useLang()` hook
+- [x] ✅ **Lottie Micro-animations** - `LottieEmpty.tsx` per stato "nessun risultato"
+  - Animazione inline semplice, `lottie-react` installato
+- [x] ✅ **Interactive Roadmap** - Timeline con ultimo item pulsante
+  - `roadmapPulse` keyframes sull'ultimo `.timeline-card`
 - [ ] 🟢 **Analytics Dashboard** - Statistiche visite private
 - [ ] 🟢 **Guestbook** - Messaggi visitatori (richiede backend)
 

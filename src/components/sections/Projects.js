@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import { ProjectCard } from '../cards/ProjectCard';
 import { projects } from '../../data/profileData';
+import LottieEmpty from '../common/LottieEmpty';
 
 /** Debounce delay per il filtro di ricerca (ms) */
 const DEBOUNCE_DELAY = 300;
@@ -75,8 +76,8 @@ export default function Projects() {
                     )
                   })
                 ) : (
-                  <Col className="text-center">
-                    <p className="no-results">Nessun progetto trovato per &quot;{searchTerm}&quot;</p>
+                  <Col xs={12} className="text-center">
+                    <LottieEmpty message={`Nessun progetto trovato per "${searchTerm}"`} />
                   </Col>
                 )}
               </Row>

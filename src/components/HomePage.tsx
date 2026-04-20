@@ -17,7 +17,7 @@ import {
 } from '../constants';
 
 // Context
-import { ThemeProvider } from '../context';
+import { ThemeProvider, LangProvider } from '../context';
 
 // Layout Components (caricati subito)
 import Banner from './layout/Banner';
@@ -30,7 +30,7 @@ import { SkeletonSection } from './common/Loader';
 import ScrollProgressBar from './common/ScrollProgressBar';
 import BackToTop from './common/BackToTop';
 import EasterEgg from './common/EasterEgg';
-import CursorTrail from './common/CursorTrail';
+// import CursorTrail from './common/CursorTrail'; // Rimosso - troppo pacchiano
 import ErrorBoundary from './common/ErrorBoundary';
 import SkipToContent from './common/SkipToContent';
 
@@ -110,12 +110,12 @@ export default function HomePage() {
   }
 
   return (
-    <ThemeProvider>
+    <LangProvider>
+      <ThemeProvider>
       <SkipToContent targetId="main-content" />
       <ScrollProgressBar />
       <BackToTop />
       <EasterEgg />
-      <CursorTrail enabled={false} color="#e08821" />
       <NavBar />
       <Banner />
       <main id="main-content" tabIndex={-1}>
@@ -142,5 +142,6 @@ export default function HomePage() {
       </main>
       <Footer />
     </ThemeProvider>
+    </LangProvider>
   );
 }
