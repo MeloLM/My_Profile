@@ -4,12 +4,29 @@
  */
 
 import type { Metadata, Viewport } from 'next';
+import { Inter, Poppins } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-multi-carousel/lib/styles.css';
 import '../App.css';
 import '../styles/global.css';
 import '../styles/components/index.css';
+
+// ============================================
+// 🔤 FONT OPTIMIZATION (self-hosted via next/font)
+// ============================================
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
 
 // 🔥 Metadata API - Questo viene renderizzato SERVER-SIDE (SEO perfetto!)
 export const metadata: Metadata = {
@@ -99,7 +116,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="it">
+    <html lang="it" className={`${inter.variable} ${poppins.variable}`}>
       <head>
         {/* Structured Data per Google */}
         <script
@@ -117,6 +134,78 @@ export default function RootLayout({
                 'https://www.linkedin.com/in/carmelo-la-mantia/',
               ],
               knowsAbout: ['React.js', 'JavaScript', 'PHP', 'Laravel', 'Web Development'],
+            }),
+          }}
+        />
+        {/* FAQ Schema - Skills & Projects */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                {
+                  '@type': 'Question',
+                  name: 'Quali sono le competenze principali di Carmelo La Mantia?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Carmelo è specializzato in React.js, JavaScript, PHP, Laravel, MySQL, Bootstrap e strumenti come Git/GitHub. Ha competenze sia frontend che backend.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Quali progetti ha realizzato Carmelo La Mantia?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Tra i progetti: Knight Shooter (game con Phaser 3), Portfolio SoulsLike (React.js), Souls Space Platform (Laravel), e applicazioni web responsive.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Come contattare Carmelo La Mantia?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Puoi contattare Carmelo tramite il form sul sito, via email a carmelo.la.mantia00@gmail.com o tramite LinkedIn.',
+                  },
+                },
+              ],
+            }),
+          }}
+        />
+        {/* Breadcrumb Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://carmelolamantia.it',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Skills',
+                  item: 'https://carmelolamantia.it/#skills',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: 'Projects',
+                  item: 'https://carmelolamantia.it/#projects',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 4,
+                  name: 'Contact',
+                  item: 'https://carmelolamantia.it/#connect',
+                },
+              ],
             }),
           }}
         />

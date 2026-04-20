@@ -1,6 +1,6 @@
 # 📋 TODO - Development Roadmap
 
-> **Last Updated**: January 30, 2026  
+> **Last Updated**: April 20, 2026 (Sprint 10 task)  
 > **Status**: 🟢 Active Development | Next.js 14+ Portfolio Showcase  
 > **Goal**: Impressionare recruiter e reviewer Senior attraverso code quality, testing e best practices moderne
 
@@ -30,38 +30,50 @@
 - [x] ✅ **Skip to Content Link** - `SkipToContent.tsx` per screen readers
 - [x] ✅ **Focus Management** - `:focus-visible` styling globale in `global.css`
 - [x] ✅ **Reduced Motion** - `prefers-reduced-motion` rispettato
-- [ ] 🔴 **Form Labels** - `<label htmlFor>` espliciti su tutti gli input Contact
-- [ ] 🔴 **Keyboard Navigation** - Navigazione completa senza mouse
+- [x] ✅ **Form Labels** - `<label htmlFor>` espliciti su tutti gli input Contact
+  - Migrato in `Contact.tsx` con label `visually-hidden` su tutti gli input
+- [x] ✅ **Keyboard Navigation** - Navigazione completa senza mouse
+  - Focus trap nella navbar mobile (Tab cycle tra elementi)
+  - Escape chiude il menu e restituisce focus al toggler
+  - `ref={navRef}` per focus management
 
 ---
 
 ## 🎯 Prossimo Sprint - Completamento TypeScript
 
-### 🔴 TypeScript Migration - Componenti
-- [ ] 🔴 **Components Core** - Convertire componenti prioritari in `.tsx`
-  - `Contact.tsx` - Form con validazione tipizzata
-  - `ProjectCard.tsx` - Props tipizzate per dati progetto
-  - `SkillItem.tsx` - Props tipizzate
-- [ ] 🔴 **Context TypeScript** - `ThemeContext.tsx` con tipi
-- [ ] 🔴 **Constants TypeScript** - `constants/index.ts` con `as const`
+### ✅ TypeScript Migration - Componenti
+- [x] ✅ **Components Core** - Convertiti componenti prioritari in `.tsx`
+  - `Contact.tsx` - Form con validazione tipizzata + label accessibili
+  - `ProjectCard.tsx` - Props tipizzate con `StaticImageData`
+  - `SkillItem.tsx` - Props tipizzate con size types
+- [x] ✅ **Context TypeScript** - `ThemeContext.tsx` con tipi e `'use client'`
+- [x] ✅ **Constants TypeScript** - `constants/index.ts` con `as const` e type exports
 
 ---
 
 ## 📈 Performance - Strategia Consolidata
 
 ### Core Web Vitals Optimization
-- [ ] 🟡 **Font Stack Optimization** - Usare `next/font` per:
-  - Self-hosting fonts (elimina richieste a Google Fonts)
-  - `display: swap` per FOUT prevention
-  - Subset solo caratteri necessari (latin)
+- [x] ✅ **Font Stack Optimization** - `next/font/google` implementato
+  - Inter + Poppins self-hosted (zero richieste esterne a runtime)
+  - `display: swap` + subset `latin`
+  - CSS variables `--font-inter` / `--font-poppins` in `layout.tsx`
 - [ ] 🟡 **Bundle Analysis & Optimization**
   - Installare `@next/bundle-analyzer`
   - Identificare e lazy-load dependencies pesanti (`react-multi-carousel`)
   - Target: First Load JS < 100KB
-- [ ] 🟡 **Skeleton Loaders** - Placeholder con dimensioni fisse per:
-  - Skills carousel (evita CLS)
-  - Projects grid (evita layout jump)
-- [ ] 🟡 **Debounce Search** - Ottimizzare filtro progetti con 300ms debounce
+- [x] ✅ **Skeleton Loaders** - Placeholder integrati nel Suspense fallback
+  - `SkeletonSection` per Skills e Projects (evita CLS)
+  - Shimmer animation con prefers-reduced-motion
+- [x] ✅ **Debounce Search** - Filtro progetti con 300ms debounce
+  - `debouncedTerm` state + useEffect timer
+  - Input reattivo ma filtro ritardato per performance
+
+### ✅ UX Improvements
+- [x] ✅ **Carousel Dot Pagination** - Dot dinamici con finestra scorrevole
+  - `CustomDot` component con window di 3 dot centrati sull'attivo
+  - Animazione fade-in sui dot, glow sull'attivo
+  - Responsive e integrato con `react-multi-carousel`
 
 ---
 
@@ -74,7 +86,9 @@
 - [ ] 🟡 **Tech Blog / DevLog** - Sezione articoli in MDX
   - Dimostra capacità di comunicazione tecnica
   - next-mdx-remote per rendering
-- [ ] 🟡 **Loading/Error States** - `loading.tsx` e `error.tsx` nelle route
+- [x] ✅ **Loading/Error States** - `loading.tsx` e `error.tsx` nelle route
+  - `loading.tsx` con bonfire animation (Dark Souls theme)
+  - `error.tsx` con "YOU DIED" e bottone RESPAWN AT BONFIRE
 
 ### 🟢 Nice to Have
 - [ ] 🟢 **Custom Cursor Context-Aware** - Cursor che cambia su hover elementi
@@ -95,9 +109,9 @@
 - [x] ✅ **Sitemap dinamica** - `sitemap.ts`
 - [x] ✅ **robots.ts** - Configurazione crawler
 
-### 🟡 Da implementare
-- [ ] 🟡 **FAQ Schema** - Structured data per Skills/Projects
-- [ ] 🟡 **Breadcrumbs Schema** - Per pagine interne future
+### ✅ Completati
+- [x] ✅ **FAQ Schema** - Structured data JSON-LD per Skills/Projects/Contact
+- [x] ✅ **Breadcrumbs Schema** - BreadcrumbList per Home > Skills > Projects > Contact
 
 ---
 
@@ -111,8 +125,8 @@
 ### 🟢 Backlog
 - [ ] 🟢 **Component Storybook** - Documentazione UI isolata
 - [ ] 🟢 **Reduced Motion** - Rispettare `prefers-reduced-motion`
-- [ ] 🟢 **Fix Centratura Loading Screen** - Alignment ultrawide/mobile
-- [ ] 🟢 **Carousel Touch Gestures** - Migliorare swipe mobile
+- [x] ✅ **Fix Centratura Loading Screen** - Rimosso `margin-left: 500px`, ora usa `margin: auto`
+- [x] ✅ **Carousel Touch Gestures** - `swipeable`, `draggable`, `minimumTouchDrag` + touch-action CSS
 
 ---
 

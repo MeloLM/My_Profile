@@ -6,7 +6,7 @@
  */
 
 import Link from 'next/link';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { Navbar , Container , Nav } from 'react-bootstrap';
 import { SocialIcons } from '../common/SocialIcons';
 import { useTheme } from '../../context';
@@ -20,6 +20,7 @@ export default function NavBar() {
     // REFACTORED: Uso dell'hook useScroll invece di useState/useEffect manuale
     const { scrolled } = useScroll(50);
     const { isDark, toggleTheme } = useTheme();
+    const navRef = useRef(null);
 
     const onUpdateActiveLink = useCallback((value) => {
         setActiveLink(value);
@@ -44,6 +45,41 @@ export default function NavBar() {
         };
     }, [expanded]);
 
+    // Keyboard: Escape to close + focus trap when mobile menu open
+    useEffect(() => {
+        if (!expanded) return;
+
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setExpanded(false);
+                const toggler = navRef.current?.querySelector('.navbar-toggler');
+                toggler?.focus();
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                const focusable = navRef.current?.querySelectorAll(
+                    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                );
+                if (!focusable || focusable.length === 0) return;
+
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [expanded]);
+
     return (
         <>
         {/* Overlay scuro quando menu mobile è aperto */}
@@ -60,6 +96,7 @@ export default function NavBar() {
             aria-label="Main navigation"
             expanded={expanded}
             onToggle={(isExpanded) => setExpanded(isExpanded)}
+            ref={navRef}
         >
             <Container fluid className=''>
                 <Link href="/" className='navbar-brand text-white'>{personalInfo.name}</Link>

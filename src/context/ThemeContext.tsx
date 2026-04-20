@@ -2,29 +2,88 @@
  * 🎨 ThemeContext
  * Gestione globale del tema (Dark/Light mode)
  * Persiste la preferenza in localStorage
- * 
  * ✅ SSR-Safe: Evita accesso a localStorage durante SSR
+ * ✅ TypeScript con interfacce tipizzate
+ * 
+ * @module context/ThemeContext
  */
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+'use client';
 
-// Creo il context
-const ThemeContext = createContext(null);
+import { 
+  createContext, 
+  useContext, 
+  useState, 
+  useEffect, 
+  useCallback,
+  ReactNode 
+} from 'react';
 
-// Temi disponibili
-export const THEMES = {
+// ============================================
+// 📝 TYPE DEFINITIONS
+// ============================================
+
+/** Tipi di tema disponibili */
+type Theme = 'dark' | 'light';
+
+/** Oggetto con i valori dei temi */
+interface ThemeValues {
+  DARK: 'dark';
+  LIGHT: 'light';
+}
+
+/** Valore del context del tema */
+interface ThemeContextValue {
+  /** Tema corrente */
+  theme: Theme;
+  /** True se il tema è dark */
+  isDark: boolean;
+  /** True se il tema è light */
+  isLight: boolean;
+  /** Toggle tra dark e light */
+  toggleTheme: () => void;
+  /** Imposta un tema specifico */
+  setTheme: (theme: Theme) => void;
+  /** Oggetto con i valori dei temi */
+  THEMES: ThemeValues;
+  /** True se l'idratazione è completata */
+  isHydrated: boolean;
+}
+
+/** Props per ThemeProvider */
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+// ============================================
+// 📦 CONSTANTS
+// ============================================
+
+/** Temi disponibili */
+export const THEMES: ThemeValues = {
   DARK: 'dark',
   LIGHT: 'light',
-};
+} as const;
 
-// Storage key
+/** Storage key */
 const THEME_STORAGE_KEY = 'portfolio-theme';
+
+// ============================================
+// 🎨 CONTEXT
+// ============================================
+
+/** Context del tema - null come default per error handling */
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+// ============================================
+// 🔧 HELPERS
+// ============================================
 
 /**
  * Recupera il tema iniziale in modo SSR-safe
- * @returns {string} Tema iniziale (sempre DARK durante SSR per evitare flash)
+ * @returns Tema iniziale (sempre DARK durante SSR per evitare flash)
  */
-const getInitialTheme = () => {
+const getInitialTheme = (): Theme => {
   // Durante SSR, ritorna sempre DARK (verrà sincronizzato lato client)
   if (typeof window === 'undefined') {
     return THEMES.DARK;
@@ -33,7 +92,7 @@ const getInitialTheme = () => {
   // Lato client: check localStorage
   try {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-    if (savedTheme && Object.values(THEMES).includes(savedTheme)) {
+    if (savedTheme === THEMES.DARK || savedTheme === THEMES.LIGHT) {
       return savedTheme;
     }
   } catch (e) {
@@ -51,33 +110,37 @@ const getInitialTheme = () => {
   return THEMES.DARK;
 };
 
+// ============================================
+// 🎨 PROVIDER COMPONENT
+// ============================================
+
 /**
  * ThemeProvider Component
  * Wrappa l'app e fornisce lo stato del tema globalmente
  */
-export const ThemeProvider = ({ children }) => {
+export const ThemeProvider = ({ children }: ThemeProviderProps): JSX.Element => {
   // ✅ SSR-Safe: Inizializza con DARK, poi sincronizza lato client
-  const [theme, setTheme] = useState(THEMES.DARK);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [theme, setThemeState] = useState<Theme>(THEMES.DARK);
+  const [isHydrated, setIsHydrated] = useState<boolean>(false);
 
   // ✅ Hydration: sincronizza con localStorage dopo il mount
   useEffect(() => {
     const initialTheme = getInitialTheme();
-    setTheme(initialTheme);
+    setThemeState(initialTheme);
     setIsHydrated(true);
   }, []);
 
   // Toggle tra dark e light
-  const toggleTheme = useCallback(() => {
-    setTheme(prevTheme => 
+  const toggleTheme = useCallback((): void => {
+    setThemeState(prevTheme => 
       prevTheme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK
     );
   }, []);
 
   // Set theme specifico
-  const setSpecificTheme = useCallback((newTheme) => {
-    if (Object.values(THEMES).includes(newTheme)) {
-      setTheme(newTheme);
+  const setSpecificTheme = useCallback((newTheme: Theme): void => {
+    if (newTheme === THEMES.DARK || newTheme === THEMES.LIGHT) {
+      setThemeState(newTheme);
     }
   }, []);
 
@@ -109,16 +172,16 @@ export const ThemeProvider = ({ children }) => {
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
-    const handleChange = (e) => {
+    const handleChange = (e: MediaQueryListEvent): void => {
       // Solo se l'utente non ha impostato manualmente
       try {
         const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
         if (!savedTheme) {
-          setTheme(e.matches ? THEMES.DARK : THEMES.LIGHT);
+          setThemeState(e.matches ? THEMES.DARK : THEMES.LIGHT);
         }
       } catch {
         // localStorage non disponibile, segui sempre la preferenza sistema
-        setTheme(e.matches ? THEMES.DARK : THEMES.LIGHT);
+        setThemeState(e.matches ? THEMES.DARK : THEMES.LIGHT);
       }
     };
 
@@ -126,14 +189,14 @@ export const ThemeProvider = ({ children }) => {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const value = {
+  const value: ThemeContextValue = {
     theme,
     isDark: theme === THEMES.DARK,
     isLight: theme === THEMES.LIGHT,
     toggleTheme,
     setTheme: setSpecificTheme,
     THEMES,
-    isHydrated, // Esponi per gestire flash prevention se necessario
+    isHydrated,
   };
 
   return (
@@ -143,11 +206,16 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
+// ============================================
+// 🪝 HOOK
+// ============================================
+
 /**
  * useTheme Hook
  * Hook per accedere al context del tema
+ * @throws Error se usato fuori da ThemeProvider
  */
-export const useTheme = () => {
+export const useTheme = (): ThemeContextValue => {
   const context = useContext(ThemeContext);
   
   if (!context) {
@@ -158,3 +226,4 @@ export const useTheme = () => {
 };
 
 export default ThemeContext;
+export type { Theme, ThemeContextValue, ThemeProviderProps };

@@ -26,6 +26,7 @@ import Footer from './layout/Footer';
 
 // Common Components
 import Loader from './common/Loader';
+import { SkeletonSection } from './common/Loader';
 import ScrollProgressBar from './common/ScrollProgressBar';
 import BackToTop from './common/BackToTop';
 import EasterEgg from './common/EasterEgg';
@@ -119,12 +120,12 @@ export default function HomePage() {
       <Banner />
       <main id="main-content" tabIndex={-1}>
         <ErrorBoundary sectionName="Skills Section">
-          <Suspense fallback={<Loader message="Loading skills..." variant="bonfire" />}>
+          <Suspense fallback={<SkeletonSection title={true} cards={3} />}>
             <Skills />
           </Suspense>
         </ErrorBoundary>
         <ErrorBoundary sectionName="Projects Section">
-          <Suspense fallback={<Loader message="Loading projects..." variant="bonfire" />}>
+          <Suspense fallback={<SkeletonSection title={true} cards={3} />}>
             <Projects />
           </Suspense>
         </ErrorBoundary>

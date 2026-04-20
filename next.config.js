@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // ============================================
-  // 🖼️ IMAGE OPTIMIZATION
+  // 🖼️ IMAGE OPTIMIZATION (Mobile-First Strategy)
   // ============================================
   images: {
     // Domini esterni consentiti
@@ -13,11 +13,20 @@ const nextConfig = {
     ],
     // ⚡ Ottimizzazione Dev Mode: disabilita ottimizzazione in dev per velocità
     unoptimized: process.env.NODE_ENV === 'development',
-    // Formati moderni (WebP prioritario, AVIF più lento da generare)
-    formats: ['image/webp'],
-    // Device sizes per responsive images
-    deviceSizes: [640, 750, 828, 1080, 1200],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    
+    // 🚀 Formati moderni: AVIF (migliore compressione) + WebP fallback
+    // AVIF: ~50% più piccolo di WebP, supportato su Chrome 85+, Firefox 93+
+    formats: ['image/avif', 'image/webp'],
+    
+    // 📱 Device sizes mobile-first (ordine crescente per srcset)
+    // Ottimizzato per viewport comuni: 320, 375, 414, 768, 1024, 1440
+    deviceSizes: [320, 480, 640, 768, 1024, 1200, 1920],
+    
+    // 🎨 Image sizes per icone e thumbnails
+    imageSizes: [16, 32, 48, 64, 80, 96, 128, 256],
+    
+    // ⚡ Minimizza numero di immagini generate in produzione
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 giorni cache
   },
 
   // ============================================

@@ -3,22 +3,34 @@
  * Sezione progetti con griglia di cards e filtri
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container , Row , Col } from 'react-bootstrap';
 import { ProjectCard } from '../cards/ProjectCard';
 import { projects } from '../../data/profileData';
 
-
+/** Debounce delay per il filtro di ricerca (ms) */
+const DEBOUNCE_DELAY = 300;
 
 export default function Projects() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [debouncedTerm, setDebouncedTerm] = useState('');
+    const timerRef = useRef(null);
+
+    // Debounce: aggiorna il termine di ricerca effettivo dopo 300ms
+    useEffect(() => {
+        timerRef.current = setTimeout(() => {
+            setDebouncedTerm(searchTerm);
+        }, DEBOUNCE_DELAY);
+
+        return () => clearTimeout(timerRef.current);
+    }, [searchTerm]);
     
-    // Filtra progetti in base alla ricerca
+    // Filtra progetti in base alla ricerca debounced
     const filteredProjects = projects.filter(project =>
-        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.title.toLowerCase().includes(debouncedTerm.toLowerCase()) ||
+        project.description.toLowerCase().includes(debouncedTerm.toLowerCase()) ||
         (project.tech && project.tech.some(tech => 
-            tech.toLowerCase().includes(searchTerm.toLowerCase())
+            tech.toLowerCase().includes(debouncedTerm.toLowerCase())
         ))
     );
 
@@ -64,7 +76,7 @@ export default function Projects() {
                   })
                 ) : (
                   <Col className="text-center">
-                    <p className="no-results">Nessun progetto trovato per "{searchTerm}"</p>
+                    <p className="no-results">Nessun progetto trovato per &quot;{searchTerm}&quot;</p>
                   </Col>
                 )}
               </Row>

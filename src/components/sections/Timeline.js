@@ -9,6 +9,9 @@ import { useRef, useState, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import { timelineData } from '../../data/profileData';
 
+/** Numero massimo di dot visibili nella pagination */
+const VISIBLE_DOTS = 3;
+
 export default function Timeline() {
   const scrollRef = useRef(null);
   
@@ -166,17 +169,28 @@ export default function Timeline() {
               </button>
             </div>
             
-            {/* Carousel Indicators */}
+            {/* Carousel Indicators - sliding window */}
             <div className="timeline-indicators">
-              {timelineData.map((_, index) => (
-                <button
-                  key={index}
-                  className={`timeline-indicator ${index === activeIndex ? 'active' : ''}`}
-                  onClick={() => scrollToCard(index)}
-                  aria-label={`Vai al punto ${index + 1}`}
-                  aria-current={index === activeIndex ? 'true' : 'false'}
-                />
-              ))}
+              {timelineData.map((_, index) => {
+                const totalDots = timelineData.length;
+                let windowStart;
+                if (totalDots <= VISIBLE_DOTS) {
+                  windowStart = 0;
+                } else {
+                  windowStart = Math.max(0, Math.min(activeIndex - Math.floor(VISIBLE_DOTS / 2), totalDots - VISIBLE_DOTS));
+                }
+                const windowEnd = windowStart + VISIBLE_DOTS;
+                if (index < windowStart || index >= windowEnd) return null;
+                return (
+                  <button
+                    key={index}
+                    className={`timeline-indicator ${index === activeIndex ? 'active' : ''}`}
+                    onClick={() => scrollToCard(index)}
+                    aria-label={`Vai al punto ${index + 1}`}
+                    aria-current={index === activeIndex ? 'true' : 'false'}
+                  />
+                );
+              })}
             </div>
           </Col>
         </Row>

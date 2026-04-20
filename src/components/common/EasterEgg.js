@@ -83,7 +83,7 @@ const EasterEgg = () => {
             </div>
 
             <p className="easter-egg-text">
-              Hai scoperto l'Easter Egg! 🎮<br />
+              Hai scoperto l&apos;Easter Egg! 🎮<br />
               <small>Konami Code: ↑↑↓↓←→←→BA</small>
             </p>
 

@@ -114,5 +114,7 @@ Button.Link = ({
   );
 };
 
+Button.Link.displayName = 'Button.Link';
+
 export default Button;
 export { Button };

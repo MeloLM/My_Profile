@@ -12,3 +12,8 @@ export { default as ToastNotification } from './ToastNotification';
 export { default as ErrorBoundary, withErrorBoundary } from './ErrorBoundary';
 export { default as SkipToContent } from './SkipToContent';
 
+// 🖼️ Mobile-optimized image component
+export { ResponsiveImage, BREAKPOINTS, SIZE_PRESETS } from './ResponsiveImage';
+
+// 🎨 Tree-shaken icons (solo icone utilizzate)
+export * from './icons';
