@@ -8,6 +8,23 @@
  */
 
 // ============================================
+// 🌐 SITE URL
+// ============================================
+
+/**
+ * URL base del sito, senza slash finale.
+ *
+ * Alimenta `metadataBase`, canonical, OpenGraph, Twitter Card, JSON-LD,
+ * sitemap.ts e robots.ts: è l'unico punto da cambiare per migrare dominio.
+ *
+ * ⚠️ Attualmente punta al dominio Vercel: il dominio custom
+ * carmelolamantia.it non è ancora configurato a livello DNS
+ * (`nslookup` → Non-existent domain). Appena i record saranno attivi
+ * basta cambiare questa riga.
+ */
+export const SITE_URL = 'https://my-profile-ten-beta.vercel.app' as const;
+
+// ============================================
 // 🕐 TIMING CONSTANTS (in millisecondi)
 // ============================================
 

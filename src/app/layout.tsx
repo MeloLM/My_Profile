@@ -5,6 +5,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Inter, Poppins } from 'next/font/google';
+import { SITE_URL } from '../constants';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-multi-carousel/lib/styles.css';
@@ -30,7 +31,7 @@ const poppins = Poppins({
 
 // 🔥 Metadata API - Questo viene renderizzato SERVER-SIDE (SEO perfetto!)
 export const metadata: Metadata = {
-  metadataBase: new URL('https://carmelolamantia.it'),
+  metadataBase: new URL(SITE_URL),
   
   title: {
     default: 'Carmelo La Mantia | Full Stack Developer Portfolio',
@@ -52,14 +53,14 @@ export const metadata: Metadata = {
     'Sicilia',
   ],
   
-  authors: [{ name: 'Carmelo La Mantia', url: 'https://carmelolamantia.it' }],
+  authors: [{ name: 'Carmelo La Mantia', url: SITE_URL }],
   creator: 'Carmelo La Mantia',
   publisher: 'Carmelo La Mantia',
   
   openGraph: {
     type: 'website',
     locale: 'it_IT',
-    url: 'https://carmelolamantia.it/',
+    url: `${SITE_URL}/`,
     siteName: 'Carmelo La Mantia Portfolio',
     title: 'Carmelo La Mantia | Full Stack Developer Portfolio',
     description: 'Full Stack Developer specializzato in React, JavaScript, PHP e Laravel. Scopri i miei progetti!',
@@ -100,7 +101,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   
   alternates: {
-    canonical: 'https://carmelolamantia.it',
+    canonical: SITE_URL,
   },
 };
 
@@ -126,8 +127,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Carmelo La Mantia',
-              url: 'https://carmelolamantia.it',
-              image: 'https://carmelolamantia.it/Melo_icon.png',
+              url: SITE_URL,
+              image: `${SITE_URL}/Melo_icon.png`,
               jobTitle: 'Full Stack Developer',
               sameAs: [
                 'https://github.com/MeloLM',
@@ -185,25 +186,25 @@ export default function RootLayout({
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://carmelolamantia.it',
+                  item: SITE_URL,
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'Skills',
-                  item: 'https://carmelolamantia.it/#skills',
+                  item: `${SITE_URL}/#skills`,
                 },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: 'Projects',
-                  item: 'https://carmelolamantia.it/#projects',
+                  item: `${SITE_URL}/#projects`,
                 },
                 {
                   '@type': 'ListItem',
                   position: 4,
                   name: 'Contact',
-                  item: 'https://carmelolamantia.it/#connect',
+                  item: `${SITE_URL}/#connect`,
                 },
               ],
             }),

@@ -10,7 +10,7 @@
 
 **Full Stack Developer** | Agrigento, Sicily 🇮🇹
 
-[🌐 Live Demo](https://carmelolamantia.it) · [💼 LinkedIn](https://www.linkedin.com/in/carmelo-la-mantia-web-developer/) · [📧 Contact](mailto:carmelo.la.mantia00@gmail.com)
+[🌐 Live Demo](https://my-profile-ten-beta.vercel.app) · [💼 LinkedIn](https://www.linkedin.com/in/carmelo-la-mantia-web-developer/) · [📧 Contact](mailto:carmelo.la.mantia00@gmail.com)
 
 <img src="./src/assets/img/Screen_HomePage_Portfolio.png" alt="Portfolio Preview" width="800"/>
 
