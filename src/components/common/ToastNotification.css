@@ -130,11 +130,6 @@
   color: #fff;
 }
 
-/* Light Theme */
-[data-theme="light"] .toast-notification {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .toast-notification {

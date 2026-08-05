@@ -109,8 +109,3 @@
   line-height: 1.6;
   margin: 0;
 }
-
-/* === LIGHT THEME === */
-[data-theme="light"] .timeline-content {
-  background: var(--color-surface, #F5F5F5);
-}

@@ -1,65 +1,21 @@
 /**
  * 📅 Timeline Component - Section
  * Sezione percorso formativo/lavorativo
- * Con supporto drag & drop per navigazione mouse e indicatori carousel
+ * Flusso continuo: l'intero array timelineData viene renderizzato senza paginazione.
+ * Navigazione via drag del mouse su desktop e swipe su mobile.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
-import { useRef, useState, useCallback, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
+import { useRef, useState, useCallback } from 'react';
 import { timelineData } from '../../data/profileData';
-
-/** Numero massimo di dot visibili nella pagination */
-const VISIBLE_DOTS = 3;
 
 export default function Timeline() {
   const scrollRef = useRef(null);
-  
+
   // State per drag
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
-  
-  // State per carousel indicators
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Update active index based on scroll position
-  const updateActiveIndex = useCallback(() => {
-    if (!scrollRef.current) return;
-    const scrollContainer = scrollRef.current;
-    const cardWidth = 300; // Approximate card width + gap
-    const newIndex = Math.round(scrollContainer.scrollLeft / cardWidth);
-    setActiveIndex(Math.min(newIndex, timelineData.length - 1));
-  }, []);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-    
-    scrollContainer.addEventListener('scroll', updateActiveIndex);
-    return () => scrollContainer.removeEventListener('scroll', updateActiveIndex);
-  }, [updateActiveIndex]);
-
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = 350;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  // Navigate to specific card
-  const scrollToCard = (index) => {
-    if (scrollRef.current) {
-      const cardWidth = 300;
-      scrollRef.current.scrollTo({
-        left: index * cardWidth,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   // Mouse drag handlers
   const handleMouseDown = useCallback((e) => {
@@ -123,15 +79,7 @@ export default function Timeline() {
         <Row>
           <Col>
             <div className="timeline-wrapper">
-              <button 
-                className="timeline-nav timeline-nav-left" 
-                onClick={() => scroll('left')}
-                aria-label="Scroll left"
-              >
-                <ChevronLeft size={30} />
-              </button>
-              
-              <div 
+              <div
                 className={`timeline-scroll ${isDragging ? 'dragging' : ''}`}
                 ref={scrollRef}
                 onMouseDown={handleMouseDown}
@@ -144,7 +92,7 @@ export default function Timeline() {
               >
                 <div className="timeline-horizontal">
                   {timelineData.map((item, index) => (
-                    <div className="timeline-card" key={index}>
+                    <div className="timeline-card" key={`${item.year}-${item.title}`}>
                       <div className="timeline-content">
                         <span className="timeline-icon">{item.icon}</span>
                         <span className="timeline-year">{item.year}</span>
@@ -159,38 +107,6 @@ export default function Timeline() {
                   ))}
                 </div>
               </div>
-              
-              <button 
-                className="timeline-nav timeline-nav-right" 
-                onClick={() => scroll('right')}
-                aria-label="Scroll right"
-              >
-                <ChevronRight size={30} />
-              </button>
-            </div>
-            
-            {/* Carousel Indicators - sliding window */}
-            <div className="timeline-indicators">
-              {timelineData.map((_, index) => {
-                const totalDots = timelineData.length;
-                let windowStart;
-                if (totalDots <= VISIBLE_DOTS) {
-                  windowStart = 0;
-                } else {
-                  windowStart = Math.max(0, Math.min(activeIndex - Math.floor(VISIBLE_DOTS / 2), totalDots - VISIBLE_DOTS));
-                }
-                const windowEnd = windowStart + VISIBLE_DOTS;
-                if (index < windowStart || index >= windowEnd) return null;
-                return (
-                  <button
-                    key={index}
-                    className={`timeline-indicator ${index === activeIndex ? 'active' : ''}`}
-                    onClick={() => scrollToCard(index)}
-                    aria-label={`Vai al punto ${index + 1}`}
-                    aria-current={index === activeIndex ? 'true' : 'false'}
-                  />
-                );
-              })}
             </div>
           </Col>
         </Row>

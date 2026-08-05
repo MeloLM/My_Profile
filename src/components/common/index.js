@@ -8,6 +8,7 @@ export { default as Button, Button as ButtonComponent } from './Button';
 export { SocialIcons } from './SocialIcons';
 export { default as ScrollProgressBar } from './ScrollProgressBar';
 export { default as BackToTop } from './BackToTop';
+export { default as WhatsAppFloat } from './WhatsAppFloat';
 export { default as ToastNotification } from './ToastNotification';
 export { default as ErrorBoundary, withErrorBoundary } from './ErrorBoundary';
 export { default as SkipToContent } from './SkipToContent';

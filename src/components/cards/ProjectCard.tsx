@@ -7,7 +7,7 @@
  * @module components/cards/ProjectCard
  */
 
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Col } from 'react-bootstrap';
 import './ProjectCard.css';
@@ -27,14 +27,14 @@ interface ProjectCardProps {
   title: string;
   /** Descrizione del progetto */
   description: string;
-  /** URL immagine preview (string o StaticImageData per next/image) */
-  imgUrl: string | StaticImageData;
+  /** Path assoluto dell'immagine dentro public/ (es. "/img/project_soul.jpeg") */
+  imgUrl: string;
   /** URL link al progetto (opzionale, default '#') */
   imgAncor?: string;
   /** Array tecnologie usate (opzionale) */
   tech?: string[];
-  /** Slug per la pagina case study (opzionale) */
-  slug?: string;
+  /** Slug per la pagina case study (richiesto: alimenta /projects/[slug]) */
+  slug: string;
 }
 
 // ============================================
@@ -77,37 +77,33 @@ export const ProjectCard = ({
 }: ProjectCardProps): JSX.Element => {
   return (
     <Col sm={6} md={4}>
-      <a 
-        href={imgAncor} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-white project-link" 
-        aria-label={`View project: ${title}`}
-      >
-        <div className="proj-imgbx">
-          <Image 
-            src={imgUrl} 
-            alt={title} 
-            width={400}
-            height={300}
-            style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-          />
-          <div className="proj-txtx">
-            <h4>{title}</h4>
-            <span>{description}</span>
-            <TechStack techs={tech} />
-            {slug && (
-              <Link
-                href={`/projects/${slug}`}
-                className="case-study-link"
-                onClick={(e) => e.stopPropagation()}
-              >
-                Case Study →
-              </Link>
-            )}
+      <div className="proj-imgbx">
+        <Image
+          src={imgUrl}
+          alt={title}
+          width={400}
+          height={300}
+          style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+        />
+        <div className="proj-txtx">
+          <h4>{title}</h4>
+          <span>{description}</span>
+          <TechStack techs={tech} />
+          <div className="project-actions d-flex gap-3 mt-3">
+            <Link href={`/projects/${slug}`} className="btn btn-outline-warning text-decoration-none">
+              Info
+            </Link>
+            <a
+              href={imgAncor}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline-light text-decoration-none"
+            >
+              Visita il Sito
+            </a>
           </div>
         </div>
-      </a>
+      </div>
     </Col>
   );
 };

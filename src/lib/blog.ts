@@ -33,7 +33,7 @@ export interface BlogPostFull {
 
 // Calcola tempo di lettura (200 wpm)
 function calcReadingTime(text: string): number {
-  const words = text.trim().split(/\\s+/).length;
+  const words = text.trim().split(/\s+/).length;
   return Math.max(1, Math.ceil(words / 200));
 }
 

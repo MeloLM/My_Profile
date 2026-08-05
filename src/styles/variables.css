@@ -1,6 +1,7 @@
 /**
  * 🎨 CSS Variables
- * Definizione delle variabili globali per temi e colori
+ * Definizione delle variabili globali di colore e design token
+ * Tema unico: DARK (il cambio tema è stato rimosso)
  */
 
 :root {
@@ -116,30 +117,6 @@
   /* === PORTFOLIO THEME COLORS === */
   --main-color: #e08821;
   --main-color-hover: rgba(224, 135, 33, 0.804);
-  --first-color: #000;
-  --second-color: #0e0e0e;
-}
-
-/* === LIGHT THEME (Warm Amber variant) === */
-[data-theme="light"] {
-  --color-background: #1e1e2a;
-  --color-surface: #252532;
-  --color-surface-light: #2f2f40;
-  --color-text-primary: #f5e6d3;
-  --color-text-secondary: #d4c4b0;
-  --color-text-muted: #a89888;
-  --first-color: #1e1e2a;
-  --second-color: #252532;
-}
-
-/* === DARK THEME (default) === */
-[data-theme="dark"] {
-  --color-background: #0F0F1E;
-  --color-surface: #1A1A2E;
-  --color-surface-light: #252541;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B8B8D4;
-  --color-text-muted: #7B7B8F;
   --first-color: #000;
   --second-color: #0e0e0e;
 }

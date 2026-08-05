@@ -7,10 +7,10 @@
 export default function Loading() {
   return (
     <div className="loading-screen" role="status" aria-label="Loading page">
-      <div className="loading-content">
+      <div className="loading-content d-flex flex-column align-items-center justify-content-center text-center">
         <div className="bonfire-animation">🔥</div>
-        <h1 className="loading-title">LOADING...</h1>
-        <p className="loading-subtitle">rest at the bonfire</p>
+        <h1 className="loading-title text-center">LOADING...</h1>
+        <p className="loading-subtitle m-0 text-center">rest at the bonfire</p>
         <div className="loading-bar">
           <div className="loading-progress"></div>
         </div>

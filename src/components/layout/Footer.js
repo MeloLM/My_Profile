@@ -10,7 +10,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Feedback } from './Feedback';
 import { SocialIcons } from '../common/SocialIcons';
 import { personalInfo } from '../../data/profileData';
-import meloIco from "../../assets/img/Melo_icon.png";
+/** Asset servito da public/img/ (path assoluto, non import statico) */
+const meloIco = '/img/Melo_icon.png';
 
 export default function Footer () {
   const currentYear = new Date().getFullYear();
@@ -34,9 +35,6 @@ export default function Footer () {
           <Col xs={12} md={6} className="text-center text-md-end">
             <SocialIcons githubColor="white" />
             <p className="mb-0 mt-3">&#xA9; Copyright | {personalInfo.name} | {currentYear}</p>
-            <p className="easter-egg-hint mt-2" title="↑↑↓↓←→←→BA">
-              <span role="img" aria-label="gamepad">🎮</span> Prova il Konami Code...
-            </p>
           </Col>
         </Row>
       </Container>

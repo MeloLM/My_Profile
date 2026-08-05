@@ -40,7 +40,7 @@ const CONFIG = {
             'SocialIcons.js'
         ],
         'src/data': [
-            'profileData.js'
+            'profileData.ts'
         ]
     },
     
@@ -222,13 +222,13 @@ function checkAppImports() {
 
 // Check 5: Verifica profileData exports
 function checkProfileData() {
-    console.log('\n🧠 Checking profileData.js exports...\n');
-    
-    const dataPath = path.join(CONFIG.srcPath, 'data', 'profileData.js');
-    
+    console.log('\n🧠 Checking profileData.ts exports...\n');
+
+    const dataPath = path.join(CONFIG.srcPath, 'data', 'profileData.ts');
+
     if (!fs.existsSync(dataPath)) {
-        log('error', 'profileData.js not found!');
-        addTodo('CRITICAL', 'Create profileData.js', 'Single source of truth for data');
+        log('error', 'profileData.ts not found!');
+        addTodo('CRITICAL', 'Create profileData.ts', 'Single source of truth for data');
         return;
     }
     

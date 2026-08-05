@@ -124,15 +124,6 @@
   font-size: 18px;
 }
 
-/* === LIGHT THEME === */
-[data-theme="light"] .linkedin-badge-card {
-  box-shadow: 0 4px 20px rgba(0, 119, 181, 0.2);
-}
-
-[data-theme="light"] .linkedin-badge-minimal {
-  background: rgba(0, 119, 181, 0.05);
-}
-
 /* === MOBILE === */
 @media (max-width: 576px) {
   .linkedin-badge-card {

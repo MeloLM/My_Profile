@@ -7,7 +7,8 @@
  */
 
 import { useState, useEffect, lazy, Suspense } from 'react';
-import '../styles/components/loading-screen.css';
+// NB: loading-screen.css è già caricato globalmente da app/layout.tsx
+// (via styles/components/index.css), quindi qui non serve reimportarlo.
 
 // Constants
 import {
@@ -15,9 +16,6 @@ import {
   PARALLAX_SPEED,
   INTERSECTION_THRESHOLD
 } from '../constants';
-
-// Context
-import { ThemeProvider, LangProvider } from '../context';
 
 // Layout Components (caricati subito)
 import Banner from './layout/Banner';
@@ -29,7 +27,7 @@ import Loader from './common/Loader';
 import { SkeletonSection } from './common/Loader';
 import ScrollProgressBar from './common/ScrollProgressBar';
 import BackToTop from './common/BackToTop';
-import EasterEgg from './common/EasterEgg';
+import WhatsAppFloat from './common/WhatsAppFloat';
 // import CursorTrail from './common/CursorTrail'; // Rimosso - troppo pacchiano
 import ErrorBoundary from './common/ErrorBoundary';
 import SkipToContent from './common/SkipToContent';
@@ -97,10 +95,11 @@ export default function HomePage() {
   if (loading) {
     return (
       <div className="loading-screen">
-        <div className="loading-content">
+        <div className="loading-content d-flex flex-column align-items-center justify-content-around text-center">
           <div className="bonfire-animation">🔥</div>
-          <h1 className="loading-title">CARMELO LA MANTIA</h1>
-          <p className="loading-subtitle">loading character ...</p>
+          {/*nome obsoleto si rompe e non si centra */}
+          {/* <h1 className="loading-title text-center ">CARMELO LA MANTIA</h1> */}
+          <h3 className="loading-subtitle m-3 text-center">loading character ...</h3>
           <div className="loading-bar">
             <div className="loading-progress"></div>
           </div>
@@ -110,12 +109,11 @@ export default function HomePage() {
   }
 
   return (
-    <LangProvider>
-      <ThemeProvider>
+    <>
       <SkipToContent targetId="main-content" />
       <ScrollProgressBar />
       <BackToTop />
-      <EasterEgg />
+      <WhatsAppFloat />
       <NavBar />
       <Banner />
       <main id="main-content" tabIndex={-1}>
@@ -141,7 +139,6 @@ export default function HomePage() {
         </ErrorBoundary>
       </main>
       <Footer />
-    </ThemeProvider>
-    </LangProvider>
+    </>
   );
 }

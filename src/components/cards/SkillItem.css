@@ -114,12 +114,3 @@
   font-size: var(--font-size-xs, 0.75rem);
   color: var(--color-text-muted, #7B7B8F);
 }
-
-/* === LIGHT THEME === */
-[data-theme="light"] .skill-item {
-  background: var(--color-surface, #F5F5F5);
-}
-
-[data-theme="light"] .skill-progress-container::before {
-  background: rgba(0, 0, 0, 0.1);
-}

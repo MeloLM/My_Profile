@@ -10,9 +10,6 @@ export type { UseScrollReturn } from './useScroll';
 export { useTypewriter } from './useTypewriter';
 export type { TypewriterOptions, TypewriterReturn } from './useTypewriter';
 
-export { useKonamiCode } from './useKonamiCode';
-export type { UseKonamiCodeOptions, UseKonamiCodeReturn } from './useKonamiCode';
-
 export { useEmail } from './useEmail';
 export type { 
   EmailFormData, 

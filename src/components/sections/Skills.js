@@ -1,6 +1,6 @@
 /**
  * 🛠️ Skills Component - Section
- * Sezione competenze con carosello e filtri
+ * Sezione competenze con carosello (senza filtri per categoria)
  * ✅ Migrato a next/image per ottimizzazione automatica
  */
 
@@ -11,7 +11,6 @@ import Carousel from "react-multi-carousel";
 import { skillsData } from '../../data/profileData';
 
 export default function Skills() {
-    const [activeFilter, setActiveFilter] = useState('All');
     const [isVisible, setIsVisible] = useState(false);
     const skillsRef = useRef(null);
     
@@ -53,12 +52,6 @@ export default function Skills() {
         }
     };
 
-    const categories = ['All', 'Frontend', 'Backend', 'Tools'];
-    
-    const filteredSkills = activeFilter === 'All' 
-        ? skillsData 
-        : skillsData.filter(skill => skill.category === activeFilter);
-
     return (
         <section className='skill' id='skills' aria-label="Skills section" ref={skillsRef}>
             <Container>
@@ -66,23 +59,9 @@ export default function Skills() {
                     <Col>
                         <div className="skill-bx">
                             <h2>Skills</h2>
-                            <p>Le mie competenze sono specializzate nel web development nel frontend con HTML, CSS, JavaScript e nel backend con PHP e Python disposto ad imparne dei nuovi. Conoscenza di sistemi operativi Windows 10, Linux e Unix. Utilizzo di strumenti di collaborazione come Discord e Git/GitHub. Familiarità con il framework Bootstrap e l&apos;editor Visual Studio Code. Esperienza anche con WordPress.</p>
-                            
-                            {/* Filter Buttons */}
-                            <div className="skill-filters">
-                                {categories.map(category => (
-                                    <button
-                                        key={category}
-                                        className={`filter-btn ${activeFilter === category ? 'active' : ''}`}
-                                        onClick={() => setActiveFilter(category)}
-                                        aria-pressed={activeFilter === category}
-                                    >
-                                        {category}
-                                    </button>
-                                ))}
-                            </div>
-                            
-                            <Carousel 
+                            <p>Sviluppatore Full Stack Junior specializzato negli ecosistemi React (Next.js, TypeScript) e PHP (Laravel). Costruisco architetture web complete, gestendo database relazionali e infrastrutture cloud (PostgreSQL, MySQL, Supabase) e curando il deployment tramite Docker e Vercel. Ottimizzo il flusso di lavoro e l&apos;analisi architetturale integrando attivamente tecniche di AI-Augmented Development (Prompt Engineering e Code Review) per accelerare il problem-solving, mantenendo sempre il totale controllo critico sulle scelte architetturali.</p>
+
+                            <Carousel
                                 responsive={responsive} 
                                 infinite={true} 
                                 className='skill-slider'
@@ -90,11 +69,10 @@ export default function Skills() {
                                 autoPlaySpeed={2000}
                                 keyBoardControl={true}
                                 transitionDuration={500}
-                                key={activeFilter}
                             >
-                                {filteredSkills.map((skill, index) => {
+                                {skillsData.map((skill) => {
                                     return (
-                                    <div className="item" key={index}>
+                                    <div className="item" key={skill.name}>
                                         <Image 
                                           src={skill.img} 
                                           className='rounded-5' 

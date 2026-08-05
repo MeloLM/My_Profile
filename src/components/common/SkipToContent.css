@@ -15,7 +15,7 @@
   
   /* Styling */
   padding: 1rem 2rem;
-  background-color: var(--primary-color, #0d6efd);
+  background-color: var(--primary-color-dark, #0d6efd);
   color: white;
   font-weight: 600;
   font-size: 1rem;
@@ -37,10 +37,4 @@
 /* Hover state */
 .skip-to-content:hover {
   background-color: var(--primary-color-dark, #0b5ed7);
-}
-
-/* Dark mode support */
-[data-theme="dark"] .skip-to-content {
-  background-color: var(--primary-color-dark, #0d6efd);
-  color: white;
 }

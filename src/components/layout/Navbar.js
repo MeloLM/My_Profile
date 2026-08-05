@@ -9,9 +9,7 @@ import Link from 'next/link';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { Navbar , Container , Nav } from 'react-bootstrap';
 import { SocialIcons } from '../common/SocialIcons';
-import { useTheme, useLang } from '../../context';
 import { useScroll } from '../../hooks';
-import { Sun, Moon } from 'react-bootstrap-icons';
 import { personalInfo } from '../../data/profileData';
 
 export default function NavBar() {
@@ -19,8 +17,6 @@ export default function NavBar() {
     const [expanded, setExpanded] = useState(false);
     // REFACTORED: Uso dell'hook useScroll invece di useState/useEffect manuale
     const { scrolled } = useScroll(50);
-    const { isDark, toggleTheme } = useTheme();
-    const { lang, toggleLang, t } = useLang();
     const navRef = useRef(null);
 
     const onUpdateActiveLink = useCallback((value) => {
@@ -106,30 +102,14 @@ export default function NavBar() {
                 </Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-                <Link href="#home" className={activeLink === 'home' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('home')}>{t('nav.home')}</Link>
-                <Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('skills')}>{t('nav.skills')}</Link>
-                <Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('projects')}>{t('nav.projects')}</Link>
-                <Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('connect')}>{t('nav.contact')}</Link>
+                <Link href="#home" className={activeLink === 'home' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('home')}>Home</Link>
+                <Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Link>
+                <Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('projects')}>Progetti</Link>
+                <Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link nav-link' : 'navbar-link nav-link'} onClick={() => onUpdateActiveLink('connect')}>Contatti</Link>
             </Nav>
             <span className="navbar-text">
                 <SocialIcons githubColor={scrolled ? 'white' : 'black'} />
-                <button 
-                    className="theme-toggle-btn" 
-                    onClick={toggleTheme}
-                    aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                    title={isDark ? 'Light Mode' : 'Dark Mode'}
-                >
-                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                </button>
-                <button
-                    className="lang-toggle-btn"
-                    onClick={toggleLang}
-                    aria-label={`Switch language to ${lang === 'it' ? 'English' : 'Italiano'}`}
-                    title={lang === 'it' ? 'Switch to English' : 'Passa all\'Italiano'}
-                >
-                    {lang === 'it' ? 'en' : 'it'}
-                </button>
-                <button className="vvd" onClick={() => { window.open(`mailto:${personalInfo.email}`); setExpanded(false); }} aria-label={`Send email to ${personalInfo.name}`}><span>{t('banner.cta')}</span></button>
+                <button className="vvd" onClick={() => { window.open(`mailto:${personalInfo.email}`); setExpanded(false); }} aria-label={`Send email to ${personalInfo.name}`}><span>Contattami</span></button>
             </span>
             </Navbar.Collapse>
             </Container>

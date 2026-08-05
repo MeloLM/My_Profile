@@ -12,7 +12,8 @@ import { useState, useRef, useCallback, FormEvent } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { useEmail } from '../../hooks';
 import { validateEmail, validateRequired } from '../../utils/validators';
-import contactImg from '../../assets/img/bonfire.svg';
+/** Asset servito da public/img/ (path assoluto, non import statico) */
+const contactImg = '/img/bonfire.svg';
 import ToastNotification from '../common/ToastNotification';
 
 // ============================================
@@ -143,6 +144,9 @@ export default function Contact(): JSX.Element {
               title="🔥 Click to rest at the bonfire"
               width={400}
               height={400}
+              /* L'ottimizzatore di next/image rifiuta gli SVG per default
+                 ("image type is not allowed"): va servito così com'è. */
+              unoptimized
             />
             {bonfireLit && (
               <div className="bonfire-message">

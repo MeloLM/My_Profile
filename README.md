@@ -25,11 +25,10 @@
 | ⚡ **Next.js 14 App Router** | Server-side rendering with optimized performance |
 | 🖼️ **Automatic Image Optimization** | WebP/AVIF with `next/image` |
 | 🎬 **Typewriter Effect** | Animated hero text with smooth transitions |
-| 🌓 **Dark/Light Theme** | Persistent theme with system preference sync |
 | 📊 **Skill Progress Bars** | Animated bars with percentage indicators |
 | 🎠 **Skills Carousel** | Auto-scrolling showcase with category filters |
 | 🔥 **Dark Souls Theme** | Loading screen with animated bonfire |
-| 🎮 **Easter Eggs** | Konami Code + Bonfire click interactions |
+| 🎮 **Easter Egg** | Bonfire click interaction |
 | 📜 **Horizontal Timeline** | Interactive career journey with navigation |
 | 📱 **Fully Responsive** | Optimized for all screen sizes |
 | ♿ **Accessible** | ARIA labels, semantic HTML, keyboard navigation |
@@ -120,11 +119,10 @@ src/
 │   ├── layout/          # Navbar, Banner, Footer
 │   ├── sections/        # Skills, Projects, Timeline, Contact
 │   ├── cards/           # ProjectCard, SkillItem, TimelineItem
-│   └── common/          # BackToTop, Loader, EasterEgg, etc.
-├── context/             # ThemeContext (Dark/Light mode)
-├── hooks/               # useScroll, useTypewriter, useEmail, useKonamiCode
+│   └── common/          # BackToTop, Loader, WhatsAppFloat, etc.
+├── hooks/               # useScroll, useTypewriter, useEmail, useWindowSize
 ├── data/
-│   └── profileData.js   # Centralized CV data (Single Source of Truth)
+│   └── profileData.ts   # Centralized CV data (Single Source of Truth, typed)
 ├── utils/               # Validators, formatters, logger
 ├── styles/              # CSS variables & global styles
 └── assets/img/          # Images and icons
@@ -134,20 +132,18 @@ src/
 
 ## 🎨 Color Palette
 
-| Theme | Color | Value | Usage |
-|-------|-------|-------|-------|
-| 🌙 Dark | Primary | `#e08821` | Accent, CTAs, Hover states |
-| 🌙 Dark | Background | `#121212` | Main background |
-| 🌙 Dark | Surface | `#1e1e1e` | Cards, sections |
-| ☀️ Light | Primary | `#d4781a` | Accent (darker for contrast) |
-| ☀️ Light | Background | `#faf8f5` | Warm paper-like background |
-| ☀️ Light | Surface | `#ffffff` | Cards, sections |
+Il progetto usa un **tema scuro unico** (nessun theme switcher).
+
+| Color | Value | Usage |
+|-------|-------|-------|
+| Primary | `#e08821` | Accent, CTAs, Hover states |
+| Background | `#121212` | Main background |
+| Surface | `#1e1e1e` | Cards, sections |
 
 ---
 
 ## 🎮 Easter Eggs
 
-- **Konami Code**: `↑ ↑ ↓ ↓ ← → ← → B A` - Triggers Dark Souls themed modal
 - **Bonfire Click**: Click the bonfire in Contact section for "BONFIRE LIT!" animation
 
 ---

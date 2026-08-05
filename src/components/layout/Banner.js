@@ -7,10 +7,12 @@
 
 import Image from 'next/image';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ArrowRightCircle } from 'react-bootstrap-icons';
+import { ArrowRightCircle, Whatsapp } from 'react-bootstrap-icons';
 import { useTypewriter } from '../../hooks';
 import { personalInfo, summary } from '../../data/profileData';
-import headerImg from '../../assets/img/solaire.svg';
+
+/** Asset servito da public/img/ (path assoluto, non import statico) */
+const headerImg = '/img/solaire.svg';
 import { useRef, useCallback } from 'react';
 
 export default function Banner() {
@@ -48,15 +50,18 @@ export default function Banner() {
       <Container fluid>
         <Row className="align-items-center">
           <Col xs={12} md={6} xl={7}>
-            <span className="tagline text-white">Welcome to my Portfolio</span>
-            <h1>{`Hi, I'm ${personalInfo.name} a `}<span className='wrap' aria-live="polite">{displayedText || '\u00A0'}</span></h1>
+            <span className="tagline text-white">Benvenuto nel mio Portfolio</span>
+            <h1>{`Ciao, sono ${personalInfo.name} un `}<span className='wrap' aria-live="polite">{displayedText || '\u00A0'}</span></h1>
             <p className='bg-banner rounded p-2'>{summary}</p>
             <div className="banner-buttons">
-              <button onClick={() => document.getElementById('connect').scrollIntoView({ behavior: 'smooth' })} aria-label="Scroll to contact section">
-                Contact Me <ArrowRightCircle size={25} />
-              </button>
+              <a href="#connect" className="cv-download-btn" aria-label="Scroll to contact section">
+                Nuovi Progetti <ArrowRightCircle size={25} />
+              </a>
               <a href="/CV_Carmelo_la_mantia_2026.pdf" download className="cv-download-btn" aria-label="Download CV">
                 Download CV <ArrowRightCircle size={25} />
+              </a>
+              <a href="https://wa.me/393510845851?text=Ciao%20Carmelo,%20vorrei%20salvare%20il%20tuo%20contatto." target="_blank" rel="noopener noreferrer" className="cv-download-btn" aria-label="Contact-me">
+                Scrivimi su <Whatsapp/>
               </a>
             </div>
           </Col>
@@ -68,11 +73,14 @@ export default function Banner() {
               style={{ transition: 'transform 0.15s ease', willChange: 'transform' }}
             >
               <Image 
-                src={headerImg} 
+                src={headerImg}
                 alt='Solaire of Astora - Dark Souls themed illustration'
                 priority
                 width={500}
                 height={500}
+                /* L'ottimizzatore di next/image rifiuta gli SVG per default
+                   ("image type is not allowed"): va servito così com'è. */
+                unoptimized
                 style={{ width: '100%', height: 'auto' }}
               />
             </div>

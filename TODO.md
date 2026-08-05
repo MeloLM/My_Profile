@@ -10,11 +10,11 @@
 
 ### ✅ Code Quality & Industry Standards
 - [x] ✅ **TypeScript Migration - Hooks** - Convertiti tutti gli hooks in TypeScript
-  - `useScroll.ts`, `useTypewriter.ts`, `useKonamiCode.ts`, `useEmail.ts`, `useWindowSize.ts`
+  - `useScroll.ts`, `useTypewriter.ts`, `useEmail.ts`, `useWindowSize.ts`
   - Export tipizzati con interfacce dedicate
 - [x] ✅ **Unit Testing Setup** - Vitest + React Testing Library configurati
   - 30 test passing su 4 hook
-  - Test per: `useScroll`, `useTypewriter`, `useKonamiCode`, `useWindowSize`
+  - Test per: `useScroll`, `useTypewriter`, `useWindowSize`
   - Scripts: `npm run test`, `npm run test:run`, `npm run test:coverage`
 - [x] ✅ **Error Boundaries** - Implementato error handling granulare
   - `ErrorBoundary.tsx` con fallback UI elegante
@@ -46,8 +46,9 @@
   - `Contact.tsx` - Form con validazione tipizzata + label accessibili
   - `ProjectCard.tsx` - Props tipizzate con `StaticImageData`
   - `SkillItem.tsx` - Props tipizzate con size types
-- [x] ✅ **Context TypeScript** - `ThemeContext.tsx` con tipi e `'use client'`
 - [x] ✅ **Constants TypeScript** - `constants/index.ts` con `as const` e type exports
+- [x] ✅ **Data Layer TypeScript** - `profileData.ts` con interfacce dedicate
+  - `PersonalInfo`, `Skill`, `Project`, `TimelineEvent`, `EducationEntry`, `WorkExperience`, `Language`
 
 ---
 
@@ -64,15 +65,10 @@
 - [x] ✅ **Skeleton Loaders** - Placeholder integrati nel Suspense fallback
   - `SkeletonSection` per Skills e Projects (evita CLS)
   - Shimmer animation con prefers-reduced-motion
-- [x] ✅ **Debounce Search** - Filtro progetti con 300ms debounce
-  - `debouncedTerm` state + useEffect timer
-  - Input reattivo ma filtro ritardato per performance
-
 ### ✅ UX Improvements
-- [x] ✅ **Carousel Dot Pagination** - Dot dinamici con finestra scorrevole
-  - `CustomDot` component con window di 3 dot centrati sull'attivo
-  - Animazione fade-in sui dot, glow sull'attivo
-  - Responsive e integrato con `react-multi-carousel`
+- [x] ✅ **Snellimento UI Sezioni** - Rimossi filtri e paginazione superflui
+  - Projects: eliminata search bar + debounce, render diretto dell'intero array
+  - Timeline: eliminati bottoni Avanti/Indietro e dot indicators, flusso continuo
 
 ---
 
@@ -96,8 +92,6 @@
   - `CursorTrail.js` aggiornato con `getCursorContext()`
 - [x] ✅ **Parallax 3D Avanzato** - Tilt effect sull'immagine hero Banner
   - `handleMouseMove` con `perspective()`, `rotateY()`, `rotateX()`
-- [x] ✅ **Internationalization (i18n)** - Toggle IT/EN in Navbar
-  - `LangContext.tsx` con traduzioni, `useLang()` hook
 - [x] ✅ **Lottie Micro-animations** - `LottieEmpty.tsx` per stato "nessun risultato"
   - Animazione inline semplice, `lottie-react` installato
 - [x] ✅ **Interactive Roadmap** - Timeline con ultimo item pulsante
@@ -124,7 +118,7 @@
 ## 🧹 Code Quality & Manutenzione
 
 ### ✅ Completati
-- [x] ✅ **Custom Hooks** - `useScroll`, `useTypewriter`, `useEmail`, `useKonamiCode`
+- [x] ✅ **Custom Hooks** - `useScroll`, `useTypewriter`, `useEmail`, `useWindowSize`
 - [x] ✅ **Data-Driven UI** - Componenti leggono da `profileData.js`
 - [x] ✅ **Ottimizzazione Immagini** - next/image su tutti i componenti
 
@@ -142,7 +136,6 @@
 - [x] **Migrazione next/image completa** - 6 componenti migrati
 - [x] **Migrazione next/link** - Navbar refactorizzato
 - [x] **Rimozione legacy CRA** - App.js, index.js, index.html, build/ eliminati
-- [x] **Fix SSR ThemeContext** - Hydration-safe con isHydrated pattern
 - [x] **next.config.js ottimizzato** - unoptimized dev, WebP only, optimizePackageImports
 - [x] **Loading screen ridotto** - 1500ms → 800ms
 - [x] **README.md aggiornato** - Next.js 14, TypeScript, nuova struttura
@@ -155,14 +148,12 @@
 - [x] **Sharp installato** - Ottimizzazione immagini
 
 ### Gennaio 2026 - UI/UX
-- [x] **Light Theme "Warm Amber"** - Tema chiaro riprogettato
-- [x] **Easter Egg** - Konami Code implementato
+- [x] **Easter Egg** - Bonfire cliccabile nella sezione Contact
 - [x] **ScrollProgressBar** - Barra progresso scroll
 - [x] **BackToTop** - Bottone ritorno in alto
 - [x] **Reveal on Scroll** - Animazioni IntersectionObserver
 
 ### Core Features
-- [x] Dark/Light Mode con ThemeContext
 - [x] Responsive Navigation con overlay mobile
 - [x] EmailJS Contact Form con validazione
 - [x] Lazy Loading con React.lazy + Suspense

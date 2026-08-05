@@ -7,7 +7,7 @@
  * @module components/cards/SkillItem
  */
 
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import './SkillItem.css';
 
 // ============================================
@@ -31,10 +31,10 @@ interface SkillItemProps {
   name: string;
   /** Livello di competenza (0-100) */
   level?: number;
-  /** Icona della skill (path o StaticImageData) */
-  icon?: string | StaticImageData;
+  /** Path assoluto dell'icona dentro public/ (es. "/img/icon/react.png") */
+  icon?: string;
   /** Alias per icon (per compatibilità con skillsData) */
-  img?: string | StaticImageData;
+  img?: string;
   /** Categoria della skill */
   category?: string;
   /** Mostra la progress bar */

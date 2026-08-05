@@ -185,12 +185,3 @@
   width: 300px;
   height: 300px;
 }
-
-/* === LIGHT THEME === */
-[data-theme="light"] .btn-ghost {
-  color: var(--color-text-primary, #1A1A2E);
-}
-
-[data-theme="light"] .btn-ghost:hover:not(:disabled) {
-  background: rgba(0, 0, 0, 0.05);
-}

@@ -9,11 +9,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ArrowLeft, BoxArrowUpRight } from 'react-bootstrap-icons';
-import { ThemeProvider } from '../../context';
 import NavBar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import ScrollProgressBar from '../common/ScrollProgressBar';
 import BackToTop from '../common/BackToTop';
+import WhatsAppFloat from '../common/WhatsAppFloat';
 import '../../App.css';
 import '../../styles/global.css';
 import '../../styles/components/index.css';
@@ -27,7 +27,8 @@ interface Project {
   problem?: string;
   solution?: string;
   results?: string[];
-  imgUrl: { src: string } | string;
+  /** Path assoluto dell'immagine dentro public/ */
+  imgUrl: string;
   imgAncor: string;
   tech: string[];
 }
@@ -37,19 +38,20 @@ interface Props {
 }
 
 export default function ProjectCaseStudy({ project }: Props) {
-  const imgSrc = typeof project.imgUrl === 'string' ? project.imgUrl : project.imgUrl?.src;
+  const imgSrc = project.imgUrl;
 
   return (
-    <ThemeProvider>
+    <>
       <ScrollProgressBar />
       <BackToTop />
+      <WhatsAppFloat />
       <NavBar />
       <main className="project-case-study" id="main-content">
         <Container>
           {/* Back link */}
-          <div className="case-back">
-            <Link href="/#projects" className="case-back-link">
-              <ArrowLeft size={18} /> Torna ai Progetti
+          <div className="mb-4">
+            <Link href="/#projects" className="btn btn-outline-secondary text-decoration-none">
+              &larr; Torna alla Home
             </Link>
           </div>
 
@@ -129,6 +131,6 @@ export default function ProjectCaseStudy({ project }: Props) {
         </Container>
       </main>
       <Footer />
-    </ThemeProvider>
+    </>
   );
 }

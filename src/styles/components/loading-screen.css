@@ -25,7 +25,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 600px;
+  /* 600px era troppo stretto per "CARMELO LA MANTIA" a 36px con 8px di
+     letter-spacing (~550px): il titolo stava al limite del contenitore e
+     straripava. Con 760px sta su una riga sola con margine di sicurezza. */
+  max-width: 760px;
   padding: 0 20px;
 }
 
@@ -52,15 +55,20 @@
 
 /* === LOADING TITLE === */
 .loading-title {
+  width: 100%;
   font-size: clamp(24px, 5vw, 36px);
   color: var(--main-color);
+  /* letter-spacing aggiunge spazio DOPO l'ultimo carattere: compensato da
+     un padding-left pari, altrimenti il testo appare spostato a sinistra */
   letter-spacing: clamp(4px, 1.5vw, 8px);
-  margin: 10px 0px 10px 500px;
-  padding-left: clamp(10px, 1vw, 8px);
+  padding-left: clamp(4px, 1.5vw, 8px);
+  margin: 10px 0;
   text-shadow: 0 0 20px rgba(224, 136, 33, 0.5);
   animation: pulse 2s ease-in-out infinite;
   text-align: center;
-  white-space: nowrap;
+  /* niente white-space: nowrap → su viewport stretti il titolo va a capo
+     invece di straripare fuori dal contenitore da 600px */
+  overflow-wrap: break-word;
 }
 
 @keyframes pulse {
@@ -74,20 +82,36 @@
 
 /* === LOADING SUBTITLE === */
 .loading-subtitle {
+  /* Stesso principio del titolo: larghezza fluida al 100% del contenitore
+     (NON una width fissa) + text-align. È questo che tiene il sottotitolo
+     sullo stesso asse del titolo invece di lasciarlo allo shrink-to-fit. */
+  width: 100%;
+  /* Azzera il margin-bottom: 1rem che Bootstrap applica di default ai <p>.
+     Ridondante con la classe .m-0 nel JSX, ma rende la regola autosufficiente. */
+  margin: 0;
   font-size: 16px;
   color: #888;
+  /* Compensazione letter-spacing come per .loading-title */
   letter-spacing: 4px;
-  margin-bottom: 30px;
+  padding-left: 4px;
+  text-align: center;
 }
 
 /* === LOADING BAR === */
 .loading-bar {
-  width: 300px;
+  /* Larghezza fluida centrata dal flex padre: niente width fissa */
+  width: 100%;
+  max-width: 300px;
   height: 4px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   overflow: hidden;
-  margin: 0 auto;
+  /* Doppia garanzia di centratura: il flex padre (align-items: center) la
+     centrerebbe comunque, ma `auto` sui margini orizzontali la rende immune
+     anche fuori da un contesto flex.
+     Lo spazio verso il sottotitolo vive qui, non come margin-bottom del <p>,
+     così la classe Bootstrap .m-0 sul sottotitolo non lo azzera. */
+  margin: 30px auto 0;
 }
 
 .loading-progress {
@@ -112,13 +136,13 @@
   }
   
   .loading-bar {
-    width: 80%;
     max-width: 250px;
   }
-  
+
   .loading-subtitle {
     font-size: 14px;
     letter-spacing: 2px;
+    padding-left: 2px;
   }
 }
 

@@ -6,7 +6,7 @@
 > **⚠️ Per le specifiche di implementazione mobile, vedere [ARCHITECTURE_MOBILE.md](./ARCHITECTURE_MOBILE.md)**
 > 
 > **AI AGENTS:** Utilizzare questo contesto prima di generare codice.
-> **Last Updated**: January 2026
+> **Last Updated**: August 2026
 
 ---
 
@@ -35,7 +35,7 @@ Il progetto utilizza **Next.js 14 App Router** con architettura ibrida:
 
 | # | Principio | Descrizione |
 |---|-----------|-------------|
-| 1 | **Data-Driven UI** | L'interfaccia è popolata dinamicamente da `src/data/profileData.js`. Evitare hardcoding. |
+| 1 | **Data-Driven UI** | L'interfaccia è popolata dinamicamente da `src/data/profileData.ts`. Evitare hardcoding. |
 | 2 | **Centralized Configuration** | Tutte le configurazioni passano tramite variabili d'ambiente (`.env`). |
 | 3 | **Serviceless Backend** | Nessun backend custom. Servizi PaaS/SaaS (EmailJS, Mailchimp) invocati dal client. |
 | 4 | **TypeScript-First** | Tutti i nuovi file devono essere TypeScript (`.ts`/`.tsx`). |
@@ -50,7 +50,7 @@ Architettura Next.js 14 App Router con components modulari.
 ```text
 src/
 ├── app/                    # 🚀 Next.js App Router
-│   ├── layout.tsx          # Root layout (metadata, fonts, providers)
+│   ├── layout.tsx          # Root layout (metadata, fonts, JSON-LD)
 │   ├── page.tsx            # Homepage (renders HomePage component)
 │   ├── robots.ts           # SEO robots configuration
 │   └── sitemap.ts          # Dynamic sitemap generation
@@ -66,17 +66,13 @@ src/
 │   ├── cards/              # Sotto-componenti (ProjectCard, SkillItem)
 │   └── HomePage.tsx        # 🎮 Main client component
 │
-├── context/                # 🔄 React Context
-│   └── ThemeContext.js     # Dark/Light theme provider (SSR-safe)
-│
 ├── data/                   # 📊 Data Layer
-│   └── profileData.js      # 🧠 SINGLE SOURCE OF TRUTH
+│   └── profileData.ts      # 🧠 SINGLE SOURCE OF TRUTH (tipizzato)
 │
 ├── hooks/                  # 🎣 Custom Hooks (TypeScript)
 │   ├── useScroll.ts        # Scroll state & direction
 │   ├── useTypewriter.ts    # Text animation
 │   ├── useEmail.ts         # EmailJS form handling
-│   ├── useKonamiCode.ts    # Easter egg detection
 │   ├── useWindowSize.ts    # Viewport tracking
 │   └── index.ts            # Barrel exports
 │
@@ -107,7 +103,7 @@ src/
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                   profileData.js                             │
+│                   profileData.ts                             │
 │  (Skills, Projects, Timeline, Contact Info, Social Links)   │
 └─────────────────────────────────────────────────────────────┘
                               │
@@ -129,7 +125,6 @@ src/
 | Tipo di State | Soluzione | Esempio |
 |---------------|-----------|---------|
 | **UI Local** | `useState` | Menu open/close, form inputs |
-| **Theme** | `ThemeContext` | Dark/Light mode |
 | **Scroll** | `useScroll` hook | Navbar hide/show |
 | **Form** | `useEmail` hook | Contact form state |
 | **Animation** | CSS Variables | Transitions, keyframes |
@@ -349,7 +344,7 @@ src/__tests__/
 └── hooks/
     ├── useScroll.test.ts
     ├── useTypewriter.test.ts
-    └── useKonamiCode.test.ts
+    └── useWindowSize.test.ts
 ```
 
 ### Test Commands
@@ -364,9 +359,33 @@ npm run test:coverage  # Coverage report
 
 ## 10. 🤖 AI AGENT GUIDELINES
 
+### 10.3 AUTO-LOGGING OBBLIGATORIO
+
+**Regola Tassativa per l'Execution Agent:**
+Al termine di OGNI esecuzione o pacchetto di modifiche, l'agente DEVE in autonomia generare un file di log sequenziale all'interno della cartella `archivio log/` (es. `LOG_002.md`, `LOG_003.md`). 
+
+Non attendere che l'utente te lo chieda esplicitamente. Se la cartella non esiste, creala. 
+
+**Formato Semplificato Richiesto (Usa esattamente questo template):**
+
+```md
+# Log [Numero] - [Titolo Breve dell'Intervento]
+**Data:** [GG/MM/AAAA]
+
+## 🎯 Obiettivo
+[1-2 righe che riassumono il task principale richiesto dall'utente]
+
+## 📁 File Coinvolti
+* **Creati:** `file1.ts`, `file2.ts` (o "Nessuno")
+* **Modificati:** `file3.tsx`, `file4.css`
+* **Eliminati:** `file5.js` (o "Nessuno")
+
+## 🤖 Note per l'IA (Contesto Futuro)
+[Aggiungi note SOLO se ci sono conseguenze per le modifiche future. Es: "La ricerca è stata rimossa, non usare più gli stati di filtro in Projects.tsx", oppure "Il file profileData è ora in TypeScript". Se non c'è nulla di critico, scrivi "Nessuna variazione architetturale di rilievo."]
+
 ### Before Generating Code
 
-1. **Read** `profileData.js` per capire la struttura dati
+1. **Read** `profileData.ts` per capire la struttura dati e le interfacce esportate
 2. **Check** componenti esistenti in `components/common/`
 3. **Follow** TypeScript conventions per nuovi file
 4. **Use** CSS variables da `variables.css`
@@ -420,4 +439,4 @@ import Button from '@/components/common/Button';
 ---
 
 > **Maintained by:** Carmelo La Mantia  
-> **Last Review:** January 2026
+> **Last Review:** August 2026
