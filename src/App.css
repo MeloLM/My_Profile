@@ -1049,75 +1049,94 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   margin-bottom: 30px;
 }
 
+/* Campi form: fondo scuro solido, bordo sottile e tenue, testo chiaro.
+   Sostituiscono i vecchi campi semitrasparenti che al focus diventavano
+   bianchi pieni, stonando col tema scuro. */
 .contact form input,
 .contact form textarea {
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  color: #fff;
-  margin: 0 0 8px 0;
-  padding: 18px 26px;
-  font-weight: 500;
-  font-size: 18px;
-  letter-spacing: 0.8px;
-  transition: 0.3s ease-in-out;
+  background-color: #16161c;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  color: #f1f1f1;
+  margin: 0 0 12px 0;
+  padding: 15px 20px;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
+.contact form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Al focus il campo resta scuro: cambia solo il bordo, con un alone tenue */
 .contact form input:focus,
 .contact form textarea:focus {
-  background: rgba(255, 255, 255, 1);
-  color: #121212;
+  outline: none;
+  background-color: #1c1c24;
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 3px rgba(224, 136, 33, 0.18);
+}
+
+.contact form input:hover:not(:focus),
+.contact form textarea:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .contact form input::placeholder,
 .contact form textarea::placeholder {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.42);
 }
 
-.contact form input:focus::placeholder,
-.contact form textarea:focus::placeholder {
-  color: #121212;
-  opacity: 0.8;
-}
-
+/* Bottone Send: fondo pieno ambra, hover fluido senza pseudo-elementi */
 .contact form button {
-  font-weight: 700;
-  color: #000;
-  background-color: #fff;
-  padding: 14px 48px;
-  font-size: 18px;
-  margin-top: 25px;
-  border-radius: 0;
-  position: relative;
-  transition: 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #121212;
+  background-color: var(--main-color);
+  border: none;
+  padding: 14px 44px;
+  font-size: 17px;
+  letter-spacing: 0.4px;
+  margin-top: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-.contact form button span {
-  z-index: 1;
-  position: relative;
+.contact form button:hover:not(:disabled) {
+  background-color: #ff9f34;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(224, 136, 33, 0.32);
 }
 
-.contact form button:hover {
-  color: #fff;
+.contact form button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(224, 136, 33, 0.25);
 }
 
-.contact form button::before {
-  content: "";
-  background: #121212;
-  width: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  transition: 0.3s ease-in-out;
+.contact form button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
-.contact form button:hover::before {
-  width: 100%;
+.contact form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Lo .spinner globale è ambra su fondo chiaro: dentro il bottone Send, che
+   ora è ambra pieno, sarebbe invisibile. Qui va scurito. */
+.contact form button .spinner {
+  border-color: rgba(0, 0, 0, 0.22);
+  border-top-color: #121212;
 }
 
 /************ Footer Css ************/
@@ -1456,9 +1475,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
   .contact form input,
   .contact form textarea {
-    padding: 14px 18px;
+    padding: 13px 16px;
     font-size: 16px;
-    border-radius: 15px;
+    border-radius: 10px;
   }
 
   .contact form button {

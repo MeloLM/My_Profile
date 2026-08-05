@@ -89,7 +89,7 @@ export const ProjectCard = ({
           <h4>{title}</h4>
           <span>{description}</span>
           <TechStack techs={tech} />
-          <div className="project-actions d-flex gap-3 mt-3">
+          <div className="project-actions d-flex justify-content-center gap-3 mt-3">
             <Link href={`/projects/${slug}`} className="btn btn-outline-warning text-decoration-none">
               Info
             </Link>

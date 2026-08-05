@@ -7,6 +7,7 @@
  */
 
 import { useState, useEffect, lazy, Suspense } from 'react';
+import Image from 'next/image';
 // NB: loading-screen.css è già caricato globalmente da app/layout.tsx
 // (via styles/components/index.css), quindi qui non serve reimportarlo.
 
@@ -96,7 +97,14 @@ export default function HomePage() {
     return (
       <div className="loading-screen">
         <div className="loading-content d-flex flex-column align-items-center justify-content-around text-center">
-          <div className="bonfire-animation">🔥</div>
+          <Image
+            src="/img/bonfire.gif"
+            alt="Bonfire loading animation"
+            width={80}
+            height={80}
+            unoptimized
+            className="mb-3"
+          />
           {/*nome obsoleto si rompe e non si centra */}
           {/* <h1 className="loading-title text-center ">CARMELO LA MANTIA</h1> */}
           <h3 className="loading-subtitle m-3 text-center">loading character ...</h3>
